@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fatemah Shaker | Data Scientist</title>
+<meta name="description" content="Fatemah Shaker is a data scientist with an engineering background, solving industrial challenges through Python and predictive modeling.">
+<meta property="og:title" content="Fatemah Shaker | Data Scientist">
+<meta property="og:description" content="Solving industrial challenges through predictive modeling. Engineering background, Python, and clear practical solutions.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EC; --ink:#22262B; --muted:#4F5861; --accent:#3F5468; --line:#9DAEBE; --panel:#E7EAEC;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+:root[data-theme="dark"]{
+  --bg:#15181C; --ink:#E9E6E0; --muted:#B4BBC2; --accent:#A9BDD0; --line:#4A5A6A; --panel:#1E2328;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px;transition:color .2s,text-decoration-color .2s}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--bg);padding:8px 14px;z-index:20}
+.skip:focus{left:8px}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+
+/* top bar */
+header.bar{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px}
+.mark{font:500 1.125rem var(--serif);color:var(--ink);text-decoration:none;white-space:nowrap}
+nav ul{list-style:none;display:flex;gap:4px;margin:0;padding:0}
+nav a{display:inline-block;padding:10px 12px;color:var(--muted);text-decoration:none;font-size:.95rem;font-weight:500}
+nav a:hover{color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent)}
+.toggle{background:none;border:1px solid var(--line);color:var(--ink);font:500 .9rem var(--sans);padding:8px 12px;border-radius:2px;cursor:pointer;transition:background .2s,border-color .2s}
+.toggle:hover{background:var(--panel);border-color:var(--accent)}
+
+/* hero */
+.hero{padding:clamp(72px,14vw,168px) 0 clamp(64px,10vw,120px)}
+.hero h1{font:500 clamp(3rem,10vw,7.5rem)/.98 var(--serif);letter-spacing:-.02em;margin:0 0 32px}
+.hero .role{font:500 clamp(1.25rem,2.6vw,1.75rem)/1.35 var(--serif);color:var(--accent);max-width:24em;margin:0 0 20px}
+.hero .statement{max-width:36em;color:var(--muted);margin:0 0 36px}
+.btn{display:inline-block;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;padding:14px 26px;border:1px solid var(--ink);border-radius:2px;transition:background .2s,color .2s}
+.btn:hover{background:transparent;color:var(--ink)}
+
+/* signature: the net */
+.net{position:relative;height:72px;
+  background:
+    repeating-linear-gradient(45deg,transparent 0 9px,var(--line) 9px 10px),
+    repeating-linear-gradient(-45deg,transparent 0 9px,var(--line) 9px 10px);
+  opacity:.55;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.net::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--line)}
+.net::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line)}
+
+/* sections */
+section.block{padding:clamp(56px,8vw,104px) 0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+h2{font:500 clamp(1.75rem,3.4vw,2.5rem)/1.15 var(--serif);letter-spacing:-.01em;margin:0}
+.body p{margin:0 0 1em;max-width:38em}
+@media(min-width:800px){.grid{grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:64px}}
+
+/* skills */
+.skills{margin:0;max-width:44em}
+.skills div{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:18px 0;border-top:1px solid var(--line)}
+.skills div:last-child{border-bottom:1px solid var(--line)}
+.skills dt{font-weight:600}
+.skills dd{margin:0;font-family:var(--mono);font-size:.95rem;color:var(--muted)}
+@media(min-width:560px){.skills div{grid-template-columns:200px 1fr;gap:24px}}
+
+/* project */
+.project{background:var(--panel);border:1px solid var(--line);padding:clamp(24px,4vw,48px)}
+.project h3{font:500 clamp(1.5rem,2.6vw,2rem)/1.2 var(--serif);margin:0 0 16px}
+.project p{margin:0 0 24px;max-width:36em}
+.project .tools-label{font-weight:600;margin:0 0 10px}
+.tools{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.tools li{font:400 .9rem var(--mono);border:1px solid var(--line);padding:4px 10px;background:var(--bg);color:var(--ink)}
+
+/* education / contact */
+.edu h3{font:500 1.375rem/1.3 var(--serif);margin:0;max-width:26em}
+.contact a.mail{font:500 clamp(1.25rem,3.4vw,2rem)/1.3 var(--serif);word-break:break-word}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.95rem}
+
+@media(max-width:640px){
+  .bar .wrap{flex-wrap:wrap;padding-block:6px}
+  nav{order:3;width:100%;overflow-x:auto}
+  html{scroll-padding-top:110px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top">Fatemah Shaker</a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="toggle" id="theme" type="button" aria-pressed="false">Dark mode</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <div class="wrap">
+      <h1>Fatemah Shaker</h1>
+      <p class="role">Data Scientist solving industrial challenges through predictive modeling</p>
+      <p class="statement">I combine a background in engineering with Python and predictive modeling to turn complex consistency patterns into clear, practical solutions.</p>
+      <a class="btn" href="#work">View my work</a>
+    </div>
+  </section>
+
+  <div class="net" aria-hidden="true"></div>
+
+  <section class="block" id="about" aria-labelledby="about-h">
+    <div class="wrap grid">
+      <h2 id="about-h">About</h2>
+      <div class="body">
+        <p>I am a data scientist with a Bachelor of Science in Engineering. That training shapes how I work: I define the problem first, then build the model.</p>
+        <p>I use Python and predictive modeling to find the patterns behind consistency in data, and I turn them into clear, practical solutions to industrial challenges.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="net" aria-hidden="true"></div>
+
+  <section class="block" id="skills" aria-labelledby="skills-h">
+    <div class="wrap grid">
+      <h2 id="skills-h">Skills</h2>
+      <dl class="skills">
+        <div><dt>Programming</dt><dd>Python</dd></div>
+        <div><dt>Data analysis</dt><dd>Pandas, NumPy</dd></div>
+        <div><dt>Visualization and apps</dt><dd>Altair, Streamlit</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="net" aria-hidden="true"></div>
+
+  <section class="block" id="work" aria-labelledby="work-h">
+    <div class="wrap grid">
+      <h2 id="work-h">Selected work</h2>
+      <article class="project">
+        <h3>Habit Tracker</h3>
+        <p>Analyzes consistency patterns to help understand habits and performance over time.</p>
+        <p class="tools-label">Built with</p>
+        <ul class="tools" aria-label="Tools used">
+          <li>Python</li><li>Pandas</li><li>Streamlit</li><li>NumPy</li><li>Altair</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <div class="net" aria-hidden="true"></div>
+
+  <section class="block edu" id="education" aria-labelledby="edu-h">
+    <div class="wrap grid">
+      <h2 id="edu-h">Education</h2>
+      <div><h3>Bachelor of Science in Engineering</h3></div>
+    </div>
+  </section>
+
+  <div class="net" aria-hidden="true"></div>
+
+  <section class="block contact" id="contact" aria-labelledby="contact-h">
+    <div class="wrap grid">
+      <h2 id="contact-h">Contact</h2>
+      <div class="body">
+        <p>To discuss a role or a project, write to me at:</p>
+        <p><a class="mail" href="mailto:fatemahshaker7@gmail.com">fatemahshaker7@gmail.com</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">&copy; <span id="year">2026</span> Fatemah Shaker</div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme');
+  function apply(t){
+    root.setAttribute('data-theme',t);
+    btn.textContent=t==='dark'?'Light mode':'Dark mode';
+    btn.setAttribute('aria-pressed',t==='dark');
+  }
+  var saved=null;
+  try{saved=localStorage.getItem('theme')}catch(e){}
+  var start=saved||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  apply(start);
+  btn.addEventListener('click',function(){
+    var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    apply(next);
+    try{localStorage.setItem('theme',next)}catch(e){}
+  });
+  document.getElementById('year').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
