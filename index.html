@@ -360,7 +360,9 @@
       display: block;
       width: 100%;
       height: 300px;
-      pointer-events: none;
+      pointer-events: auto;
+      cursor: crosshair;
+      touch-action: pan-y;
     }
 
     @media (min-width: 1100px) {
@@ -609,7 +611,7 @@
           <p class="statement">I combine a background in engineering with Python and predictive modeling to turn complex consistency patterns into clear, practical solutions.</p>
           <div><a class="btn" href="#work">View my work</a></div>
         </div>
-        <canvas class="model" id="model" aria-hidden="true"></canvas>
+        <canvas class="model" id="model" role="img" aria-label="Interactive industrial analytics illustration. Move your pointer over the vessel, controller, or charts and click to learn about each part."></canvas>
       </section>
 
       <!-- At a glance -->
@@ -897,6 +899,13 @@
         var heroEl = document.querySelector(".hero");
         var cw = 0, ch = 0, dpr = 1, rafId = null, visible = true;
         var start = null;
+        var pointer = { x: -1000, y: -1000, active: false };
+        var selectedPart = -1;
+        var partInfo = [
+          {x:110,y:25,w:120,h:245,title:"PROCESS INSTRUMENTATION",desc:"Sensors monitor process conditions."},
+          {x:245,y:165,w:195,h:115,title:"AUTOMATION & CONTROL",desc:"PLC / PID adjusts the process."},
+          {x:350,y:20,w:245,h:270,title:"DATA SCIENCE",desc:"KPIs and models turn signals into insight."}
+        ];
         var animated = !reduceMotion.matches;
         var draw = function (ts) {
           if (!cw || !ch) return;
@@ -972,9 +981,27 @@
             var qx = 374, qy = 173 - ((time * 18) % 22);
             ctx.beginPath(); ctx.arc(qx,qy,3,0,Math.PI*2); ctx.fillStyle=teal; ctx.fill();
           }
+          // Interactive focus: hover over a system area, or click to pin its explanation.
+          var logicalX = pointer.x, logicalY = pointer.y;
+          var hoveredPart = -1;
+          if (pointer.active) {
+            for (var pi=0; pi<partInfo.length; pi++) { var part=partInfo[pi]; if(logicalX>=part.x && logicalX<=part.x+part.w && logicalY>=part.y && logicalY<=part.y+part.h){hoveredPart=pi;break;} }
+          }
+          var focusPart = selectedPart >= 0 ? selectedPart : hoveredPart;
+          if (focusPart >= 0) {
+            var info=partInfo[focusPart];
+            ctx.save(); ctx.strokeStyle=[gold,lavender,teal][focusPart]; ctx.lineWidth=2.5; ctx.setLineDash([5,4]);
+            ctx.beginPath(); ctx.roundRect(info.x,info.y,info.w,info.h,12); ctx.stroke(); ctx.setLineDash([]);
+            ctx.fillStyle=light ? "rgba(255,255,255,.96)" : "rgba(24,29,45,.97)"; ctx.strokeStyle=[gold,lavender,teal][focusPart];
+            ctx.beginPath(); ctx.roundRect(125,286,370,29,8); ctx.fill(); ctx.stroke();
+            ctx.fillStyle=ink; ctx.font="bold 10px system-ui, sans-serif"; ctx.fillText(info.title,137,298);
+            ctx.font="10px system-ui, sans-serif"; ctx.fillText(info.desc,137,309); ctx.restore();
+          } else {
+            ctx.fillStyle=muted; ctx.font="10px system-ui, sans-serif"; ctx.fillText("HOVER / CLICK A SYSTEM TO EXPLORE",185,313);
+          }
           // Small label grounding the visual in industrial analytics
           ctx.fillStyle=ink; ctx.font="10px system-ui, sans-serif";
-          ctx.fillText("SENSORS",92,270); ctx.fillText("CONTROL",316,276); ctx.fillText("PREDICTIVE ANALYTICS",451,300);
+          ctx.fillText("SENSORS",106,280); ctx.fillText("CONTROL",316,276); ctx.fillText("PREDICTIVE ANALYTICS",451,300);
           ctx.restore();
           if (animated && visible) rafId = window.requestAnimationFrame(draw);
         };
@@ -984,6 +1011,15 @@
           canvas.width=Math.round(cw*dpr); canvas.height=Math.round(ch*dpr);
           ctx.setTransform(dpr,0,0,dpr,0,0); if(rafId){cancelAnimationFrame(rafId);rafId=null;} draw(0);
         };
+        var canvasPoint = function(ev) {
+          var rect=canvas.getBoundingClientRect();
+          var scale=Math.min(cw/620,ch/320,1.15);
+          var ox=(cw-620*scale)/2, oy=(ch-320*scale)/2;
+          pointer.x=(ev.clientX-rect.left-ox)/scale; pointer.y=(ev.clientY-rect.top-oy)/scale; pointer.active=true;
+        };
+        canvas.addEventListener("pointermove",function(ev){canvasPoint(ev);if(!animated)draw(0);});
+        canvas.addEventListener("pointerleave",function(){pointer.active=false;if(!animated)draw(0);});
+        canvas.addEventListener("click",function(ev){canvasPoint(ev);var hit=-1;for(var i=0;i<partInfo.length;i++){var p=partInfo[i];if(pointer.x>=p.x&&pointer.x<=p.x+p.w&&pointer.y>=p.y&&pointer.y<=p.y+p.h){hit=i;break;}}selectedPart=(hit===selectedPart)?-1:hit;if(!animated)draw(0);});
         resize();
         if("ResizeObserver" in window) new ResizeObserver(resize).observe(canvas); else window.addEventListener("resize",resize);
         if("MutationObserver" in window) new MutationObserver(resize).observe(root,{attributes:true,attributeFilter:["data-theme"]});
