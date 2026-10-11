@@ -16,13 +16,11 @@
   <script>
     (function () {
       var root = document.documentElement;
-      var theme = "dark";
+      var theme = "light";
       try {
         var saved = localStorage.getItem("theme");
         if (saved === "light" || saved === "dark") {
           theme = saved;
-        } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
-          theme = "light";
         }
       } catch (e) {}
       root.setAttribute("data-theme", theme);
@@ -37,13 +35,13 @@
   <style>
     /* ---------- Tokens ---------- */
     :root {
-      --ink: #0A0A0B;
-      --paper: #F4F4F2;
-      --graphite: #121214;
+      --ink: #202945;
+      --paper: #F1F2F5;
+      --graphite: #E8EAF0;
       --white: #FFFFFF;
-      --slate: #8A9099;
-      --steel: #4A5058;
-      --mist: #B4BAC2;
+      --slate: #7F86A7;
+      --steel: #52657B;
+      --mist: #A8B0C0;
 
       --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
       --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
@@ -53,14 +51,14 @@
       --top-h: 64px;
       --head-h: 52px;
 
-      /* Dark is the default */
-      --bg: var(--ink);
-      --panel: var(--graphite);
-      --text: var(--paper);
-      --muted: var(--mist);
-      --rule: rgba(138, 144, 153, 0.3);
-      --track: rgba(138, 144, 153, 0.22);
-      --bg-glass: rgba(10, 10, 11, 0.92);
+      /* Dark theme: dark surfaces with bright, high-contrast text */
+      --bg: #171D2E;
+      --panel: #242C41;
+      --text: #F4F6FC;
+      --muted: #C0C9DC;
+      --rule: rgba(190, 202, 229, 0.22);
+      --track: rgba(190, 202, 229, 0.20);
+      --bg-glass: rgba(23, 29, 46, 0.96);
       color-scheme: dark;
     }
 
@@ -69,9 +67,9 @@
       --panel: var(--white);
       --text: var(--ink);
       --muted: var(--steel);
-      --rule: rgba(74, 80, 88, 0.28);
-      --track: rgba(74, 80, 88, 0.16);
-      --bg-glass: rgba(244, 244, 242, 0.94);
+      --rule: rgba(82, 101, 123, 0.24);
+      --track: rgba(127, 134, 167, 0.20);
+      --bg-glass: rgba(241, 242, 245, 0.96);
       color-scheme: light;
     }
 
@@ -105,7 +103,7 @@
     a { color: inherit; }
 
     :focus-visible {
-      outline: 2px solid var(--text);
+      outline: 2px solid var(--slate);
       outline-offset: 3px;
     }
 
@@ -488,7 +486,7 @@
       line-height: 1.25;
       overflow-wrap: anywhere;
     }
-    .contact-value.lg { font-size: clamp(1.25rem, 4.4vw, 2.5rem); letter-spacing: -0.03em; }
+    .contact-value.lg { font-size: clamp(1.25rem, 3.6vw, 1.75rem); letter-spacing: -0.025em; }
     .contact-cta { font-weight: 500; }
 
     @media (min-width: 700px) {
@@ -607,8 +605,8 @@
         </div>
         <div class="panel kpi">
           <p class="kpi-label">Projects</p>
-          <p class="kpi-value">1</p>
-          <p class="kpi-note">Habit Tracker</p>
+          <p class="kpi-value">4</p>
+          <p class="kpi-note">Industrial optimization, habit tracking, senior and junior projects</p>
         </div>
         <div class="panel kpi">
           <p class="kpi-label">Degree</p>
@@ -621,26 +619,33 @@
       <section class="panel p-project" id="work" aria-labelledby="work-title">
         <div class="panel-head">
           <h2 class="panel-title" id="work-title">Project</h2>
-          <p class="panel-meta">1 project</p>
+          <p class="panel-meta">4 projects</p>
         </div>
         <div class="panel-body">
           <article class="case">
-            <h3>Habit Tracker</h3>
-            <p class="lead">Analyzes consistency patterns to help understand habits and performance over time.</p>
+            <h3>Habit Tracking App</h3>
+            <p class="lead">Built an interactive Streamlit app for daily, weekly and monthly habit tracking, with streak analysis, completion heatmaps, progress bars and AI-generated coaching tips.</p>
+            <p style="margin-top:16px"><a href="https://habbit-tracking-app.streamlit.app" target="_blank" rel="noopener noreferrer">Open live Streamlit app ↗</a></p>
             <dl class="kv">
-              <div>
-                <dt>Tools used</dt>
-                <dd>
-                  <ul class="items">
-                    <li>Python</li>
-                    <li>Pandas</li>
-                    <li>Streamlit</li>
-                    <li>NumPy</li>
-                    <li>Altair</li>
-                  </ul>
-                </dd>
-              </div>
+              <div><dt>Tools used</dt><dd><ul class="items"><li>Python</li><li>Pandas</li><li>Streamlit</li><li>Altair</li><li>OpenRouter API</li><li>ZenQuotes API</li></ul></dd></div>
             </dl>
+          </article>
+          <article class="case" style="margin-top:40px">
+            <h3>Industrial Process Optimization</h3>
+            <p class="lead">Midal Cables · August 2025 – February 2026. Reduced time wasted in the aluminum wire drawing process by 30% through data analysis, root cause analysis and workflow optimization, supported by interactive Power BI KPI dashboards.</p>
+            <dl class="kv">
+              <div><dt>Tools used</dt><dd><ul class="items"><li>Power BI</li><li>Data Analysis</li><li>Root Cause Analysis</li><li>Workflow Optimization</li></ul></dd></div>
+            </dl>
+          </article>
+          <article class="case" style="margin-top:40px">
+            <h3>Senior Project</h3>
+            <p class="lead">University of Bahrain · 2022. Designed and tuned PID and Fuzzy PID controllers for a nonlinear blood glucose–insulin system for Type 1 diabetes, aiming to maintain normal glucose levels with minimal insulin dose.</p>
+            <dl class="kv"><div><dt>Tools used</dt><dd><ul class="items"><li>MATLAB</li><li>Simulink</li><li>PID Control</li><li>Fuzzy PID</li></ul></dd></div></dl>
+          </article>
+          <article class="case" style="margin-top:40px">
+            <h3>Junior Project</h3>
+            <p class="lead">University of Bahrain · 2021. Designed, built and tested an Arduino weather station using a DHT11 sensor and LCD, sending sensor readings to a web server via Wi-Fi and MQTT.</p>
+            <dl class="kv"><div><dt>Tools used</dt><dd><ul class="items"><li>Arduino Uno</li><li>DHT11</li><li>LCD</li><li>Wi-Fi</li><li>MQTT</li></ul></dd></div></dl>
           </article>
         </div>
       </section>
@@ -869,259 +874,108 @@
         }
       }
 
-      /* Isometric block field: extruded towers that rise in once and lift near the pointer */
+      /* 3D industrial digital twin: process vessel + instrumentation + control loop + analytics */
       var canvas = document.getElementById("model");
       if (canvas && canvas.getContext) {
         var ctx = canvas.getContext("2d");
         var heroEl = document.querySelector(".hero");
-        var G = 10;
-        var MAXLEVEL = 6;
-        var DURATION = 2200;
-        var cw = 0;
-        var ch = 0;
-        var palette = { bg: [10, 10, 11], text: [244, 244, 242] };
+        var cw = 0, ch = 0, dpr = 1, rafId = null, visible = true;
+        var start = null;
         var animated = !reduceMotion.matches;
-        var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-        var levels = [];
-        var lifts = [];
-        var geo = { tw: 0, th: 0, u: 0, ox: 0, oy: 0 };
-        var pointer = null;
-        var startTime = null;
-        var progress = animated ? 0 : 1;
-        var rafId = null;
-        var isVisible = true;
-
-        /* Deterministic tower heights: a mound with soft ripples */
-        for (var gi = 0; gi < G; gi++) {
-          for (var gj = 0; gj < G; gj++) {
-            var wave = 0.5 + 0.5 * Math.sin(gi * 0.75 + 0.5) * Math.cos(gj * 0.6 - 0.2);
-            var mound = Math.exp(-(Math.pow(gi - 6.5, 2) + Math.pow(gj - 3, 2)) / 10);
-            var v = Math.max(0, Math.min(1, 0.55 * wave + 0.45 * mound));
-            levels.push(1 + Math.round((MAXLEVEL - 1) * v));
-            lifts.push(0);
-          }
-        }
-
-        var parseColor = function (str, fallback) {
-          var m = /^#([0-9a-f]{6})$/i.exec(str || "");
-          if (!m) return fallback;
-          var n = parseInt(m[1], 16);
-          return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-        };
-
-        var readColors = function () {
-          var cs = window.getComputedStyle(root);
-          palette.bg = parseColor(cs.getPropertyValue("--panel").trim(), palette.bg);
-          palette.text = parseColor(cs.getPropertyValue("--text").trim(), palette.text);
-        };
-
-        var mix = function (t) {
-          var a = palette.bg;
-          var b = palette.text;
-          return "rgb(" +
-            Math.round(a[0] + (b[0] - a[0]) * t) + "," +
-            Math.round(a[1] + (b[1] - a[1]) * t) + "," +
-            Math.round(a[2] + (b[2] - a[2]) * t) + ")";
-        };
-
-        var PLATE_M = 0.6;
-
-        var layout = function () {
-          var tw = Math.min((cw * 0.94) / (G + 2 * PLATE_M), (ch * 0.9) / (2.7 + (G - 0.5 + PLATE_M) / 2));
-          var th = tw / 2;
-          var maxH = tw * 2.3;
-          var plateT = tw * 0.15;
-          var totalH = maxH + th / 2 + (G - 0.5 + PLATE_M) * th + plateT;
-          geo.tw = tw;
-          geo.th = th;
-          geo.u = tw * 0.3;
-          geo.plateT = plateT;
-          geo.ox = cw * 0.52;
-          geo.oy = (ch - totalH) / 2 + maxH + th / 2;
-        };
-
-        var quad = function (x1, y1, x2, y2, x3, y3, x4, y4, fill) {
-          ctx.beginPath();
-          ctx.moveTo(x1, y1);
-          ctx.lineTo(x2, y2);
-          ctx.lineTo(x3, y3);
-          ctx.lineTo(x4, y4);
-          ctx.closePath();
-          ctx.fillStyle = fill;
-          ctx.fill();
-          ctx.stroke();
-        };
-
-        var draw = function (p) {
+        var draw = function (ts) {
           if (!cw || !ch) return;
           ctx.clearRect(0, 0, cw, ch);
-          var isLight = root.getAttribute("data-theme") === "light";
-          var hw = geo.tw * 0.46;
-          var hh = geo.th * 0.46;
+          var light = root.getAttribute("data-theme") === "light";
+          var ink = light ? "#68718f" : "#c4cbe4";
+          var muted = light ? "#aab2c5" : "#6c7699";
+          var blue = "#8298c7", lavender = "#a49bd4", teal = "#66b7b2", gold = "#d6b66c";
+          var scale = Math.min(cw / 620, ch / 320, 1.15);
+          var ox = (cw - 620 * scale) / 2, oy = (ch - 320 * scale) / 2;
+          ctx.save(); ctx.translate(ox, oy); ctx.scale(scale, scale);
+          ctx.lineCap = "round"; ctx.lineJoin = "round";
+          // Faint engineering grid
+          ctx.strokeStyle = light ? "rgba(120,135,170,.12)" : "rgba(180,190,225,.10)";
           ctx.lineWidth = 1;
-          ctx.lineJoin = "round";
-          ctx.strokeStyle = mix(isLight ? 0.55 : 0.45);
-
-          /* Print bed with a faint cell grid */
-          var pg = function (gi, gj) {
-            return [geo.ox + ((gi - gj) * geo.tw) / 2, geo.oy + ((gi + gj) * geo.th) / 2];
-          };
-          var lo = -0.5 - PLATE_M;
-          var hi = G - 0.5 + PLATE_M;
-          var pT = pg(lo, lo);
-          var pR = pg(hi, lo);
-          var pB = pg(hi, hi);
-          var pL = pg(lo, hi);
-          var pt = geo.plateT;
-          ctx.globalAlpha = Math.min(1, p * 4);
-          quad(pL[0], pL[1], pB[0], pB[1], pB[0], pB[1] + pt, pL[0], pL[1] + pt, mix(isLight ? 0.3 : 0.1));
-          quad(pB[0], pB[1], pR[0], pR[1], pR[0], pR[1] + pt, pB[0], pB[1] + pt, mix(isLight ? 0.5 : 0.05));
-          quad(pT[0], pT[1], pR[0], pR[1], pB[0], pB[1], pL[0], pL[1], mix(isLight ? 0.04 : 0.07));
-          ctx.strokeStyle = mix(0.2);
-          ctx.beginPath();
-          for (var k = 0; k <= G; k++) {
-            var gk = k - 0.5;
-            var s1 = pg(gk, lo);
-            var s2 = pg(gk, hi);
-            var s3 = pg(lo, gk);
-            var s4 = pg(hi, gk);
-            ctx.moveTo(s1[0], s1[1]);
-            ctx.lineTo(s2[0], s2[1]);
-            ctx.moveTo(s3[0], s3[1]);
-            ctx.lineTo(s4[0], s4[1]);
+          for (var gx=20; gx<620; gx+=24) { ctx.beginPath(); ctx.moveTo(gx,12); ctx.lineTo(gx,308); ctx.stroke(); }
+          for (var gy=16; gy<320; gy+=24) { ctx.beginPath(); ctx.moveTo(8,gy); ctx.lineTo(612,gy); ctx.stroke(); }
+          // Analytics panel with a live-looking trend line
+          ctx.fillStyle = light ? "rgba(255,255,255,.78)" : "rgba(27,31,47,.72)";
+          ctx.strokeStyle = muted; ctx.lineWidth = 1.2;
+          ctx.beginPath(); ctx.roundRect(355, 30, 232, 116, 10); ctx.fill(); ctx.stroke();
+          ctx.fillStyle = ink; ctx.font = "11px system-ui, sans-serif"; ctx.fillText("PROCESS KPI  /  LIVE DATA", 371, 49);
+          ctx.strokeStyle = muted; ctx.setLineDash([3,5]);
+          for (var gy2=65; gy2<132; gy2+=20) { ctx.beginPath(); ctx.moveTo(370,gy2); ctx.lineTo(573,gy2); ctx.stroke(); }
+          ctx.setLineDash([]);
+          var pts = [[372,119],[395,105],[418,111],[441,82],[464,91],[487,69],[510,78],[533,57],[556,65],[575,53]];
+          ctx.beginPath(); pts.forEach(function(pt,i){ if(!i)ctx.moveTo(pt[0],pt[1]); else ctx.lineTo(pt[0],pt[1]); });
+          ctx.strokeStyle = blue; ctx.lineWidth = 2.8; ctx.stroke();
+          pts.forEach(function(pt,i){ctx.beginPath();ctx.arc(pt[0],pt[1],i===pts.length-1?4:2.5,0,Math.PI*2);ctx.fillStyle=i===pts.length-1?teal:lavender;ctx.fill();});
+          // 3D process tank / vessel
+          ctx.fillStyle = light ? "rgba(130,152,199,.20)" : "rgba(130,152,199,.22)";
+          ctx.strokeStyle = blue; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.ellipse(170,102,57,17,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(113,102); ctx.lineTo(113,221); ctx.bezierCurveTo(113,243,227,243,227,221); ctx.lineTo(227,102); ctx.stroke();
+          ctx.beginPath(); ctx.ellipse(170,221,57,17,0,0,Math.PI); ctx.stroke();
+          ctx.beginPath(); ctx.ellipse(170,221,57,17,0,Math.PI,Math.PI*2); ctx.strokeStyle=muted; ctx.stroke();
+          // Fluid level and subtle fill
+          ctx.fillStyle = light ? "rgba(102,183,178,.27)" : "rgba(102,183,178,.25)";
+          ctx.beginPath(); ctx.moveTo(116,167); ctx.lineTo(116,220); ctx.bezierCurveTo(116,236,224,236,224,220); ctx.lineTo(224,167); ctx.closePath(); ctx.fill();
+          ctx.beginPath(); ctx.ellipse(170,167,54,14,0,0,Math.PI*2); ctx.fillStyle="rgba(102,183,178,.42)"; ctx.fill(); ctx.strokeStyle=teal; ctx.stroke();
+          // Top-mounted temperature/pressure transmitter
+          ctx.strokeStyle = gold; ctx.lineWidth=2.5; ctx.beginPath(); ctx.moveTo(170,84); ctx.lineTo(170,58); ctx.stroke();
+          ctx.fillStyle = light ? "#fff" : "#292d40"; ctx.strokeStyle=gold;
+          ctx.beginPath(); ctx.arc(170,49,15,0,Math.PI*2); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(170,49); ctx.lineTo(178,42); ctx.stroke();
+          ctx.fillStyle=ink; ctx.font="10px system-ui, sans-serif"; ctx.fillText("PT / TT",148,27);
+          // Process pipe from vessel to control valve and controller
+          ctx.strokeStyle=teal; ctx.lineWidth=5; ctx.beginPath(); ctx.moveTo(227,184); ctx.lineTo(270,184); ctx.lineTo(270,216); ctx.lineTo(306,216); ctx.stroke();
+          ctx.strokeStyle=blue; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(227,184); ctx.lineTo(270,184); ctx.lineTo(270,216); ctx.lineTo(306,216); ctx.stroke();
+          // Control valve symbol
+          ctx.fillStyle=light?"#fff":"#292d40"; ctx.strokeStyle=lavender; ctx.lineWidth=2;
+          ctx.beginPath(); ctx.moveTo(270,203); ctx.lineTo(257,216); ctx.lineTo(270,229); ctx.closePath(); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(270,203); ctx.lineTo(283,216); ctx.lineTo(270,229); ctx.closePath(); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(270,203); ctx.lineTo(270,193); ctx.stroke(); ctx.beginPath(); ctx.arc(270,189,4,0,Math.PI*2); ctx.stroke();
+          // PLC / PID controller module
+          ctx.fillStyle = light ? "rgba(255,255,255,.92)" : "rgba(27,31,47,.92)"; ctx.strokeStyle=lavender; ctx.lineWidth=1.6;
+          ctx.beginPath(); ctx.roundRect(322,177,105,78,8); ctx.fill(); ctx.stroke();
+          ctx.fillStyle=ink; ctx.font="bold 11px system-ui, sans-serif"; ctx.fillText("PLC  /  PID",338,195);
+          for(var led=0;led<3;led++){ctx.beginPath();ctx.arc(340+led*15,211,3.2,0,Math.PI*2);ctx.fillStyle=[teal,gold,lavender][led];ctx.fill();}
+          ctx.strokeStyle=muted; ctx.lineWidth=1.2;
+          for(var row=0;row<3;row++){ctx.beginPath();ctx.moveTo(338,225+row*7);ctx.lineTo(410,225+row*7);ctx.stroke();}
+          // Signal connection to KPI panel
+          ctx.setLineDash([4,5]); ctx.strokeStyle=lavender; ctx.lineWidth=1.5;
+          ctx.beginPath(); ctx.moveTo(374,177); ctx.lineTo(374,157); ctx.lineTo(470,157); ctx.lineTo(470,146); ctx.stroke(); ctx.setLineDash([]);
+          // Data science layer: feature bars and model nodes
+          ctx.fillStyle=light ? "rgba(255,255,255,.82)" : "rgba(27,31,47,.72)"; ctx.strokeStyle=muted;
+          ctx.beginPath(); ctx.roundRect(451,178,136,105,9); ctx.fill(); ctx.stroke();
+          ctx.fillStyle=ink; ctx.font="11px system-ui, sans-serif"; ctx.fillText("DATA  /  MODEL",465,196);
+          var heights=[24,39,31,53,44,62];
+          heights.forEach(function(h,i){ctx.fillStyle=[blue,lavender,teal][i%3];ctx.globalAlpha=.9;ctx.fillRect(466+i*17,267-h,10,h);}); ctx.globalAlpha=1;
+          ctx.strokeStyle=muted; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(463,268);ctx.lineTo(572,268);ctx.stroke();
+          // Animated data pulses along the feedback path
+          if (animated) {
+            var time = (ts || 0) / 1000;
+            var px = 231 + ((time * 42) % 72);
+            ctx.beginPath(); ctx.arc(px,184,3.6,0,Math.PI*2); ctx.fillStyle=gold; ctx.fill();
+            var qx = 374, qy = 173 - ((time * 18) % 22);
+            ctx.beginPath(); ctx.arc(qx,qy,3,0,Math.PI*2); ctx.fillStyle=teal; ctx.fill();
           }
-          ctx.stroke();
-          ctx.globalAlpha = 1;
-          ctx.strokeStyle = mix(isLight ? 0.55 : 0.45);
-
-          for (var s = 0; s <= 2 * G - 2; s++) {
-            for (var i = Math.max(0, s - G + 1); i <= Math.min(G - 1, s); i++) {
-              var j = s - i;
-              var idx = i * G + j;
-              var d = (i + j) / (2 * G - 2);
-              var r = Math.max(0, Math.min(1, (p * 1.6 - d * 0.9) / 0.7));
-              r = 1 - Math.pow(1 - r, 3);
-              if (r <= 0) continue;
-
-              var h = (levels[idx] * r + lifts[idx]) * geo.u;
-              var a = Math.min(1, (levels[idx] + lifts[idx] * 0.5) / MAXLEVEL);
-              var sx = geo.ox + ((i - j) * geo.tw) / 2;
-              var sy = geo.oy + ((i + j) * geo.th) / 2;
-
-              var topFill;
-              var leftFill;
-              var rightFill;
-              if (isLight) {
-                topFill = mix(0.05 + 0.12 * a);
-                leftFill = mix(0.3 + 0.3 * a);
-                rightFill = mix(0.52 + 0.4 * a);
-              } else {
-                var t = 0.28 + 0.72 * a;
-                topFill = mix(t);
-                leftFill = mix(t * 0.5);
-                rightFill = mix(t * 0.26);
-              }
-
-              /* Left face */
-              quad(sx - hw, sy - h, sx, sy - h + hh, sx, sy + hh, sx - hw, sy, leftFill);
-              /* Right face */
-              quad(sx + hw, sy - h, sx, sy - h + hh, sx, sy + hh, sx + hw, sy, rightFill);
-              /* Top face */
-              quad(sx, sy - h - hh, sx + hw, sy - h, sx, sy - h + hh, sx - hw, sy - h, topFill);
-            }
-          }
+          // Small label grounding the visual in industrial analytics
+          ctx.fillStyle=ink; ctx.font="10px system-ui, sans-serif";
+          ctx.fillText("SENSORS",92,270); ctx.fillText("CONTROL",316,276); ctx.fillText("PREDICTIVE ANALYTICS",451,300);
+          ctx.restore();
+          if (animated && visible) rafId = window.requestAnimationFrame(draw);
         };
-
-        /* Ease each tower toward its target lift; returns true when everything has settled */
-        var updateLifts = function () {
-          var settled = true;
-          var pi = 0;
-          var pj = 0;
-          if (pointer) {
-            var ga = (pointer.x - geo.ox) / (geo.tw / 2);
-            var gb = (pointer.y - geo.oy) / (geo.th / 2);
-            pi = (ga + gb) / 2;
-            pj = (gb - ga) / 2;
-          }
-          for (var i = 0; i < G; i++) {
-            for (var j = 0; j < G; j++) {
-              var idx = i * G + j;
-              var target = 0;
-              if (pointer) {
-                var dd = Math.pow(i - pi, 2) + Math.pow(j - pj, 2);
-                target = 1.6 * Math.exp(-dd / (2 * 1.6 * 1.6));
-              }
-              lifts[idx] += (target - lifts[idx]) * 0.14;
-              if (Math.abs(target - lifts[idx]) > 0.003) settled = false;
-            }
-          }
-          return settled;
+        var resize = function(){
+          var rect=canvas.getBoundingClientRect(); dpr=Math.min(window.devicePixelRatio||1,2);
+          cw=Math.round(rect.width); ch=Math.round(rect.height); if(!cw||!ch)return;
+          canvas.width=Math.round(cw*dpr); canvas.height=Math.round(ch*dpr);
+          ctx.setTransform(dpr,0,0,dpr,0,0); if(rafId){cancelAnimationFrame(rafId);rafId=null;} draw(0);
         };
-
-        var frame = function (ts) {
-          rafId = null;
-          if (!isVisible) return;
-          if (startTime === null) startTime = ts;
-          progress = Math.min(1, (ts - startTime) / DURATION);
-          var settled = updateLifts();
-          draw(progress);
-          if (progress < 1 || !settled) rafId = window.requestAnimationFrame(frame);
-        };
-
-        var kick = function () {
-          if (animated && isVisible && !rafId) rafId = window.requestAnimationFrame(frame);
-        };
-
-        var resize = function () {
-          var rect = canvas.getBoundingClientRect();
-          var dpr = Math.min(window.devicePixelRatio || 1, 2);
-          cw = Math.round(rect.width);
-          ch = Math.round(rect.height);
-          if (!cw || !ch) return;
-          canvas.width = cw * dpr;
-          canvas.height = ch * dpr;
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          layout();
-          draw(progress);
-        };
-
-        readColors();
         resize();
-        kick();
-
-        if ("ResizeObserver" in window) {
-          new ResizeObserver(resize).observe(canvas);
-        } else {
-          window.addEventListener("resize", resize);
-        }
-
-        if ("MutationObserver" in window) {
-          new MutationObserver(function () {
-            readColors();
-            draw(progress);
-          }).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
-        }
-
-        if ("IntersectionObserver" in window && heroEl) {
-          new IntersectionObserver(function (entries) {
-            isVisible = entries[0].isIntersecting;
-            if (isVisible) kick();
-          }).observe(heroEl);
-        }
-
-        /* Pointer: nearby towers lift gently (fine pointers only) */
-        if (animated && heroEl) {
-          heroEl.addEventListener("pointermove", function (e) {
-            if (!finePointer.matches) return;
-            var rect = canvas.getBoundingClientRect();
-            pointer = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-            kick();
-          });
-          heroEl.addEventListener("pointerleave", function () {
-            pointer = null;
-            kick();
-          });
-        }
+        if("ResizeObserver" in window) new ResizeObserver(resize).observe(canvas); else window.addEventListener("resize",resize);
+        if("MutationObserver" in window) new MutationObserver(resize).observe(root,{attributes:true,attributeFilter:["data-theme"]});
+        if("IntersectionObserver" in window && heroEl) new IntersectionObserver(function(entries){visible=entries[0].isIntersecting;if(rafId){cancelAnimationFrame(rafId);rafId=null;}if(visible&&animated)draw(0);}).observe(heroEl);
       }
     })();
   </script>
