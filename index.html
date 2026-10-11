@@ -211,6 +211,7 @@
       background: transparent;
       color: var(--text);
       border: 1px solid var(--rule);
+      border-radius: 12px;
       font: inherit;
       font-weight: 500;
       cursor: pointer;
@@ -271,6 +272,8 @@
       min-width: 0;
       background: var(--panel);
       border: 1px solid var(--rule);
+      border-radius: 18px;
+      overflow: hidden;
     }
 
     .panel-head {
@@ -415,16 +418,26 @@
     .facts dd { font-size: 1.0625rem; }
 
     /* ---------- Project ---------- */
+    .case {
+      position: relative;
+      padding: clamp(20px, 3vw, 30px);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--bg) 28%, var(--panel));
+    }
+    .case + .case { margin-top: 22px !important; }
     .case h3 {
       font-family: var(--font-display);
       font-weight: 600;
-      font-size: clamp(2.25rem, 5vw, 3.75rem);
-      line-height: 1;
+      font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+      line-height: 1.12;
       letter-spacing: -0.035em;
     }
-    .case .lead { margin-top: 20px; }
-    .case .kv { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--rule); }
+    .case .lead { margin-top: 14px; }
+    .case .kv { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--rule); }
     .case .kv > div { padding-top: 0; }
+    .case > p a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border: 1px solid var(--rule); border-radius: 999px; text-decoration: none; font-weight: 600; }
+    .case > p a:hover { background: var(--text); color: var(--bg); }
 
     /* ---------- Skills chart ---------- */
     .bars { display: grid; gap: 22px; }
@@ -437,10 +450,11 @@
       font-weight: 500;
     }
     .bar-count { font-family: var(--font-mono); color: var(--muted); font-weight: 400; }
-    .bar-track { display: block; height: 12px; background: var(--track); }
+    .bar-track { display: block; height: 12px; background: var(--track); border-radius: 999px; overflow: hidden; }
     .bar-fill {
       display: block;
       height: 100%;
+      border-radius: inherit;
       background: var(--text);
       width: calc(var(--n) / 2 * 100%);
     }
@@ -466,6 +480,8 @@
 
     .contact-list { margin-top: 20px; border-top: 1px solid var(--text); }
     .contact-list li { border-bottom: 1px solid var(--text); }
+    .contact-list li:first-child { border-top-left-radius: 12px; border-top-right-radius: 12px; overflow: hidden; }
+    .contact-list li:last-child { border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; overflow: hidden; }
 
     .contact-row {
       display: flex;
@@ -732,19 +748,19 @@
               </a>
             </li>
             <li>
+              <a class="contact-row" href="https://www.linkedin.com/in/fatemah-shaker7" target="_blank" rel="noopener noreferrer">
+                <span class="contact-label">LinkedIn</span>
+                <span class="contact-value">linkedin.com/in/fatemah-shaker7</span>
+                <span class="contact-cta">Open profile<span class="sr"> (opens in a new tab)</span></span>
+              </a>
+            </li>            <li>
               <a class="contact-row" href="https://github.com/fatemahshaker7-sudo" target="_blank" rel="noopener noreferrer">
                 <span class="contact-label">GitHub</span>
                 <span class="contact-value">fatemahshaker7-sudo</span>
                 <span class="contact-cta">Open profile<span class="sr"> (opens in a new tab)</span></span>
               </a>
             </li>
-            <li>
-              <a class="contact-row" href="https://www.linkedin.com/in/fatemah-shaker7" target="_blank" rel="noopener noreferrer">
-                <span class="contact-label">LinkedIn</span>
-                <span class="contact-value">linkedin.com/in/fatemah-shaker7</span>
-                <span class="contact-cta">Open profile<span class="sr"> (opens in a new tab)</span></span>
-              </a>
-            </li>
+
           </ul>
         </div>
       </section>
@@ -893,11 +909,7 @@
           var ox = (cw - 620 * scale) / 2, oy = (ch - 320 * scale) / 2;
           ctx.save(); ctx.translate(ox, oy); ctx.scale(scale, scale);
           ctx.lineCap = "round"; ctx.lineJoin = "round";
-          // Faint engineering grid
-          ctx.strokeStyle = light ? "rgba(120,135,170,.12)" : "rgba(180,190,225,.10)";
-          ctx.lineWidth = 1;
-          for (var gx=20; gx<620; gx+=24) { ctx.beginPath(); ctx.moveTo(gx,12); ctx.lineTo(gx,308); ctx.stroke(); }
-          for (var gy=16; gy<320; gy+=24) { ctx.beginPath(); ctx.moveTo(8,gy); ctx.lineTo(612,gy); ctx.stroke(); }
+          // Grid removed for a cleaner hero illustration background.
           // Analytics panel with a live-looking trend line
           ctx.fillStyle = light ? "rgba(255,255,255,.78)" : "rgba(27,31,47,.72)";
           ctx.strokeStyle = muted; ctx.lineWidth = 1.2;
