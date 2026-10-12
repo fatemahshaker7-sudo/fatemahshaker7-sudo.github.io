@@ -9,7 +9,7 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Fatemah Shaker | Data Scientist">
+  <meta property="og:title" content="Fatemah Shaker | Process Data Scientist">
   <meta property="og:description" content="Data scientist solving industrial challenges through predictive modeling. Engineering background, Python and clear, practical solutions.">
 
   <!-- Set the theme before first paint to avoid a flash -->
@@ -305,8 +305,8 @@
     }
 
     @media (min-width: 1100px) {
-      .p-project { grid-column: span 7; }
-      .p-skills { grid-column: span 5; }
+      .p-project { grid-column: 1 / -1; }
+      .p-skills { grid-column: 1 / -1; }
       .p-about { grid-column: span 8; }
       .p-edu { grid-column: span 4; }
     }
@@ -427,7 +427,22 @@
       border-radius: 16px;
       background: color-mix(in srgb, var(--bg) 28%, var(--panel));
     }
-    .case + .case { margin-top: 22px !important; }
+    .case[hidden] { display: none !important; }
+    .project-tabs {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      padding: 18px 24px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .project-tab {
+      appearance: none; border: 1px solid var(--rule); border-bottom: 0;
+      border-radius: 10px 10px 0 0; padding: 11px 15px;
+      background: transparent; color: var(--muted); font: inherit;
+      font-weight: 600; cursor: pointer; transition: background .2s, color .2s;
+    }
+    .project-tab[aria-selected="true"] { background: var(--panel); color: var(--text); box-shadow: inset 0 3px 0 var(--accent, #8b91bd); }
+    .project-tab:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+    .project-view { padding-top: 24px; }
+    .project-view .case { margin: 0; }
     .case h3 {
       font-family: var(--font-display);
       font-weight: 600;
@@ -636,11 +651,17 @@
       <!-- Project -->
       <section class="panel p-project" id="work" aria-labelledby="work-title">
         <div class="panel-head">
-          <h2 class="panel-title" id="work-title">Project</h2>
-          <p class="panel-meta">4 projects</p>
+          <h2 class="panel-title" id="work-title">Projects</h2>
+          <p class="panel-meta">Select a project to explore</p>
         </div>
-        <div class="panel-body">
-          <article class="case">
+        <div class="project-tabs" role="tablist" aria-label="Projects">
+          <button class="project-tab" id="tab-habit" role="tab" aria-selected="true" aria-controls="project-habit" tabindex="0">Habit Tracking App</button>
+          <button class="project-tab" id="tab-industrial" role="tab" aria-selected="false" aria-controls="project-industrial" tabindex="-1">Industrial Optimization</button>
+          <button class="project-tab" id="tab-senior" role="tab" aria-selected="false" aria-controls="project-senior" tabindex="-1">Senior Project</button>
+          <button class="project-tab" id="tab-junior" role="tab" aria-selected="false" aria-controls="project-junior" tabindex="-1">Junior Project</button>
+        </div>
+        <div class="panel-body project-view">
+          <article class="case" id="project-habit" role="tabpanel" aria-labelledby="tab-habit">
             <h3>Habit Tracking App</h3>
             <p class="lead">Built an interactive Streamlit app for daily, weekly and monthly habit tracking, with streak analysis, completion heatmaps, progress bars and AI-generated coaching tips.</p>
             <p style="margin-top:16px"><a href="https://habbit-tracking-app.streamlit.app" target="_blank" rel="noopener noreferrer">Open live Streamlit app ↗</a></p>
@@ -648,19 +669,19 @@
               <div><dt>Tools used</dt><dd><ul class="items"><li>Python</li><li>Pandas</li><li>Streamlit</li><li>Altair</li><li>OpenRouter API</li><li>ZenQuotes API</li></ul></dd></div>
             </dl>
           </article>
-          <article class="case" style="margin-top:40px">
+          <article class="case" id="project-industrial" role="tabpanel" aria-labelledby="tab-industrial" hidden>
             <h3>Industrial Process Optimization</h3>
             <p class="lead">Midal Cables · August 2025 – February 2026. Reduced time wasted in the aluminum wire drawing process by 30% through data analysis, root cause analysis and workflow optimization, supported by interactive Power BI KPI dashboards.</p>
             <dl class="kv">
               <div><dt>Tools used</dt><dd><ul class="items"><li>Power BI</li><li>Data Analysis</li><li>Root Cause Analysis</li><li>Workflow Optimization</li></ul></dd></div>
             </dl>
           </article>
-          <article class="case" style="margin-top:40px">
+          <article class="case" id="project-senior" role="tabpanel" aria-labelledby="tab-senior" hidden>
             <h3>Senior Project</h3>
             <p class="lead">University of Bahrain · 2022. Designed and tuned PID and Fuzzy PID controllers for a nonlinear blood glucose–insulin system for Type 1 diabetes, aiming to maintain normal glucose levels with minimal insulin dose.</p>
             <dl class="kv"><div><dt>Tools used</dt><dd><ul class="items"><li>MATLAB</li><li>Simulink</li><li>PID Control</li><li>Fuzzy PID</li></ul></dd></div></dl>
           </article>
-          <article class="case" style="margin-top:40px">
+          <article class="case" id="project-junior" role="tabpanel" aria-labelledby="tab-junior" hidden>
             <h3>Junior Project</h3>
             <p class="lead">University of Bahrain · 2021. Designed, built and tested an Arduino weather station using a DHT11 sensor and LCD, sending sensor readings to a web server via Wi-Fi and MQTT.</p>
             <dl class="kv"><div><dt>Tools used</dt><dd><ul class="items"><li>Arduino Uno</li><li>DHT11</li><li>LCD</li><li>Wi-Fi</li><li>MQTT</li></ul></dd></div></dl>
@@ -782,6 +803,31 @@
       /* Footer year */
       var yearEl = document.getElementById("year");
       if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      /* Project tabs */
+      var projectTabs = Array.prototype.slice.call(document.querySelectorAll('.project-tab'));
+      function activateProjectTab(tab, moveFocus) {
+        projectTabs.forEach(function (item) {
+          var active = item === tab;
+          item.setAttribute('aria-selected', active ? 'true' : 'false');
+          item.tabIndex = active ? 0 : -1;
+          var panel = document.getElementById(item.getAttribute('aria-controls'));
+          if (panel) panel.hidden = !active;
+        });
+        if (moveFocus) tab.focus();
+      }
+      projectTabs.forEach(function (tab, index) {
+        tab.addEventListener('click', function () { activateProjectTab(tab, false); });
+        tab.addEventListener('keydown', function (event) {
+          var next = index;
+          if (event.key === 'ArrowRight') next = (index + 1) % projectTabs.length;
+          else if (event.key === 'ArrowLeft') next = (index - 1 + projectTabs.length) % projectTabs.length;
+          else if (event.key === 'Home') next = 0;
+          else if (event.key === 'End') next = projectTabs.length - 1;
+          else return;
+          event.preventDefault(); activateProjectTab(projectTabs[next], true);
+        });
+      });
 
       /* Theme toggle */
       var themeBtn = document.getElementById("theme-toggle");
@@ -942,22 +988,18 @@
           ctx.fillStyle = light ? "rgba(102,183,178,.27)" : "rgba(102,183,178,.25)";
           ctx.beginPath(); ctx.moveTo(116,167); ctx.lineTo(116,220); ctx.bezierCurveTo(116,236,224,236,224,220); ctx.lineTo(224,167); ctx.closePath(); ctx.fill();
           ctx.beginPath(); ctx.ellipse(170,167,54,14,0,0,Math.PI*2); ctx.fillStyle="rgba(102,183,178,.42)"; ctx.fill(); ctx.strokeStyle=teal; ctx.stroke();
-          // P&ID instrument bubbles: PT = pressure transmitter, TT = temperature transmitter.
-          // Connection lines stop at each bubble boundary; symbols remain unobstructed.
+          // Single P&ID instrument bubble: TT = temperature transmitter.
+          // The stem and process connection stop at the bubble boundary.
           ctx.strokeStyle = gold; ctx.lineWidth = 1.8;
-          ctx.beginPath(); ctx.moveTo(148,62); ctx.lineTo(148,78); ctx.moveTo(192,62); ctx.lineTo(192,78); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(170,62); ctx.lineTo(170,78); ctx.lineTo(170,85); ctx.stroke();
           ctx.fillStyle = light ? "#fff" : "#292d40"; ctx.strokeStyle = gold; ctx.lineWidth = 1.8;
-          ctx.beginPath(); ctx.arc(148,49,13,0,Math.PI*2); ctx.fill(); ctx.stroke();
-          ctx.beginPath(); ctx.arc(192,49,13,0,Math.PI*2); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.arc(170,49,13,0,Math.PI*2); ctx.fill(); ctx.stroke();
           ctx.fillStyle=ink; ctx.font="bold 8px system-ui, sans-serif"; ctx.textAlign="center";
-          ctx.fillText("PT",148,52); ctx.fillText("TT",192,52); ctx.textAlign="start";
-          // Short instrument connections to the vessel roof (do not cross the bubbles).
-          ctx.strokeStyle=gold; ctx.lineWidth=1.8; ctx.beginPath(); ctx.moveTo(148,78); ctx.lineTo(148,87); ctx.lineTo(170,87); ctx.moveTo(192,78); ctx.lineTo(192,87); ctx.lineTo(170,87); ctx.lineTo(170,85); ctx.stroke();
+          ctx.fillText("TT",170,52); ctx.textAlign="start";
           // Process pipe is split at the control-valve body so no pipe is drawn through its symbol.
           ctx.strokeStyle=teal; ctx.lineWidth=5; ctx.beginPath(); ctx.moveTo(227,216); ctx.lineTo(257,216); ctx.moveTo(283,216); ctx.lineTo(307,216); ctx.stroke();
           ctx.strokeStyle=blue; ctx.lineWidth=1.8; ctx.beginPath(); ctx.moveTo(227,216); ctx.lineTo(257,216); ctx.moveTo(283,216); ctx.lineTo(307,216); ctx.stroke();
           ctx.fillStyle=teal; ctx.beginPath(); ctx.moveTo(303,210); ctx.lineTo(312,216); ctx.lineTo(303,222); ctx.closePath(); ctx.fill();
-          //ctx.fillStyle=muted; ctx.font="9px system-ui, sans-serif"; ctx.fillText("PROCESS FLOW",226,202);
           // P&ID control valve: opposing triangles with actuator stem and diaphragm.
           ctx.fillStyle=light?"#fff":"#292d40"; ctx.strokeStyle=lavender; ctx.lineWidth=2;
           ctx.beginPath(); ctx.moveTo(257,204); ctx.lineTo(270,216); ctx.lineTo(257,228); ctx.closePath(); ctx.fill(); ctx.stroke();
@@ -973,15 +1015,15 @@
           for(var row=0;row<3;row++){ctx.beginPath();ctx.moveTo(338,225+row*7);ctx.lineTo(410,225+row*7);ctx.stroke();}
           // Dashed instrument signal to the controller: begin outside the TT bubble and end at the controller edge.
           ctx.setLineDash([4,4]); ctx.strokeStyle=gold; ctx.lineWidth=1.5;
-          ctx.beginPath(); ctx.moveTo(205,49); ctx.lineTo(242,49); ctx.lineTo(242,151); ctx.lineTo(310,151); ctx.lineTo(310,190); ctx.lineTo(322,190); ctx.stroke();
+          var instrumentPath = [[170,36],[170,14],[340,14],[340,177]];
+          ctx.beginPath(); instrumentPath.forEach(function(pt,i){if(!i)ctx.moveTo(pt[0],pt[1]);else ctx.lineTo(pt[0],pt[1]);}); ctx.stroke();
           ctx.setLineDash([]);
-          ctx.fillStyle=gold; ctx.beginPath(); ctx.moveTo(317,186); ctx.lineTo(322,190); ctx.lineTo(317,194); ctx.closePath(); ctx.fill();
-          //ctx.fillStyle=muted; ctx.font="9px system-ui, sans-serif"; ctx.fillText("MEASURED VALUE",247,143);
+          ctx.fillStyle=gold; ctx.beginPath(); ctx.moveTo(318,172); ctx.lineTo(322,177); ctx.lineTo(326,172); ctx.closePath(); ctx.fill();
           // Dashed control signal stops at the actuator diaphragm boundary; it does not cross the symbol.
+          var controlPath = [[326,177],[326,163],[270,163],[270,183]];
           ctx.setLineDash([4,4]); ctx.strokeStyle=lavender; ctx.lineWidth=1.6;
-          ctx.beginPath(); ctx.moveTo(322,239); ctx.lineTo(316,239); ctx.lineTo(316,267); ctx.lineTo(290,267); ctx.lineTo(290,188); ctx.lineTo(283,188); ctx.stroke();
+          ctx.beginPath(); controlPath.forEach(function(pt,i){if(!i)ctx.moveTo(pt[0],pt[1]);else ctx.lineTo(pt[0],pt[1]);}); ctx.stroke();
           ctx.setLineDash([]);
-          //ctx.fillStyle=muted; ctx.font="9px system-ui, sans-serif"; ctx.fillText("CONTROL OUTPUT",292,280);
           // Controller data is also logged for trend analysis
           ctx.setLineDash([4,5]); ctx.strokeStyle=lavender; ctx.lineWidth=1.5;
           ctx.beginPath(); ctx.moveTo(374,177); ctx.lineTo(374,157); ctx.lineTo(470,157); ctx.lineTo(470,146); ctx.stroke(); ctx.setLineDash([]);
@@ -995,10 +1037,23 @@
           // Animated data pulses along the feedback path
           if (animated) {
             var time = (ts || 0) / 1000;
-            var pulseY = 53 + ((time * 28) % 92);
-            ctx.beginPath(); ctx.arc(242,pulseY,3.6,0,Math.PI*2); ctx.fillStyle=gold; ctx.fill();
+            var instrumentLengths = [], instrumentTotal = 0;
+            for (var ii=1; ii<instrumentPath.length; ii++) { var idx=instrumentPath[ii], prev=instrumentPath[ii-1]; var il=Math.hypot(idx[0]-prev[0],idx[1]-prev[1]); instrumentLengths.push(il); instrumentTotal+=il; }
+            var instrumentDistance = (time * 32) % instrumentTotal, instrumentSeg = 0;
+            while (instrumentSeg < instrumentLengths.length-1 && instrumentDistance > instrumentLengths[instrumentSeg]) { instrumentDistance -= instrumentLengths[instrumentSeg]; instrumentSeg++; }
+            var instrumentFrom=instrumentPath[instrumentSeg], instrumentTo=instrumentPath[instrumentSeg+1], instrumentRatio=instrumentLengths[instrumentSeg] ? instrumentDistance/instrumentLengths[instrumentSeg] : 0;
+            var pulseX=instrumentFrom[0]+(instrumentTo[0]-instrumentFrom[0])*instrumentRatio, pulseY=instrumentFrom[1]+(instrumentTo[1]-instrumentFrom[1])*instrumentRatio;
+            ctx.beginPath(); ctx.arc(pulseX,pulseY,3.6,0,Math.PI*2); ctx.fillStyle=gold; ctx.fill();
             var qx = 374, qy = 173 - ((time * 18) % 22);
             ctx.beginPath(); ctx.arc(qx,qy,3,0,Math.PI*2); ctx.fillStyle=teal; ctx.fill();
+            // Moving control pulse travels from the PLC/PID block along the signal path to the valve actuator.
+            var lengths = [], totalLength = 0;
+            for (var ci=1; ci<controlPath.length; ci++) { var dx=controlPath[ci][0]-controlPath[ci-1][0], dy=controlPath[ci][1]-controlPath[ci-1][1]; var seg=Math.hypot(dx,dy); lengths.push(seg); totalLength+=seg; }
+            var distance = (time * 42) % totalLength, segIndex = 0;
+            while (segIndex < lengths.length-1 && distance > lengths[segIndex]) { distance -= lengths[segIndex]; segIndex++; }
+            var from = controlPath[segIndex], to = controlPath[segIndex+1], ratio = lengths[segIndex] ? distance/lengths[segIndex] : 0;
+            var dotX = from[0] + (to[0]-from[0])*ratio, dotY = from[1] + (to[1]-from[1])*ratio;
+            ctx.beginPath(); ctx.arc(dotX,dotY,4,0,Math.PI*2); ctx.fillStyle=gold; ctx.shadowColor=gold; ctx.shadowBlur=7; ctx.fill(); ctx.shadowBlur=0;
           }
           // Interactive focus: hover over a system area, or click to pin its explanation.
           var logicalX = pointer.x, logicalY = pointer.y;
