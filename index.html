@@ -603,7 +603,7 @@
       <section class="panel hero" id="overview" aria-labelledby="hero-title">
         <div class="panel-head">
           <p class="panel-title">Overview</p>
-          <p class="panel-meta">Data Science</p>
+          <p class="panel-meta">PI&C Engineer | Data Scientist</p>
         </div>
         <div class="panel-body">
           <h1 id="hero-title"><span>Fatemah</span><span>Shaker</span></h1>
@@ -902,9 +902,9 @@
         var pointer = { x: -1000, y: -1000, active: false };
         var selectedPart = -1;
         var partInfo = [
-          {x:110,y:25,w:120,h:245,title:"PROCESS INSTRUMENTATION",desc:"Sensors monitor process conditions."},
+          {x:105,y:24,w:130,h:245,title:"PROCESS INSTRUMENTATION",desc:"Sensors monitor process conditions."},
           {x:245,y:165,w:195,h:115,title:"AUTOMATION & CONTROL",desc:"PLC / PID adjusts the process."},
-          {x:350,y:20,w:245,h:270,title:"DATA SCIENCE",desc:"KPIs and models turn signals into insight."}
+          {x:350,y:20,w:245,h:270,title:"DATA SCIENCE",desc:"Trends and KPIs reveal drift and improvement."}
         ];
         var animated = !reduceMotion.matches;
         var draw = function (ts) {
@@ -942,20 +942,28 @@
           ctx.fillStyle = light ? "rgba(102,183,178,.27)" : "rgba(102,183,178,.25)";
           ctx.beginPath(); ctx.moveTo(116,167); ctx.lineTo(116,220); ctx.bezierCurveTo(116,236,224,236,224,220); ctx.lineTo(224,167); ctx.closePath(); ctx.fill();
           ctx.beginPath(); ctx.ellipse(170,167,54,14,0,0,Math.PI*2); ctx.fillStyle="rgba(102,183,178,.42)"; ctx.fill(); ctx.strokeStyle=teal; ctx.stroke();
-          // Top-mounted temperature/pressure transmitter
-          ctx.strokeStyle = gold; ctx.lineWidth=2.5; ctx.beginPath(); ctx.moveTo(170,84); ctx.lineTo(170,58); ctx.stroke();
-          ctx.fillStyle = light ? "#fff" : "#292d40"; ctx.strokeStyle=gold;
-          ctx.beginPath(); ctx.arc(170,49,15,0,Math.PI*2); ctx.fill(); ctx.stroke();
-          ctx.beginPath(); ctx.moveTo(170,49); ctx.lineTo(178,42); ctx.stroke();
-          ctx.fillStyle=ink; ctx.font="10px system-ui, sans-serif"; ctx.fillText("PT / TT",148,27);
-          // Process pipe from vessel to control valve and controller
-          ctx.strokeStyle=teal; ctx.lineWidth=5; ctx.beginPath(); ctx.moveTo(227,184); ctx.lineTo(270,184); ctx.lineTo(270,216); ctx.lineTo(306,216); ctx.stroke();
-          ctx.strokeStyle=blue; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(227,184); ctx.lineTo(270,184); ctx.lineTo(270,216); ctx.lineTo(306,216); ctx.stroke();
-          // Control valve symbol
+          // P&ID instrument bubbles: PT = pressure transmitter, TT = temperature transmitter.
+          // Connection lines stop at each bubble boundary; symbols remain unobstructed.
+          ctx.strokeStyle = gold; ctx.lineWidth = 1.8;
+          ctx.beginPath(); ctx.moveTo(148,62); ctx.lineTo(148,78); ctx.moveTo(192,62); ctx.lineTo(192,78); ctx.stroke();
+          ctx.fillStyle = light ? "#fff" : "#292d40"; ctx.strokeStyle = gold; ctx.lineWidth = 1.8;
+          ctx.beginPath(); ctx.arc(148,49,13,0,Math.PI*2); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.arc(192,49,13,0,Math.PI*2); ctx.fill(); ctx.stroke();
+          ctx.fillStyle=ink; ctx.font="bold 8px system-ui, sans-serif"; ctx.textAlign="center";
+          ctx.fillText("PT",148,52); ctx.fillText("TT",192,52); ctx.textAlign="start";
+          // Short instrument connections to the vessel roof (do not cross the bubbles).
+          ctx.strokeStyle=gold; ctx.lineWidth=1.8; ctx.beginPath(); ctx.moveTo(148,78); ctx.lineTo(148,87); ctx.lineTo(170,87); ctx.moveTo(192,78); ctx.lineTo(192,87); ctx.lineTo(170,87); ctx.lineTo(170,85); ctx.stroke();
+          // Process pipe is split at the control-valve body so no pipe is drawn through its symbol.
+          ctx.strokeStyle=teal; ctx.lineWidth=5; ctx.beginPath(); ctx.moveTo(227,216); ctx.lineTo(257,216); ctx.moveTo(283,216); ctx.lineTo(307,216); ctx.stroke();
+          ctx.strokeStyle=blue; ctx.lineWidth=1.8; ctx.beginPath(); ctx.moveTo(227,216); ctx.lineTo(257,216); ctx.moveTo(283,216); ctx.lineTo(307,216); ctx.stroke();
+          ctx.fillStyle=teal; ctx.beginPath(); ctx.moveTo(303,210); ctx.lineTo(312,216); ctx.lineTo(303,222); ctx.closePath(); ctx.fill();
+          //ctx.fillStyle=muted; ctx.font="9px system-ui, sans-serif"; ctx.fillText("PROCESS FLOW",226,202);
+          // P&ID control valve: opposing triangles with actuator stem and diaphragm.
           ctx.fillStyle=light?"#fff":"#292d40"; ctx.strokeStyle=lavender; ctx.lineWidth=2;
-          ctx.beginPath(); ctx.moveTo(270,203); ctx.lineTo(257,216); ctx.lineTo(270,229); ctx.closePath(); ctx.fill(); ctx.stroke();
-          ctx.beginPath(); ctx.moveTo(270,203); ctx.lineTo(283,216); ctx.lineTo(270,229); ctx.closePath(); ctx.fill(); ctx.stroke();
-          ctx.beginPath(); ctx.moveTo(270,203); ctx.lineTo(270,193); ctx.stroke(); ctx.beginPath(); ctx.arc(270,189,4,0,Math.PI*2); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(257,204); ctx.lineTo(270,216); ctx.lineTo(257,228); ctx.closePath(); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(283,204); ctx.lineTo(270,216); ctx.lineTo(283,228); ctx.closePath(); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(270,204); ctx.lineTo(270,196); ctx.stroke();
+          ctx.beginPath(); ctx.ellipse(270,188,12,5,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
           // PLC / PID controller module
           ctx.fillStyle = light ? "rgba(255,255,255,.92)" : "rgba(27,31,47,.92)"; ctx.strokeStyle=lavender; ctx.lineWidth=1.6;
           ctx.beginPath(); ctx.roundRect(322,177,105,78,8); ctx.fill(); ctx.stroke();
@@ -963,7 +971,18 @@
           for(var led=0;led<3;led++){ctx.beginPath();ctx.arc(340+led*15,211,3.2,0,Math.PI*2);ctx.fillStyle=[teal,gold,lavender][led];ctx.fill();}
           ctx.strokeStyle=muted; ctx.lineWidth=1.2;
           for(var row=0;row<3;row++){ctx.beginPath();ctx.moveTo(338,225+row*7);ctx.lineTo(410,225+row*7);ctx.stroke();}
-          // Signal connection to KPI panel
+          // Dashed instrument signal to the controller: begin outside the TT bubble and end at the controller edge.
+          ctx.setLineDash([4,4]); ctx.strokeStyle=gold; ctx.lineWidth=1.5;
+          ctx.beginPath(); ctx.moveTo(205,49); ctx.lineTo(242,49); ctx.lineTo(242,151); ctx.lineTo(310,151); ctx.lineTo(310,190); ctx.lineTo(322,190); ctx.stroke();
+          ctx.setLineDash([]);
+          ctx.fillStyle=gold; ctx.beginPath(); ctx.moveTo(317,186); ctx.lineTo(322,190); ctx.lineTo(317,194); ctx.closePath(); ctx.fill();
+          //ctx.fillStyle=muted; ctx.font="9px system-ui, sans-serif"; ctx.fillText("MEASURED VALUE",247,143);
+          // Dashed control signal stops at the actuator diaphragm boundary; it does not cross the symbol.
+          ctx.setLineDash([4,4]); ctx.strokeStyle=lavender; ctx.lineWidth=1.6;
+          ctx.beginPath(); ctx.moveTo(322,239); ctx.lineTo(316,239); ctx.lineTo(316,267); ctx.lineTo(290,267); ctx.lineTo(290,188); ctx.lineTo(283,188); ctx.stroke();
+          ctx.setLineDash([]);
+          //ctx.fillStyle=muted; ctx.font="9px system-ui, sans-serif"; ctx.fillText("CONTROL OUTPUT",292,280);
+          // Controller data is also logged for trend analysis
           ctx.setLineDash([4,5]); ctx.strokeStyle=lavender; ctx.lineWidth=1.5;
           ctx.beginPath(); ctx.moveTo(374,177); ctx.lineTo(374,157); ctx.lineTo(470,157); ctx.lineTo(470,146); ctx.stroke(); ctx.setLineDash([]);
           // Data science layer: feature bars and model nodes
@@ -976,8 +995,8 @@
           // Animated data pulses along the feedback path
           if (animated) {
             var time = (ts || 0) / 1000;
-            var px = 231 + ((time * 42) % 72);
-            ctx.beginPath(); ctx.arc(px,184,3.6,0,Math.PI*2); ctx.fillStyle=gold; ctx.fill();
+            var pulseY = 53 + ((time * 28) % 92);
+            ctx.beginPath(); ctx.arc(242,pulseY,3.6,0,Math.PI*2); ctx.fillStyle=gold; ctx.fill();
             var qx = 374, qy = 173 - ((time * 18) % 22);
             ctx.beginPath(); ctx.arc(qx,qy,3,0,Math.PI*2); ctx.fillStyle=teal; ctx.fill();
           }
@@ -999,9 +1018,9 @@
           } else {
             ctx.fillStyle=muted; ctx.font="10px system-ui, sans-serif"; ctx.fillText("HOVER / CLICK A SYSTEM TO EXPLORE",185,313);
           }
-          // Small label grounding the visual in industrial analytics
-          ctx.fillStyle=ink; ctx.font="10px system-ui, sans-serif";
-          ctx.fillText("SENSORS",106,280); ctx.fillText("CONTROL",316,276); ctx.fillText("PREDICTIVE ANALYTICS",451,300);
+          // Three stages of a closed-loop control system
+          ctx.fillStyle=ink; ctx.font="bold 10px system-ui, sans-serif";
+          ctx.fillText("INSTRUMENTATION",105,280); ctx.fillText("CONTROL",320,276); ctx.fillText("PREDICTIVE ANALYSIS",458,300);
           ctx.restore();
           if (animated && visible) rafId = window.requestAnimationFrame(draw);
         };
