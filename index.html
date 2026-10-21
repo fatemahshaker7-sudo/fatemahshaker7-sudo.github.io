@@ -638,8 +638,8 @@
         </div>
         <div class="panel kpi">
           <p class="kpi-label">Projects</p>
-          <p class="kpi-value">4</p>
-          <p class="kpi-note">Industrial optimization, habit tracking, senior and junior projects</p>
+          <p class="kpi-value">5</p>
+          <p class="kpi-note">Delivery estimation, industrial optimization, habit tracking, senior and junior projects</p>
         </div>
         <div class="panel kpi">
           <p class="kpi-label">Degree</p>
@@ -655,12 +655,25 @@
           <p class="panel-meta">Select a project to explore</p>
         </div>
         <div class="project-tabs" role="tablist" aria-label="Projects">
+          <button class="project-tab" id="tab-olist" role="tab" aria-selected="false" aria-controls="project-olist" tabindex="-1">Olist Delivery Estimation</button>
           <button class="project-tab" id="tab-habit" role="tab" aria-selected="true" aria-controls="project-habit" tabindex="0">Habit Tracking App</button>
           <button class="project-tab" id="tab-industrial" role="tab" aria-selected="false" aria-controls="project-industrial" tabindex="-1">Industrial Optimization</button>
           <button class="project-tab" id="tab-senior" role="tab" aria-selected="false" aria-controls="project-senior" tabindex="-1">Senior Project</button>
           <button class="project-tab" id="tab-junior" role="tab" aria-selected="false" aria-controls="project-junior" tabindex="-1">Junior Project</button>
         </div>
         <div class="panel-body project-view">
+          <article class="case" id="project-olist" role="tabpanel" aria-labelledby="tab-olist" hidden>
+            <h3>Olist Delivery Time Estimation</h3>
+            <p class="lead">Built an end-to-end machine learning project using the Brazilian Olist e-commerce dataset to estimate delivery time in days. Compared regression models and deployed a Stacking ensemble combining HistGradientBoosting, Random Forest and Extra Trees, with Ridge regression learning how to combine their predictions. The selected model achieved a test MAE of 4.39 days on unseen orders.</p>
+            <p style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px">
+              <a href="https://olist-delivery-estimation-app.streamlit.app/" target="_blank" rel="noopener noreferrer">Open live Streamlit app ↗</a>
+              <a href="https://github.com/fatemahshaker7-sudo/OLIST_DATE_ESTIMATION" target="_blank" rel="noopener noreferrer">View GitHub repository ↗</a>
+            </p>
+            <dl class="kv">
+              <div><dt>Tools used</dt><dd><ul class="items"><li>Python</li><li>Pandas</li><li>NumPy</li><li>Scikit-learn</li><li>Machine Learning</li><li>Streamlit</li></ul></dd></div>
+              <div><dt>Key result</dt><dd>4.39-day mean absolute error (MAE) on unseen test data.</dd></div>
+            </dl>
+          </article>
           <article class="case" id="project-habit" role="tabpanel" aria-labelledby="tab-habit">
             <h3>Habit Tracking App</h3>
             <p class="lead">Built an interactive Streamlit app for daily, weekly and monthly habit tracking, with streak analysis, completion heatmaps, progress bars and AI-generated coaching tips.</p>
