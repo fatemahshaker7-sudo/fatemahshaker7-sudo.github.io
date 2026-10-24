@@ -456,22 +456,39 @@
     .case > p a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border: 1px solid var(--rule); border-radius: 999px; text-decoration: none; font-weight: 600; }
     .case > p a:hover { background: var(--text); color: var(--bg); }
 
-
     /* Project discipline filter */
-    .project-filter {
-      display:flex; flex-wrap:wrap; align-items:center; gap:8px;
-      padding:16px 24px 0;
-    }
+    .project-filter { display:flex; flex-wrap:wrap; align-items:center; gap:8px; padding:16px 24px 0; }
     .project-filter-label { color:var(--muted); font-weight:600; margin-right:4px; }
-    .filter-btn {
-      appearance:none; border:1px solid var(--rule); border-radius:999px;
-      padding:8px 14px; background:transparent; color:var(--muted);
-      font:inherit; font-weight:600; cursor:pointer;
-    }
+    .filter-btn { appearance:none; border:1px solid var(--rule); border-radius:999px; padding:8px 14px; background:transparent; color:var(--muted); font:inherit; font-weight:600; cursor:pointer; }
     .filter-btn[aria-pressed="true"] { background:var(--text); color:var(--bg); border-color:var(--text); }
     .filter-btn:focus-visible { outline:2px solid var(--slate); outline-offset:3px; }
 
-    /* Interactive embedded app preview */
+    /* Senior/Junior project detail viewer */
+    .project-detail-modal[hidden] { display:none !important; }
+    .project-detail-modal { position:fixed; inset:0; z-index:300; background:rgba(7,11,22,.78); display:grid; place-items:center; padding:clamp(8px,2vw,24px); }
+    /* When opened in a separate browser tab, use the full viewport rather than a centered modal. */
+    body.project-standalone { margin:0; overflow:hidden; }
+    body.project-standalone > :not(#project-detail-modal) { display:none !important; }
+    body.project-standalone .project-detail-modal { padding:0; background:var(--bg); }
+    body.project-standalone .project-detail-window { width:100%; height:100vh; height:100dvh; min-height:0; border:0; border-radius:0; box-shadow:none; }
+    body.project-standalone .project-detail-body { padding:clamp(8px,1.5vw,20px); }
+    body.project-standalone .project-detail-content iframe { height:min(68vh,760px); }
+    .project-detail-window { width:min(1100px,100%); height:min(820px,94vh); min-height:360px; background:var(--panel); color:var(--text); border:1px solid var(--rule); border-radius:16px; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 24px 90px rgba(0,0,0,.35); }
+    .project-detail-head { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--rule); }
+    .project-detail-head strong { font-family:var(--font-display); font-size:1.1rem; }
+    .project-detail-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .project-detail-actions button, .project-detail-nav { display:inline-flex; align-items:center; justify-content:center; min-width:42px; min-height:40px; padding:8px 12px; border:1px solid var(--rule); border-radius:10px; color:var(--text); background:transparent; font:inherit; cursor:pointer; }
+    .project-detail-actions button:hover, .project-detail-nav:hover { background:var(--text); color:var(--bg); }
+    .project-detail-body { flex:1; min-height:0; display:grid; grid-template-columns:48px minmax(0,1fr) 48px; align-items:center; gap:12px; padding:18px; }
+    .project-detail-content { min-width:0; height:100%; overflow:auto; padding:clamp(8px,2vw,24px); border:1px solid var(--rule); border-radius:12px; }
+    .project-detail-content h3 { font-family:var(--font-display); font-size:clamp(1.4rem,3vw,2rem); margin-bottom:14px; }
+    .project-detail-content p { margin:0 0 12px; }
+    .project-detail-content .placeholder-note { color:var(--muted); font-size:.92rem; }
+    .project-detail-content iframe { display:block; width:100%; height:min(52vh,520px); min-height:260px; border:1px solid var(--rule); border-radius:8px; background:#fff; margin-top:14px; }
+    .project-detail-counter { text-align:center; color:var(--muted); padding:0 12px 12px; font-family:var(--font-mono); font-size:.85rem; }
+    .explore-project { display:inline-flex; align-items:center; gap:6px; border:1px solid var(--rule); border-radius:999px; padding:8px 13px; background:transparent; color:var(--text); font:inherit; font-weight:600; cursor:pointer; }
+    .explore-project:hover { background:var(--text); color:var(--bg); }
+    /* Minimized interactive Streamlit app preview */
     .app-preview[hidden] { display:none !important; }
     .app-preview { position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center; padding:clamp(8px,2vw,24px); background:rgba(7,11,22,.72); }
     .app-preview-dialog { display:flex; flex-direction:column; width:min(1180px,100%); height:min(820px,94vh); min-height:360px; background:var(--panel); color:var(--text); border:1px solid var(--rule); border-radius:16px; overflow:hidden; box-shadow:0 24px 90px rgba(0,0,0,.35); }
@@ -482,7 +499,7 @@
     .app-preview-actions button:hover, .app-preview-actions a:hover { background:var(--text); color:var(--bg); }
     .app-preview-frame { width:100%; flex:1; border:0; background:#fff; }
     .app-preview-note { padding:8px 14px; border-top:1px solid var(--rule); color:var(--muted); font-size:.85rem; }
-    @media(max-width:560px) { .app-preview-head { align-items:flex-start; flex-wrap:wrap; } .app-preview-actions { margin-left:0; width:100%; } .app-preview-actions button,.app-preview-actions a { flex:1; } }
+    @media(max-width:600px) { .project-detail-head { align-items:flex-start; flex-direction:column; } .project-detail-actions { width:100%; } .project-detail-actions button { flex:1; } .project-detail-body { grid-template-columns:34px minmax(0,1fr) 34px; gap:5px; padding:8px; } .project-detail-content { padding:10px; } .app-preview-head { align-items:flex-start; flex-wrap:wrap; } .app-preview-actions { margin-left:0; width:100%; } .app-preview-actions button,.app-preview-actions a { flex:1; } }
 
     /* ---------- Skills chart ---------- */
     .bars { display: grid; gap: 22px; }
@@ -661,8 +678,8 @@
       <section class="kpis" aria-label="At a glance">
         <div class="panel kpi">
           <p class="kpi-label">Languages and tools</p>
-          <p class="kpi-value">6</p>
-          <p class="kpi-note">Python, C++, Pandas, NumPy, Altair, Streamlit</p>
+          <p class="kpi-value">12</p>
+          <p class="kpi-note">Python, C++, Pandas, NumPy, Altair, Streamlit, MATLAB, Simulink, SCADA, PLC, Modeling, 3D Modeling</p>
         </div>
         <div class="panel kpi">
           <p class="kpi-label">Projects</p>
@@ -684,17 +701,15 @@
         </div>
         <div class="project-filter" role="group" aria-label="Filter projects by discipline">
           <span class="project-filter-label">Show:</span>
-          <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All projects</button>
           <button class="filter-btn" type="button" data-filter="engineering" aria-pressed="false">Engineering</button>
-          <button class="filter-btn" type="button" data-filter="both" aria-pressed="false">Both</button>
           <button class="filter-btn" type="button" data-filter="data-science" aria-pressed="false">Data Science</button>
         </div>
         <div class="project-tabs" role="tablist" aria-label="Projects">
-          <button class="project-tab" id="tab-olist" data-discipline="data-science" role="tab" aria-selected="false" aria-controls="project-olist" tabindex="-1">Olist Delivery Estimation</button>
-          <button class="project-tab" id="tab-habit" data-discipline="data-science" role="tab" aria-selected="true" aria-controls="project-habit" tabindex="0">Habit Tracking App</button>
-          <button class="project-tab" id="tab-industrial" data-discipline="both" role="tab" aria-selected="false" aria-controls="project-industrial" tabindex="-1">Industrial Optimization</button>
-          <button class="project-tab" id="tab-senior" data-discipline="both" role="tab" aria-selected="false" aria-controls="project-senior" tabindex="-1">Senior Project</button>
-          <button class="project-tab" id="tab-junior" data-discipline="engineering" role="tab" aria-selected="false" aria-controls="project-junior" tabindex="-1">Junior Project</button>
+          <button class="project-tab" id="tab-olist" role="tab" aria-selected="false" aria-controls="project-olist" tabindex="-1">Olist Delivery Estimation</button>
+          <button class="project-tab" id="tab-habit" role="tab" aria-selected="true" aria-controls="project-habit" tabindex="0">Habit Tracking App</button>
+          <button class="project-tab" id="tab-industrial" role="tab" aria-selected="false" aria-controls="project-industrial" tabindex="-1">Industrial Optimization</button>
+          <button class="project-tab" id="tab-senior" role="tab" aria-selected="false" aria-controls="project-senior" tabindex="-1">Senior Project</button>
+          <button class="project-tab" id="tab-junior" role="tab" aria-selected="false" aria-controls="project-junior" tabindex="-1">Junior Project</button>
         </div>
         <div class="panel-body project-view">
           <article class="case" id="project-olist" role="tabpanel" aria-labelledby="tab-olist" hidden>
@@ -726,11 +741,13 @@
           </article>
           <article class="case" id="project-senior" role="tabpanel" aria-labelledby="tab-senior" hidden>
             <h3>Senior Project</h3>
+            <p style="margin-top:14px"><button type="button" class="explore-project" data-project="senior">🔎 Learn More</button></p>
             <p class="lead">University of Bahrain · 2022. Designed and tuned PID and Fuzzy PID controllers for a nonlinear blood glucose–insulin system for Type 1 diabetes, aiming to maintain normal glucose levels with minimal insulin dose.</p>
             <dl class="kv"><div><dt>Tools used</dt><dd><ul class="items"><li>MATLAB</li><li>Simulink</li><li>PID Control</li><li>Fuzzy PID</li></ul></dd></div></dl>
           </article>
           <article class="case" id="project-junior" role="tabpanel" aria-labelledby="tab-junior" hidden>
             <h3>Junior Project</h3>
+            <p style="margin-top:14px"><button type="button" class="explore-project" data-project="junior">🔎 Learn More</button></p>
             <p class="lead">University of Bahrain · 2021. Designed, built and tested an Arduino weather station using a DHT11 sensor and LCD, sending sensor readings to a web server via Wi-Fi and MQTT.</p>
             <dl class="kv"><div><dt>Tools used</dt><dd><ul class="items"><li>Arduino Uno</li><li>DHT11</li><li>LCD</li><li>Wi-Fi</li><li>MQTT</li></ul></dd></div></dl>
           </article>
@@ -741,7 +758,7 @@
       <section class="panel p-skills" id="skills" aria-labelledby="skills-title">
         <div class="panel-head">
           <h2 class="panel-title" id="skills-title">Skills</h2>
-          <p class="panel-meta">6 tools</p>
+          <p class="panel-meta">12 tools</p>
         </div>
         <div class="panel-body">
           <ul class="bars" id="bars">
@@ -764,6 +781,16 @@
               <div class="bar-top"><span>Data apps</span><span class="bar-count">1 tool</span></div>
               <span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--n:1"></span></span>
               <p class="bar-items">Streamlit</p>
+            </li>
+            <li class="bar-row">
+              <div class="bar-top"><span>Engineering &amp; control</span><span class="bar-count">5 tools</span></div>
+              <span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--n:5"></span></span>
+              <p class="bar-items">MATLAB, Simulink, SCADA, PLC, Modeling</p>
+            </li>
+            <li class="bar-row">
+              <div class="bar-top"><span>3D modeling</span><span class="bar-count">1 tool</span></div>
+              <span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--n:1"></span></span>
+              <p class="bar-items">3D Modeling</p>
             </li>
           </ul>
           <p class="chart-note">Bars show how many tools sit in each category.</p>
@@ -852,8 +879,26 @@
           <button id="app-preview-close" type="button">Close ✕</button>
         </div>
       </header>
-      <iframe class="app-preview-frame" id="app-preview-frame" title="Interactive live app preview" allow="clipboard-read; clipboard-write; fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin" loading="lazy"></iframe>
-      <p class="app-preview-note">Interactive preview. If the app shows a redirect or refuses embedding, use “Open in new tab”; the app deployment must permit iframe embedding.</p>
+      <iframe class="app-preview-frame" id="app-preview-frame" title="Interactive live app preview" allow="clipboard-read; clipboard-write; fullscreen; autoplay" referrerpolicy="strict-origin-when-cross-origin" loading="eager"></iframe>
+      <p class="app-preview-note">You can interact with the app here. If the site does not allow embedding, use “Open in new tab”.</p>
+    </div>
+  </section>
+
+  <section id="project-detail-modal" class="project-detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title" hidden>
+    <div class="project-detail-window">
+      <header class="project-detail-head">
+        <strong id="detail-title">Project Details</strong>
+        <div class="project-detail-actions">
+          <button type="button" id="detail-open-tab">Open in New Tab ↗</button>
+          <button type="button" id="detail-close">Close ✕</button>
+        </div>
+      </header>
+      <div class="project-detail-body">
+        <button type="button" class="project-detail-nav" id="detail-prev" aria-label="Previous section">←</button>
+        <section class="project-detail-content" id="detail-content" aria-live="polite"></section>
+        <button type="button" class="project-detail-nav" id="detail-next" aria-label="Next section">→</button>
+      </div>
+      <p id="detail-counter" class="project-detail-counter"></p>
     </div>
   </section>
 
@@ -881,86 +926,142 @@
       projectTabs.forEach(function (tab, index) {
         tab.addEventListener('click', function () { activateProjectTab(tab, false); });
         tab.addEventListener('keydown', function (event) {
-          var next = index;
-          if (event.key === 'ArrowRight') next = (index + 1) % projectTabs.length;
-          else if (event.key === 'ArrowLeft') next = (index - 1 + projectTabs.length) % projectTabs.length;
+          var visibleTabs = projectTabs.filter(function (item) { return !item.hidden; });
+          var current = visibleTabs.indexOf(tab);
+          var next = current;
+          if (event.key === 'ArrowRight') next = (current + 1) % visibleTabs.length;
+          else if (event.key === 'ArrowLeft') next = (current - 1 + visibleTabs.length) % visibleTabs.length;
           else if (event.key === 'Home') next = 0;
-          else if (event.key === 'End') next = projectTabs.length - 1;
+          else if (event.key === 'End') next = visibleTabs.length - 1;
           else return;
-          event.preventDefault(); activateProjectTab(projectTabs[next], true);
+          event.preventDefault(); if (visibleTabs[next]) activateProjectTab(visibleTabs[next], true);
         });
       });
 
-      /* Discipline filter: All by default; Both shows the two cross-discipline projects. */
-      var filterButtons = Array.prototype.slice.call(document.querySelectorAll(".filter-btn"));
-      var disciplineOrder = {
-        all: ["tab-olist", "tab-habit", "tab-industrial", "tab-senior", "tab-junior"],
-        engineering: ["tab-junior"],
-        both: ["tab-industrial", "tab-senior"],
-        "data-science": ["tab-olist", "tab-habit"]
-      };
-      function applyProjectFilter(filter) {
-        var allowed = disciplineOrder[filter] || disciplineOrder.all;
+      /* Independent discipline filters: neither selected shows all projects. */
+      var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
+      var engineeringSelected = false, dataScienceSelected = false;
+      var allProjectIds = ['tab-olist','tab-habit','tab-industrial','tab-senior','tab-junior'];
+      function applyProjectFilter() {
         filterButtons.forEach(function (button) {
-          button.setAttribute("aria-pressed", button.getAttribute("data-filter") === filter ? "true" : "false");
+          var selected = button.getAttribute('data-filter') === 'engineering' ? engineeringSelected : dataScienceSelected;
+          button.setAttribute('aria-pressed', selected ? 'true' : 'false');
         });
+        var allowed;
+        if (engineeringSelected && dataScienceSelected) allowed = ['tab-industrial','tab-senior'];
+        else if (engineeringSelected) allowed = ['tab-junior'];
+        else if (dataScienceSelected) allowed = ['tab-olist','tab-habit'];
+        else allowed = allProjectIds.slice();
         projectTabs.forEach(function (tab) {
           var show = allowed.indexOf(tab.id) !== -1;
-          tab.hidden = !show;
-          tab.setAttribute("aria-hidden", show ? "false" : "true");
+          tab.hidden = !show; tab.setAttribute('aria-hidden', show ? 'false' : 'true');
         });
-        var activeTab = projectTabs.find(function (tab) {
-          return allowed.indexOf(tab.id) !== -1 && tab.getAttribute("aria-selected") === "true";
-        });
-        if (!activeTab) {
-          activeTab = document.getElementById(allowed[0]);
-          if (activeTab) activateProjectTab(activeTab, false);
-        }
+        var activeTab = projectTabs.find(function (tab) { return allowed.indexOf(tab.id) !== -1 && tab.getAttribute('aria-selected') === 'true'; });
+        if (!activeTab) { activeTab = document.getElementById(allowed[0]); if (activeTab) activateProjectTab(activeTab, false); }
       }
       filterButtons.forEach(function (button) {
-        button.addEventListener("click", function () { applyProjectFilter(button.getAttribute("data-filter")); });
+        button.addEventListener('click', function () {
+          if (button.getAttribute('data-filter') === 'engineering') engineeringSelected = !engineeringSelected;
+          else dataScienceSelected = !dataScienceSelected;
+          applyProjectFilter();
+        });
       });
-      applyProjectFilter("all");
+      applyProjectFilter();
 
-      /* Live app preview: embedded when supported, with a full-tab fallback. */
-      var preview = document.getElementById("app-preview");
-      var previewFrame = document.getElementById("app-preview-frame");
-      var previewTitle = document.getElementById("app-preview-title");
-      var previewNewTab = document.getElementById("app-preview-new-tab");
-      var previewClose = document.getElementById("app-preview-close");
+      /* Minimized interactive Streamlit app preview. */
+      var preview = document.getElementById('app-preview');
+      var previewFrame = document.getElementById('app-preview-frame');
+      var previewTitle = document.getElementById('app-preview-title');
+      var previewNewTab = document.getElementById('app-preview-new-tab');
+      var previewClose = document.getElementById('app-preview-close');
       var lastPreviewTrigger = null;
-      function closeAppPreview() {
-        preview.hidden = true;
-        previewFrame.src = "about:blank";
-        if (lastPreviewTrigger) lastPreviewTrigger.focus();
-      }
-      function getStreamlitEmbedUrl(rawUrl) {
-        // Streamlit Community Cloud supports the embed query flag. Preserve any
-        // existing query parameters and avoid duplicating the flag.
-        var url = new URL(rawUrl, window.location.href);
-        if (!url.searchParams.has("embed")) url.searchParams.set("embed", "true");
-        return url.toString();
-      }
-      document.querySelectorAll('a[href*="streamlit.app"], a[href*="share.streamlit.io"]').forEach(function (link) {
-        link.addEventListener("click", function (event) {
-          // Keep modifier-click and non-primary clicks behaving like normal links.
-          if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-          event.preventDefault();
-          lastPreviewTrigger = link;
-          previewTitle.textContent = link.textContent.replace(/\s*↗\s*$/, "").trim();
+      function closeAppPreview() { preview.hidden = true; previewFrame.src = 'about:blank'; if (lastPreviewTrigger) lastPreviewTrigger.focus(); }
+      document.querySelectorAll('a[href*="streamlit.app"]').forEach(function (link) {
+        link.addEventListener('click', function (event) {
+          event.preventDefault(); lastPreviewTrigger = link;
+          previewTitle.textContent = link.textContent.replace(/\s*↗\s*$/, '').trim();
           previewNewTab.href = link.href;
-          previewFrame.src = getStreamlitEmbedUrl(link.href);
+          var embedUrl = new URL(link.href);
+          embedUrl.searchParams.set('embed', 'true');
+          previewFrame.src = embedUrl.href;
           preview.hidden = false;
           previewClose.focus();
         });
       });
-      previewClose.addEventListener("click", closeAppPreview);
-      preview.addEventListener("click", function (event) {
-        if (event.target === preview) closeAppPreview();
+      previewClose.addEventListener('click', closeAppPreview);
+      preview.addEventListener('click', function (event) { if (event.target === preview) closeAppPreview(); });
+      document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && !preview.hidden) closeAppPreview(); });
+
+      /* Shared Senior/Junior viewer. The query string opens the same viewer in a new tab. */
+      var detailModal = document.getElementById('project-detail-modal');
+      var detailContent = document.getElementById('detail-content');
+      var detailTitle = document.getElementById('detail-title');
+      var detailCounter = document.getElementById('detail-counter');
+      var detailIndex = 0, detailProject = 'senior';
+      var detailData = {
+        senior: { title: 'Senior Project', slides: [
+          {title:'Overview',body:'PID and Fuzzy PID control for a nonlinear blood glucose–insulin system. The project aimed to maintain glucose levels within a normal range while minimizing insulin dose.',note:'Placeholder section — replace this with your final project summary.'},
+          {title:'Problem & Objectives',body:'Describe the control problem, project objectives, system constraints, and performance criteria.',note:'Suggested content: background, objectives, and project scope.'},
+          {title:'Modeling & Methodology',body:'Explain the mathematical model, assumptions, controller structure, tuning method, and simulation setup.',note:'Suggested content: model equations, Simulink block diagrams, and controller design.'},
+          {title:'Results & Evaluation',body:'Compare PID and Fuzzy PID responses using your simulation results and performance metrics.',note:'Suggested content: response plots, overshoot, settling time, and discussion.'},
+          {title:'Presentation Preview',body:'Sample PDF preview for layout testing only. Replace it with your actual project presentation when ready.',pdf:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',note:'The sample PDF is not your original project presentation.'},
+          {title:'Tools & Contribution',body:'MATLAB, Simulink, PID Control, and Fuzzy PID.',note:'Suggested content: your individual contribution, challenges, conclusions, and future work.'}
+        ]},
+        junior: { title: 'Junior Project', slides: [
+          {title:'Overview',body:'Arduino-based weather station using a DHT11 sensor and LCD, with readings sent to a web server via Wi-Fi and MQTT.',note:'Placeholder section — replace this with your final project summary.'},
+          {title:'Problem & Objectives',body:'Describe the intended use, requirements, and objectives of the weather station.',note:'Suggested content: project motivation, scope, and design requirements.'},
+          {title:'System Architecture',body:'Show how the DHT11 sensor, Arduino Uno, LCD, Wi-Fi connection, MQTT service, and web server work together.',note:'Suggested content: system architecture diagram and data flow.'},
+          {title:'Implementation & Testing',body:'Explain the circuit, firmware, sensor readings, data transmission, and validation tests.',note:'Suggested content: wiring photographs, code excerpts, and test results.'},
+          {title:'Results & Presentation',body:'Sample PDF preview for layout testing only. Replace it with your actual project presentation when ready.',pdf:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',note:'The sample PDF is not your original project presentation.'},
+          {title:'Tools & Future Work',body:'Arduino Uno, DHT11, LCD, Wi-Fi, and MQTT.',note:'Suggested content: your contribution, limitations, conclusions, and possible improvements.'}
+        ]}
+      };
+      function renderDetail() {
+        var slides = detailData[detailProject].slides, slide = slides[detailIndex];
+        detailTitle.textContent = detailData[detailProject].title;
+        var html = '<h3>' + slide.title + '</h3><p>' + slide.body + '</p>';
+        if (slide.pdf) html += '<iframe title="Sample PDF presentation preview" src="' + slide.pdf + '#toolbar=1&navpanes=0"></iframe>';
+        if (slide.note) html += '<p class="placeholder-note">' + slide.note + '</p>';
+        detailContent.innerHTML = html; detailCounter.textContent = 'Section ' + (detailIndex + 1) + ' of ' + slides.length;
+        document.title = detailData[detailProject].title + ' | Fatemah Shaker';
+      }
+      function openProjectDetail(project, index) {
+        detailProject = detailData[project] ? project : 'senior';
+        detailIndex = Math.max(0, Math.min(Number(index) || 0, detailData[detailProject].slides.length - 1));
+        renderDetail(); detailModal.hidden = false; document.body.style.overflow = 'hidden';
+      }
+      function closeProjectDetail() {
+        detailModal.hidden = true; document.body.style.overflow = '';
+        var url = new URL(window.location.href);
+        if (url.searchParams.has('project-view')) { url.searchParams.delete('project-view'); url.searchParams.delete('section'); window.history.replaceState({}, '', url.pathname + url.search + url.hash); }
+      }
+      document.querySelectorAll('.explore-project').forEach(function (button) { button.addEventListener('click', function () { openProjectDetail(button.getAttribute('data-project'), 0); }); });
+      document.getElementById('detail-prev').addEventListener('click', function () { detailIndex = (detailIndex - 1 + detailData[detailProject].slides.length) % detailData[detailProject].slides.length; renderDetail(); });
+      document.getElementById('detail-next').addEventListener('click', function () { detailIndex = (detailIndex + 1) % detailData[detailProject].slides.length; renderDetail(); });
+      document.getElementById('detail-close').addEventListener('click', function () {
+        if (new URL(window.location.href).searchParams.has('project-view')) {
+          window.close();
+          if (!window.closed) { document.body.classList.remove('project-standalone'); closeProjectDetail(); }
+        } else closeProjectDetail();
       });
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && !preview.hidden) closeAppPreview();
+      detailModal.addEventListener('click', function (event) { if (event.target === detailModal) closeProjectDetail(); });
+      document.getElementById('detail-open-tab').addEventListener('click', function () {
+        var url = new URL(window.location.href); url.searchParams.set('project-view', detailProject); url.searchParams.set('section', String(detailIndex));
+        window.open(url.href, '_blank', 'noopener,noreferrer');
       });
+      document.addEventListener('keydown', function (event) {
+        if (!detailModal.hidden) {
+          if (event.key === 'ArrowLeft') { event.preventDefault(); document.getElementById('detail-prev').click(); }
+          else if (event.key === 'ArrowRight') { event.preventDefault(); document.getElementById('detail-next').click(); }
+          else if (event.key === 'Escape') closeProjectDetail();
+        }
+      });
+      var initialUrl = new URL(window.location.href);
+      if (initialUrl.searchParams.has('project-view')) {
+        document.body.classList.add('project-standalone');
+        openProjectDetail(initialUrl.searchParams.get('project-view'), initialUrl.searchParams.get('section'));
+        document.getElementById('detail-open-tab').textContent = 'Open Another Tab ↗';
+      }
 
       /* Theme toggle */
       var themeBtn = document.getElementById("theme-toggle");
@@ -1151,6 +1252,7 @@
           var instrumentPath = [[170,36],[170,14],[340,14],[340,177]];
           ctx.beginPath(); instrumentPath.forEach(function(pt,i){if(!i)ctx.moveTo(pt[0],pt[1]);else ctx.lineTo(pt[0],pt[1]);}); ctx.stroke();
           ctx.setLineDash([]);
+          // No extra yellow arrow is drawn at the top of the PLC / PID block.
           // Dashed control signal stops at the actuator diaphragm boundary; it does not cross the symbol.
           var controlPath = [[326,177],[326,163],[270,163],[270,183]];
           ctx.setLineDash([4,4]); ctx.strokeStyle=lavender; ctx.lineWidth=1.6;
@@ -1176,19 +1278,20 @@
             var instrumentFrom=instrumentPath[instrumentSeg], instrumentTo=instrumentPath[instrumentSeg+1], instrumentRatio=instrumentLengths[instrumentSeg] ? instrumentDistance/instrumentLengths[instrumentSeg] : 0;
             var pulseX=instrumentFrom[0]+(instrumentTo[0]-instrumentFrom[0])*instrumentRatio, pulseY=instrumentFrom[1]+(instrumentTo[1]-instrumentFrom[1])*instrumentRatio;
             ctx.beginPath(); ctx.arc(pulseX,pulseY,3.6,0,Math.PI*2); ctx.fillStyle=gold; ctx.fill();
-            // Green live-data pulse follows the dotted line from the PLC/PID to PROCESS KPI / LIVE DATA.
-            var kpiPath = [[374,177],[374,157],[470,157],[470,146]];
-            var kpiLengths = [], kpiTotal = 0;
-            for (var ki=1; ki<kpiPath.length; ki++) {
-              var kdx=kpiPath[ki][0]-kpiPath[ki-1][0], kdy=kpiPath[ki][1]-kpiPath[ki-1][1];
-              var kseg=Math.hypot(kdx,kdy); kpiLengths.push(kseg); kpiTotal+=kseg;
+            // Green data pulse follows the entire dashed route from the controller to the process KPI panel.
+            var dataPath = [[374,177],[374,157],[470,157],[470,146]];
+            var dataLengths = [], dataTotal = 0;
+            for (var di=1; di<dataPath.length; di++) {
+              var ddx=dataPath[di][0]-dataPath[di-1][0], ddy=dataPath[di][1]-dataPath[di-1][1];
+              var dseg=Math.hypot(ddx,ddy); dataLengths.push(dseg); dataTotal+=dseg;
             }
-            var kdist=(time*38)%kpiTotal, ksegIndex=0;
-            while(ksegIndex<kpiLengths.length-1 && kdist>kpiLengths[ksegIndex]) { kdist-=kpiLengths[ksegIndex]; ksegIndex++; }
-            var kfrom=kpiPath[ksegIndex], kto=kpiPath[ksegIndex+1];
-            var kratio=kpiLengths[ksegIndex] ? kdist/kpiLengths[ksegIndex] : 0;
-            var qx=kfrom[0]+(kto[0]-kfrom[0])*kratio, qy=kfrom[1]+(kto[1]-kfrom[1])*kratio;
-            ctx.beginPath(); ctx.arc(qx,qy,4,0,Math.PI*2); ctx.fillStyle=teal; ctx.shadowColor=teal; ctx.shadowBlur=7; ctx.fill(); ctx.shadowBlur=0;
+            var dataDistance=(time*30)%dataTotal, dataSeg=0;
+            while(dataSeg<dataLengths.length-1 && dataDistance>dataLengths[dataSeg]) { dataDistance-=dataLengths[dataSeg]; dataSeg++; }
+            var dataFrom=dataPath[dataSeg], dataTo=dataPath[dataSeg+1];
+            var dataRatio=dataLengths[dataSeg] ? dataDistance/dataLengths[dataSeg] : 0;
+            var qx=dataFrom[0]+(dataTo[0]-dataFrom[0])*dataRatio;
+            var qy=dataFrom[1]+(dataTo[1]-dataFrom[1])*dataRatio;
+            ctx.beginPath(); ctx.arc(qx,qy,3.2,0,Math.PI*2); ctx.fillStyle=teal; ctx.shadowColor=teal; ctx.shadowBlur=6; ctx.fill(); ctx.shadowBlur=0;
             // Moving control pulse travels from the PLC/PID block along the signal path to the valve actuator.
             var lengths = [], totalLength = 0;
             for (var ci=1; ci<controlPath.length; ci++) { var dx=controlPath[ci][0]-controlPath[ci-1][0], dy=controlPath[ci][1]-controlPath[ci-1][1]; var seg=Math.hypot(dx,dy); lengths.push(seg); totalLength+=seg; }
