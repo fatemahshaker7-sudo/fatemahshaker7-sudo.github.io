@@ -456,6 +456,34 @@
     .case > p a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border: 1px solid var(--rule); border-radius: 999px; text-decoration: none; font-weight: 600; }
     .case > p a:hover { background: var(--text); color: var(--bg); }
 
+
+    /* Project discipline filter */
+    .project-filter {
+      display:flex; flex-wrap:wrap; align-items:center; gap:8px;
+      padding:16px 24px 0;
+    }
+    .project-filter-label { color:var(--muted); font-weight:600; margin-right:4px; }
+    .filter-btn {
+      appearance:none; border:1px solid var(--rule); border-radius:999px;
+      padding:8px 14px; background:transparent; color:var(--muted);
+      font:inherit; font-weight:600; cursor:pointer;
+    }
+    .filter-btn[aria-pressed="true"] { background:var(--text); color:var(--bg); border-color:var(--text); }
+    .filter-btn:focus-visible { outline:2px solid var(--slate); outline-offset:3px; }
+
+    /* Interactive embedded app preview */
+    .app-preview[hidden] { display:none !important; }
+    .app-preview { position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center; padding:clamp(8px,2vw,24px); background:rgba(7,11,22,.72); }
+    .app-preview-dialog { display:flex; flex-direction:column; width:min(1180px,100%); height:min(820px,94vh); min-height:360px; background:var(--panel); color:var(--text); border:1px solid var(--rule); border-radius:16px; overflow:hidden; box-shadow:0 24px 90px rgba(0,0,0,.35); }
+    .app-preview-head { display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--rule); }
+    .app-preview-title { font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .app-preview-actions { display:flex; gap:8px; margin-left:auto; }
+    .app-preview-actions button, .app-preview-actions a { display:inline-flex; align-items:center; justify-content:center; min-height:38px; padding:7px 12px; border:1px solid var(--rule); border-radius:9px; color:var(--text); background:transparent; text-decoration:none; font:inherit; cursor:pointer; white-space:nowrap; }
+    .app-preview-actions button:hover, .app-preview-actions a:hover { background:var(--text); color:var(--bg); }
+    .app-preview-frame { width:100%; flex:1; border:0; background:#fff; }
+    .app-preview-note { padding:8px 14px; border-top:1px solid var(--rule); color:var(--muted); font-size:.85rem; }
+    @media(max-width:560px) { .app-preview-head { align-items:flex-start; flex-wrap:wrap; } .app-preview-actions { margin-left:0; width:100%; } .app-preview-actions button,.app-preview-actions a { flex:1; } }
+
     /* ---------- Skills chart ---------- */
     .bars { display: grid; gap: 22px; }
     .bar-row { display: grid; gap: 8px; }
@@ -654,12 +682,19 @@
           <h2 class="panel-title" id="work-title">Projects</h2>
           <p class="panel-meta">Select a project to explore</p>
         </div>
+        <div class="project-filter" role="group" aria-label="Filter projects by discipline">
+          <span class="project-filter-label">Show:</span>
+          <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All projects</button>
+          <button class="filter-btn" type="button" data-filter="engineering" aria-pressed="false">Engineering</button>
+          <button class="filter-btn" type="button" data-filter="both" aria-pressed="false">Both</button>
+          <button class="filter-btn" type="button" data-filter="data-science" aria-pressed="false">Data Science</button>
+        </div>
         <div class="project-tabs" role="tablist" aria-label="Projects">
-          <button class="project-tab" id="tab-olist" role="tab" aria-selected="false" aria-controls="project-olist" tabindex="-1">Olist Delivery Estimation</button>
-          <button class="project-tab" id="tab-habit" role="tab" aria-selected="true" aria-controls="project-habit" tabindex="0">Habit Tracking App</button>
-          <button class="project-tab" id="tab-industrial" role="tab" aria-selected="false" aria-controls="project-industrial" tabindex="-1">Industrial Optimization</button>
-          <button class="project-tab" id="tab-senior" role="tab" aria-selected="false" aria-controls="project-senior" tabindex="-1">Senior Project</button>
-          <button class="project-tab" id="tab-junior" role="tab" aria-selected="false" aria-controls="project-junior" tabindex="-1">Junior Project</button>
+          <button class="project-tab" id="tab-olist" data-discipline="data-science" role="tab" aria-selected="false" aria-controls="project-olist" tabindex="-1">Olist Delivery Estimation</button>
+          <button class="project-tab" id="tab-habit" data-discipline="data-science" role="tab" aria-selected="true" aria-controls="project-habit" tabindex="0">Habit Tracking App</button>
+          <button class="project-tab" id="tab-industrial" data-discipline="both" role="tab" aria-selected="false" aria-controls="project-industrial" tabindex="-1">Industrial Optimization</button>
+          <button class="project-tab" id="tab-senior" data-discipline="both" role="tab" aria-selected="false" aria-controls="project-senior" tabindex="-1">Senior Project</button>
+          <button class="project-tab" id="tab-junior" data-discipline="engineering" role="tab" aria-selected="false" aria-controls="project-junior" tabindex="-1">Junior Project</button>
         </div>
         <div class="panel-body project-view">
           <article class="case" id="project-olist" role="tabpanel" aria-labelledby="tab-olist" hidden>
@@ -808,6 +843,20 @@
     </footer>
   </div>
 
+  <section class="app-preview" id="app-preview" role="dialog" aria-modal="true" aria-labelledby="app-preview-title" hidden>
+    <div class="app-preview-dialog">
+      <header class="app-preview-head">
+        <span class="app-preview-title" id="app-preview-title">Live app preview</span>
+        <div class="app-preview-actions">
+          <a id="app-preview-new-tab" href="#" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a>
+          <button id="app-preview-close" type="button">Close ✕</button>
+        </div>
+      </header>
+      <iframe class="app-preview-frame" id="app-preview-frame" title="Interactive live app preview" allow="clipboard-read; clipboard-write; fullscreen; geolocation" referrerpolicy="strict-origin-when-cross-origin" loading="lazy"></iframe>
+      <p class="app-preview-note">Interactive preview. If the app shows a redirect or refuses embedding, use “Open in new tab”; the app deployment must permit iframe embedding.</p>
+    </div>
+  </section>
+
   <script>
     (function () {
       var root = document.documentElement;
@@ -840,6 +889,77 @@
           else return;
           event.preventDefault(); activateProjectTab(projectTabs[next], true);
         });
+      });
+
+      /* Discipline filter: All by default; Both shows the two cross-discipline projects. */
+      var filterButtons = Array.prototype.slice.call(document.querySelectorAll(".filter-btn"));
+      var disciplineOrder = {
+        all: ["tab-olist", "tab-habit", "tab-industrial", "tab-senior", "tab-junior"],
+        engineering: ["tab-junior"],
+        both: ["tab-industrial", "tab-senior"],
+        "data-science": ["tab-olist", "tab-habit"]
+      };
+      function applyProjectFilter(filter) {
+        var allowed = disciplineOrder[filter] || disciplineOrder.all;
+        filterButtons.forEach(function (button) {
+          button.setAttribute("aria-pressed", button.getAttribute("data-filter") === filter ? "true" : "false");
+        });
+        projectTabs.forEach(function (tab) {
+          var show = allowed.indexOf(tab.id) !== -1;
+          tab.hidden = !show;
+          tab.setAttribute("aria-hidden", show ? "false" : "true");
+        });
+        var activeTab = projectTabs.find(function (tab) {
+          return allowed.indexOf(tab.id) !== -1 && tab.getAttribute("aria-selected") === "true";
+        });
+        if (!activeTab) {
+          activeTab = document.getElementById(allowed[0]);
+          if (activeTab) activateProjectTab(activeTab, false);
+        }
+      }
+      filterButtons.forEach(function (button) {
+        button.addEventListener("click", function () { applyProjectFilter(button.getAttribute("data-filter")); });
+      });
+      applyProjectFilter("all");
+
+      /* Live app preview: embedded when supported, with a full-tab fallback. */
+      var preview = document.getElementById("app-preview");
+      var previewFrame = document.getElementById("app-preview-frame");
+      var previewTitle = document.getElementById("app-preview-title");
+      var previewNewTab = document.getElementById("app-preview-new-tab");
+      var previewClose = document.getElementById("app-preview-close");
+      var lastPreviewTrigger = null;
+      function closeAppPreview() {
+        preview.hidden = true;
+        previewFrame.src = "about:blank";
+        if (lastPreviewTrigger) lastPreviewTrigger.focus();
+      }
+      function getStreamlitEmbedUrl(rawUrl) {
+        // Streamlit Community Cloud supports the embed query flag. Preserve any
+        // existing query parameters and avoid duplicating the flag.
+        var url = new URL(rawUrl, window.location.href);
+        if (!url.searchParams.has("embed")) url.searchParams.set("embed", "true");
+        return url.toString();
+      }
+      document.querySelectorAll('a[href*="streamlit.app"], a[href*="share.streamlit.io"]').forEach(function (link) {
+        link.addEventListener("click", function (event) {
+          // Keep modifier-click and non-primary clicks behaving like normal links.
+          if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          lastPreviewTrigger = link;
+          previewTitle.textContent = link.textContent.replace(/\s*↗\s*$/, "").trim();
+          previewNewTab.href = link.href;
+          previewFrame.src = getStreamlitEmbedUrl(link.href);
+          preview.hidden = false;
+          previewClose.focus();
+        });
+      });
+      previewClose.addEventListener("click", closeAppPreview);
+      preview.addEventListener("click", function (event) {
+        if (event.target === preview) closeAppPreview();
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && !preview.hidden) closeAppPreview();
       });
 
       /* Theme toggle */
@@ -1031,7 +1151,6 @@
           var instrumentPath = [[170,36],[170,14],[340,14],[340,177]];
           ctx.beginPath(); instrumentPath.forEach(function(pt,i){if(!i)ctx.moveTo(pt[0],pt[1]);else ctx.lineTo(pt[0],pt[1]);}); ctx.stroke();
           ctx.setLineDash([]);
-          ctx.fillStyle=gold; ctx.beginPath(); ctx.moveTo(318,172); ctx.lineTo(322,177); ctx.lineTo(326,172); ctx.closePath(); ctx.fill();
           // Dashed control signal stops at the actuator diaphragm boundary; it does not cross the symbol.
           var controlPath = [[326,177],[326,163],[270,163],[270,183]];
           ctx.setLineDash([4,4]); ctx.strokeStyle=lavender; ctx.lineWidth=1.6;
@@ -1057,8 +1176,19 @@
             var instrumentFrom=instrumentPath[instrumentSeg], instrumentTo=instrumentPath[instrumentSeg+1], instrumentRatio=instrumentLengths[instrumentSeg] ? instrumentDistance/instrumentLengths[instrumentSeg] : 0;
             var pulseX=instrumentFrom[0]+(instrumentTo[0]-instrumentFrom[0])*instrumentRatio, pulseY=instrumentFrom[1]+(instrumentTo[1]-instrumentFrom[1])*instrumentRatio;
             ctx.beginPath(); ctx.arc(pulseX,pulseY,3.6,0,Math.PI*2); ctx.fillStyle=gold; ctx.fill();
-            var qx = 374, qy = 173 - ((time * 18) % 22);
-            ctx.beginPath(); ctx.arc(qx,qy,3,0,Math.PI*2); ctx.fillStyle=teal; ctx.fill();
+            // Green live-data pulse follows the dotted line from the PLC/PID to PROCESS KPI / LIVE DATA.
+            var kpiPath = [[374,177],[374,157],[470,157],[470,146]];
+            var kpiLengths = [], kpiTotal = 0;
+            for (var ki=1; ki<kpiPath.length; ki++) {
+              var kdx=kpiPath[ki][0]-kpiPath[ki-1][0], kdy=kpiPath[ki][1]-kpiPath[ki-1][1];
+              var kseg=Math.hypot(kdx,kdy); kpiLengths.push(kseg); kpiTotal+=kseg;
+            }
+            var kdist=(time*38)%kpiTotal, ksegIndex=0;
+            while(ksegIndex<kpiLengths.length-1 && kdist>kpiLengths[ksegIndex]) { kdist-=kpiLengths[ksegIndex]; ksegIndex++; }
+            var kfrom=kpiPath[ksegIndex], kto=kpiPath[ksegIndex+1];
+            var kratio=kpiLengths[ksegIndex] ? kdist/kpiLengths[ksegIndex] : 0;
+            var qx=kfrom[0]+(kto[0]-kfrom[0])*kratio, qy=kfrom[1]+(kto[1]-kfrom[1])*kratio;
+            ctx.beginPath(); ctx.arc(qx,qy,4,0,Math.PI*2); ctx.fillStyle=teal; ctx.shadowColor=teal; ctx.shadowBlur=7; ctx.fill(); ctx.shadowBlur=0;
             // Moving control pulse travels from the PLC/PID block along the signal path to the valve actuator.
             var lengths = [], totalLength = 0;
             for (var ci=1; ci<controlPath.length; ci++) { var dx=controlPath[ci][0]-controlPath[ci-1][0], dy=controlPath[ci][1]-controlPath[ci-1][1]; var seg=Math.hypot(dx,dy); lengths.push(seg); totalLength+=seg; }
