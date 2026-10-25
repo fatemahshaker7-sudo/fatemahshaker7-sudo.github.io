@@ -98,14 +98,17 @@ cd fatemahshaker7-sudo.github.io
 
 An internet connection may be needed for externally hosted fonts and links to deployed applications.
 
+
 ## Repository Structure
 
+```text
 fatemahshaker7-sudo.github.io/
 ├── index.html        # Portfolio website and interactive features
 ├── presentations/
 │   ├── junior.pdf    # Junior engineering project presentation
 │   └── senior.pdf    # Senior engineering project presentation
 └── README.md         # Project overview and documentation
+```
 
 
 ## Deployment
