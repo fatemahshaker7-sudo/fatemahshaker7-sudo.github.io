@@ -485,6 +485,8 @@
     .project-detail-content p { margin:0 0 12px; }
     .project-detail-content .placeholder-note { color:var(--muted); font-size:.92rem; }
     .project-detail-content iframe { display:block; width:100%; height:min(52vh,520px); min-height:260px; border:1px solid var(--rule); border-radius:8px; background:#fff; margin-top:14px; }
+    .presentation-actions a { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border:1px solid var(--rule); border-radius:10px; background:var(--text); color:var(--bg); text-decoration:none; font:inherit; font-weight:600; }
+    .presentation-actions a:hover { background:transparent; color:var(--text); }
     .project-detail-counter { text-align:center; color:var(--muted); padding:0 12px 12px; font-family:var(--font-mono); font-size:.85rem; }
     .explore-project { display:inline-flex; align-items:center; gap:6px; border:1px solid var(--rule); border-radius:999px; padding:8px 13px; background:transparent; color:var(--text); font:inherit; font-weight:600; cursor:pointer; }
     .explore-project:hover { background:var(--text); color:var(--bg); }
@@ -998,29 +1000,44 @@
       var detailTitle = document.getElementById('detail-title');
       var detailCounter = document.getElementById('detail-counter');
       var detailIndex = 0, detailProject = 'senior';
+      var presentationUrls = {
+        senior: 'https://fatemahshaker7-sudo.github.io/presentations/senior_project.pdf',
+        junior: 'https://fatemahshaker7-sudo.github.io/presentations/junior_project.pdf'
+      };
       var detailData = {
         senior: { title: 'Senior Project', slides: [
-          {title:'Overview',body:'PID and Fuzzy PID control for a nonlinear blood glucose–insulin system. The project aimed to maintain glucose levels within a normal range while minimizing insulin dose.',note:'Placeholder section — replace this with your final project summary.'},
-          {title:'Problem & Objectives',body:'Describe the control problem, project objectives, system constraints, and performance criteria.',note:'Suggested content: background, objectives, and project scope.'},
-          {title:'Modeling & Methodology',body:'Explain the mathematical model, assumptions, controller structure, tuning method, and simulation setup.',note:'Suggested content: model equations, Simulink block diagrams, and controller design.'},
-          {title:'Results & Evaluation',body:'Compare PID and Fuzzy PID responses using your simulation results and performance metrics.',note:'Suggested content: response plots, overshoot, settling time, and discussion.'},
-          {title:'Presentation Preview',body:'Sample PDF preview for layout testing only. Replace it with your actual project presentation when ready.',pdf:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',note:'The sample PDF is not your original project presentation.'},
-          {title:'Tools & Contribution',body:'MATLAB, Simulink, PID Control, and Fuzzy PID.',note:'Suggested content: your individual contribution, challenges, conclusions, and future work.'}
+          {title:'Project Overview',body:'This project investigated PID and Fuzzy PID control for a nonlinear blood glucose–insulin system associated with Type 1 diabetes. The goal was to support glucose regulation while avoiding unnecessarily high insulin delivery, using a model-based simulation approach.',note:'Project context: University of Bahrain · 2022.'},
+          {title:'Problem & Objectives',body:'Blood glucose regulation is challenging because the glucose–insulin system is nonlinear and glucose levels can change over time. The project objective was to design and study two feedback-control approaches—conventional PID and Fuzzy PID—and assess how effectively they regulate glucose while considering insulin requirements.',note:'The presentation below contains the project’s original objectives and scope.'},
+          {title:'System Model & Simulation',body:'A nonlinear blood glucose–insulin system was used as the controlled process. MATLAB and Simulink provided the environment for representing the system, implementing the controllers, and observing their simulated responses.',note:'This section describes the model-based simulation approach without assuming unverified numerical results.'},
+          {title:'Controller Design',body:'The project considered a conventional Proportional–Integral–Derivative (PID) controller and a Fuzzy PID controller. Both approaches were studied in the context of feedback regulation, with the aim of keeping glucose near a normal range while managing the amount of insulin delivered.',note:'Refer to the embedded presentation for the controller structures, tuning details, and diagrams.'},
+          {title:'Evaluation & Key Takeaway',body:'The two control approaches were examined through simulation to understand their glucose-regulation behavior. The key engineering task was to assess control performance alongside insulin delivery rather than treating glucose tracking as the only objective.',note:'Specific plots, measured performance values, and conclusions should be read in the original presentation below.'},
+          {title:'Project Presentation',body:'View the original Senior Project presentation below. You can read it here, open it in a full browser tab, or download the PDF.',presentation:true},
+          {title:'Tools & Engineering Skills',body:'MATLAB · Simulink · Feedback Control · PID Control · Fuzzy PID · Nonlinear System Modeling · Simulation-Based Evaluation',note:'The project brought together control-system design and simulation for a biomedical engineering application.'}
         ]},
         junior: { title: 'Junior Project', slides: [
-          {title:'Overview',body:'Arduino-based weather station using a DHT11 sensor and LCD, with readings sent to a web server via Wi-Fi and MQTT.',note:'Placeholder section — replace this with your final project summary.'},
-          {title:'Problem & Objectives',body:'Describe the intended use, requirements, and objectives of the weather station.',note:'Suggested content: project motivation, scope, and design requirements.'},
-          {title:'System Architecture',body:'Show how the DHT11 sensor, Arduino Uno, LCD, Wi-Fi connection, MQTT service, and web server work together.',note:'Suggested content: system architecture diagram and data flow.'},
-          {title:'Implementation & Testing',body:'Explain the circuit, firmware, sensor readings, data transmission, and validation tests.',note:'Suggested content: wiring photographs, code excerpts, and test results.'},
-          {title:'Results & Presentation',body:'Sample PDF preview for layout testing only. Replace it with your actual project presentation when ready.',pdf:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',note:'The sample PDF is not your original project presentation.'},
-          {title:'Tools & Future Work',body:'Arduino Uno, DHT11, LCD, Wi-Fi, and MQTT.',note:'Suggested content: your contribution, limitations, conclusions, and possible improvements.'}
+          {title:'Project Overview',body:'This project developed an Arduino-based weather station that reads environmental measurements from a DHT11 sensor, displays readings on an LCD, and sends the data to a web server through Wi-Fi and MQTT for remote access.',note:'Project context: University of Bahrain · 2021.'},
+          {title:'Problem & Objectives',body:'The aim was to create a compact system for collecting and presenting environmental sensor data in two ways: a local display for immediate viewing and a network connection for remote monitoring. The design combines embedded hardware with a lightweight messaging workflow.',note:'See the original presentation for the stated requirements and project scope.'},
+          {title:'System Architecture & Data Flow',body:'The DHT11 provides the sensor readings to the Arduino-based system. The LCD presents the readings locally, while the Wi-Fi connection and MQTT messaging path send the data onward to a web server for remote viewing.',note:'This summarizes the system components described for the project; the presentation contains the original architecture details.'},
+          {title:'Hardware & Implementation',body:'The main components include an Arduino board, a DHT11 temperature-and-humidity sensor, an LCD, Wi-Fi connectivity, and MQTT communication. The implementation connects sensor acquisition, local display, and network data transmission into one monitoring workflow.',note:'Refer to the PDF for the circuit, implementation details, and any code or configuration shown.'},
+          {title:'Testing & Outcome',body:'The system was designed to read the DHT11 measurements, show them on the LCD, and transmit them for web-based monitoring. These functions form the main end-to-end behavior to verify when testing the station.',note:'The original presentation should be used for the specific test observations and reported results.'},
+          {title:'Project Presentation',body:'View the original Junior Project presentation below. You can read it here, open it in a full browser tab, or download the PDF.',presentation:true},
+          {title:'Tools & Engineering Skills',body:'Arduino · DHT11 Sensor · LCD · Wi-Fi · MQTT · Embedded Systems · Sensor Data Acquisition · IoT Monitoring',note:'The project combines basic electronics and embedded programming with networked data reporting.'}
         ]}
       };
       function renderDetail() {
         var slides = detailData[detailProject].slides, slide = slides[detailIndex];
         detailTitle.textContent = detailData[detailProject].title;
         var html = '<h3>' + slide.title + '</h3><p>' + slide.body + '</p>';
-        if (slide.pdf) html += '<iframe title="Sample PDF presentation preview" src="' + slide.pdf + '#toolbar=1&navpanes=0"></iframe>';
+        if (slide.presentation) {
+          var pdfUrl = presentationUrls[detailProject];
+          var label = detailProject === 'senior' ? 'Senior' : 'Junior';
+          html += '<div class="presentation-actions" style="display:flex;flex-wrap:wrap;gap:10px;margin:14px 0">' +
+            '<a class="presentation-action" href="' + pdfUrl + '" target="_blank" rel="noopener noreferrer">Open PDF in Full Browser ↗</a>' +
+            '<a class="presentation-action" href="' + pdfUrl + '" download="' + detailProject + '_project.pdf">Download PDF ↓</a>' +
+            '</div>' +
+            '<iframe title="' + label + ' Project PDF presentation" src="' + pdfUrl + '#toolbar=1&navpanes=0&view=FitH" loading="lazy"></iframe>' +
+            '<p class="placeholder-note">If the embedded preview does not load in your browser, use “Open PDF in Full Browser”.</p>';
+        }
         if (slide.note) html += '<p class="placeholder-note">' + slide.note + '</p>';
         detailContent.innerHTML = html; detailCounter.textContent = 'Section ' + (detailIndex + 1) + ' of ' + slides.length;
         document.title = detailData[detailProject].title + ' | Fatemah Shaker';
