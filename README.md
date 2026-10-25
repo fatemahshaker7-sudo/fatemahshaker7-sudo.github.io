@@ -80,13 +80,6 @@ Further details about the engineering projects are available in the [live portfo
 - Industrial process analysis
 - Instrumentation and control-system modeling
 
-### Web Technologies
-- HTML5
-- CSS3
-- JavaScript
-- Responsive interface design
-- Git and GitHub
-- GitHub Pages
 
 ## Run Locally
 
