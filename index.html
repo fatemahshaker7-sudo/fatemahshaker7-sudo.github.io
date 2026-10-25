@@ -606,6 +606,347 @@
       transition: color 0.2s ease;
     }
     .site-footer a:hover { color: var(--text); }
+
+    /* ---------- SCADA-inspired visual layer (preserves the original palette) ---------- */
+    :root {
+      --signal-green: #61D6A5;
+      --signal-cyan: #73C9E8;
+      --signal-amber: #E9BE69;
+      --scada-grid: rgba(127, 134, 167, 0.075);
+      --scada-glow: rgba(115, 201, 232, 0.12);
+    }
+
+    body {
+      background-image:
+        linear-gradient(var(--scada-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--scada-grid) 1px, transparent 1px),
+        radial-gradient(ellipse at 78% 4%, var(--scada-glow), transparent 36%);
+      background-size: 32px 32px, 32px 32px, auto;
+      background-attachment: fixed;
+    }
+
+    .sidebar {
+      background: color-mix(in srgb, var(--bg) 94%, var(--panel));
+      border-right-color: color-mix(in srgb, var(--signal-cyan) 24%, var(--rule));
+      box-shadow: 8px 0 32px rgba(0, 0, 0, 0.06);
+    }
+
+    .side-brand { position: relative; padding: 0 8px 18px; }
+    .side-brand::after {
+      content: "SYSTEM ONLINE  /  PORTFOLIO";
+      display: block;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--rule);
+      color: var(--signal-green);
+      font: 500 0.62rem/1.4 var(--font-mono);
+      letter-spacing: 0.08em;
+    }
+    .side-brand::before {
+      content: "";
+      position: absolute;
+      right: 8px;
+      top: 5px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--signal-green);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--signal-green) 65%, transparent);
+    }
+
+    .side-nav a {
+      border-left-width: 3px;
+      border-radius: 0 9px 9px 0;
+    }
+    .side-nav a[aria-current="location"] {
+      border-left-color: var(--signal-cyan);
+      background: linear-gradient(90deg, color-mix(in srgb, var(--signal-cyan) 12%, var(--panel)), transparent);
+    }
+
+    .topbar {
+      border-bottom-color: color-mix(in srgb, var(--signal-cyan) 22%, var(--rule));
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.045);
+    }
+    .crumb::before {
+      content: "●";
+      margin-right: 10px;
+      color: var(--signal-green);
+      font-size: 0.65rem;
+      vertical-align: 0.12em;
+      text-shadow: 0 0 10px color-mix(in srgb, var(--signal-green) 45%, transparent);
+    }
+
+    .panel {
+      position: relative;
+      border-radius: 12px;
+      border-color: color-mix(in srgb, var(--slate) 28%, var(--rule));
+      box-shadow: 0 12px 32px rgba(8, 13, 28, 0.045);
+      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+    .panel:hover {
+      border-color: color-mix(in srgb, var(--signal-cyan) 42%, var(--rule));
+      box-shadow: 0 16px 38px rgba(8, 13, 28, 0.085);
+    }
+    .panel-head {
+      position: relative;
+      background: linear-gradient(90deg, color-mix(in srgb, var(--panel) 88%, var(--signal-cyan)), var(--panel) 62%);
+      border-bottom-color: color-mix(in srgb, var(--signal-cyan) 20%, var(--rule));
+    }
+    .panel-head::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+      border-radius: 2px;
+      background: var(--signal-cyan);
+      box-shadow: 0 0 10px color-mix(in srgb, var(--signal-cyan) 40%, transparent);
+      order: -1;
+    }
+    .panel-head .panel-title { margin-right: auto; }
+    .panel-meta {
+      font: 500 0.7rem/1.5 var(--font-mono);
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      background-image: linear-gradient(135deg, color-mix(in srgb, var(--panel) 92%, var(--signal-cyan)), var(--panel) 60%);
+      border-color: color-mix(in srgb, var(--signal-cyan) 32%, var(--rule));
+    }
+    .hero .panel-head::after {
+      content: "LIVE OVERVIEW";
+      color: var(--signal-green);
+      font: 500 0.65rem/1.4 var(--font-mono);
+      letter-spacing: 0.12em;
+      margin-left: 4px;
+    }
+    .hero h1 { text-wrap: balance; }
+    .hero h1 span:last-child { color: var(--slate); }
+    .role { max-width: 25em; }
+    .btn {
+      border-radius: 7px;
+      background: var(--signal-cyan);
+      border-color: var(--signal-cyan);
+      color: #172033;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--signal-cyan) 10%, transparent);
+    }
+    .btn:hover { background: transparent; color: var(--signal-cyan); }
+    .model { filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.08)); }
+
+    .kpi {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      background: linear-gradient(145deg, var(--panel), color-mix(in srgb, var(--panel) 88%, var(--slate)));
+    }
+    .kpi::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--signal-cyan);
+      opacity: 0.8;
+    }
+    .kpi:nth-child(2)::after { background: var(--signal-green); }
+    .kpi:nth-child(3)::after { background: var(--signal-amber); }
+    .kpi-label {
+      font: 500 0.72rem/1.5 var(--font-mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .kpi-value { font-variant-numeric: tabular-nums; }
+
+    .case {
+      border-radius: 10px;
+      border-color: color-mix(in srgb, var(--signal-cyan) 18%, var(--rule));
+      background-image: linear-gradient(135deg, color-mix(in srgb, var(--panel) 92%, var(--signal-cyan)), var(--panel) 75%);
+    }
+    .project-tabs { gap: 6px; }
+    .project-tab { border-radius: 7px 7px 0 0; font-size: 0.9rem; }
+    .project-tab[aria-selected="true"] {
+      box-shadow: inset 0 3px 0 var(--signal-cyan);
+      border-color: color-mix(in srgb, var(--signal-cyan) 35%, var(--rule));
+    }
+    .filter-btn, .explore-project,
+    .case > p a, .presentation-actions a,
+    .project-detail-actions button, .project-detail-nav,
+    .app-preview-actions button, .app-preview-actions a {
+      border-radius: 7px;
+      transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+    .filter-btn[aria-pressed="true"] {
+      background: var(--signal-cyan);
+      border-color: var(--signal-cyan);
+      color: #172033;
+    }
+    .explore-project { border-color: color-mix(in srgb, var(--signal-cyan) 48%, var(--rule)); }
+    .explore-project:hover { background: var(--signal-cyan); color: #172033; }
+    .case > p a:hover, .presentation-actions a:hover,
+    .project-detail-actions button:hover, .project-detail-nav:hover,
+    .app-preview-actions button:hover, .app-preview-actions a:hover {
+      background: var(--signal-cyan);
+      border-color: var(--signal-cyan);
+      color: #172033;
+    }
+
+    .bar-track { border-radius: 3px; }
+    .bar-fill {
+      background: linear-gradient(90deg, var(--slate), var(--signal-cyan));
+      box-shadow: 0 0 12px color-mix(in srgb, var(--signal-cyan) 22%, transparent);
+    }
+    .bar-row:nth-child(5) .bar-fill { background: linear-gradient(90deg, var(--slate), var(--signal-green)); }
+
+    .contact-list { border-top-color: color-mix(in srgb, var(--signal-cyan) 36%, var(--rule)); }
+    .contact-list li { border-bottom-color: var(--rule); }
+    .contact-row { border-left: 3px solid transparent; }
+    .contact-row:hover { border-left-color: var(--signal-green); background: color-mix(in srgb, var(--signal-cyan) 10%, var(--panel)); color: var(--text); }
+    .contact-row:hover .contact-label { color: var(--signal-cyan); }
+    .contact-cta { color: var(--signal-cyan); }
+
+    .project-detail-window, .app-preview-dialog {
+      border-radius: 12px;
+      border-color: color-mix(in srgb, var(--signal-cyan) 24%, var(--rule));
+    }
+    .project-detail-head, .app-preview-head {
+      background: linear-gradient(90deg, color-mix(in srgb, var(--panel) 84%, var(--signal-cyan)), var(--panel));
+      border-bottom-color: color-mix(in srgb, var(--signal-cyan) 24%, var(--rule));
+    }
+    .project-detail-head strong, .app-preview-title { letter-spacing: -0.015em; }
+    .project-detail-counter {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .project-detail-content { border-radius: 8px; }
+    .presentation-actions a:first-child {
+      background: var(--signal-cyan);
+      border-color: var(--signal-cyan);
+      color: #172033;
+    }
+    .presentation-actions a:first-child:hover { background: transparent; color: var(--signal-cyan); }
+
+    .site-footer {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.025em;
+    }
+    .site-footer a { color: var(--signal-cyan); }
+
+    @media (max-width: 899px) {
+      .side-brand::before { right: 24px; }
+      .hero .panel-head::after { margin-left: auto; }
+    }
+    @media (max-width: 599px) {
+      body { background-size: 24px 24px, 24px 24px, auto; }
+      .panel-head { padding-inline: 16px; }
+      .panel-meta { font-size: 0.62rem; }
+      .hero .panel-head::after { font-size: 0.56rem; letter-spacing: 0.06em; }
+      .kpi { padding-inline: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+
+
+    /* Project-button hover states: lift, highlight and subtle SCADA glow */
+    .project-tab,
+    .filter-btn,
+    .explore-project {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      transform: translateY(0);
+      transition:
+        transform 180ms ease,
+        color 180ms ease,
+        background-color 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .project-tab::after,
+    .filter-btn::after,
+    .explore-project::after {
+      content: "";
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      bottom: 0;
+      height: 2px;
+      background: var(--signal-cyan);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 180ms ease;
+      z-index: -1;
+    }
+
+    .project-tab:hover,
+    .filter-btn:hover,
+    .explore-project:hover {
+      transform: translateY(-3px);
+      color: var(--text);
+      border-color: color-mix(in srgb, var(--signal-cyan) 72%, var(--rule));
+      box-shadow: 0 7px 18px color-mix(in srgb, var(--signal-cyan) 16%, transparent);
+    }
+
+    .project-tab:hover {
+      background: color-mix(in srgb, var(--signal-cyan) 9%, var(--panel));
+    }
+
+    .project-tab[aria-selected="true"]:hover {
+      background: var(--panel);
+      box-shadow: inset 0 3px 0 var(--signal-cyan), 0 7px 18px color-mix(in srgb, var(--signal-cyan) 16%, transparent);
+    }
+
+    .filter-btn:hover {
+      background: color-mix(in srgb, var(--signal-cyan) 12%, var(--panel));
+    }
+
+    .filter-btn[aria-pressed="true"]:hover {
+      background: var(--signal-cyan);
+      color: #172033;
+      box-shadow: 0 7px 18px color-mix(in srgb, var(--signal-cyan) 25%, transparent);
+    }
+
+    .explore-project:hover {
+      background: var(--signal-cyan);
+      color: #172033;
+      border-color: var(--signal-cyan);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal-cyan) 14%, transparent), 0 8px 20px color-mix(in srgb, var(--signal-cyan) 22%, transparent);
+    }
+
+    .project-tab:hover::after,
+    .filter-btn:hover::after,
+    .explore-project:hover::after {
+      transform: scaleX(1);
+    }
+
+    .project-tab:active,
+    .filter-btn:active,
+    .explore-project:active {
+      transform: translateY(-1px) scale(.985);
+    }
+
+    .project-tab:focus-visible,
+    .filter-btn:focus-visible,
+    .explore-project:focus-visible {
+      outline: 2px solid var(--signal-cyan);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .project-tab,
+      .filter-btn,
+      .explore-project,
+      .project-tab::after,
+      .filter-btn::after,
+      .explore-project::after {
+        transition: none;
+      }
+    }
   </style>
 </head>
 
@@ -1212,6 +1553,14 @@
           var muted = light ? "#aab2c5" : "#6c7699";
           var blue = "#8298c7", lavender = "#a49bd4", teal = "#66b7b2", gold = "#d6b66c";
           var scale = Math.min(cw / 620, ch / 320, 1.15);
+          // Shared process simulation clock drives the tank, valve, sensor, and analytics together.
+          var time = animated ? (ts || 0) / 1000 : 0;
+          var levelY = 163 + (animated ? Math.sin(time * 0.72) * 22 : 0);
+          var levelPct = Math.round(100 - ((levelY - 125) / 100) * 100);
+          var valveResponse = animated ? Math.sin(time * 0.72 + 0.8) : 0;
+          // One shared valve position (0 = closed, 1 = open) drives the symbol, actuator, flow and status.
+          var valveOpening = animated ? (0.5 + 0.5 * Math.sin(time * 0.72 + 0.8)) : 0.5;
+          var valveGap = 1 + valveOpening * 8;
           var ox = (cw - 620 * scale) / 2, oy = (ch - 320 * scale) / 2;
           ctx.save(); ctx.translate(ox, oy); ctx.scale(scale, scale);
           ctx.lineCap = "round"; ctx.lineJoin = "round";
@@ -1224,10 +1573,18 @@
           ctx.strokeStyle = muted; ctx.setLineDash([3,5]);
           for (var gy2=65; gy2<132; gy2+=20) { ctx.beginPath(); ctx.moveTo(370,gy2); ctx.lineTo(573,gy2); ctx.stroke(); }
           ctx.setLineDash([]);
-          var pts = [[372,119],[395,105],[418,111],[441,82],[464,91],[487,69],[510,78],[533,57],[556,65],[575,53]];
+          // Set point is fixed; the measured process value starts away from it and trends toward the target.
+          var setPointY = 82;
+          ctx.save(); ctx.strokeStyle = gold; ctx.lineWidth = 1.5; ctx.setLineDash([5,4]);
+          ctx.beginPath(); ctx.moveTo(372,setPointY); ctx.lineTo(575,setPointY); ctx.stroke(); ctx.setLineDash([]);
+          ctx.fillStyle = gold; ctx.font = "bold 8px ui-monospace, monospace"; ctx.fillText("SP 60%", 536, setPointY - 5); ctx.restore();
+          var basePts = [[372,116],[395,108],[418,99],[441,91],[464,86],[487,78],[510,84],[533,79],[556,84],[575,81]];
+          var pts = basePts.map(function(pt,i){ return [pt[0], pt[1] + (animated ? Math.sin(time * 1.15 - i * 0.55) * (5 - i * 0.28) + valveResponse * (2.8 - i * 0.18) : 0)]; });
           ctx.beginPath(); pts.forEach(function(pt,i){ if(!i)ctx.moveTo(pt[0],pt[1]); else ctx.lineTo(pt[0],pt[1]); });
           ctx.strokeStyle = blue; ctx.lineWidth = 2.8; ctx.stroke();
           pts.forEach(function(pt,i){ctx.beginPath();ctx.arc(pt[0],pt[1],i===pts.length-1?4:2.5,0,Math.PI*2);ctx.fillStyle=i===pts.length-1?teal:lavender;ctx.fill();});
+          // Live scan marker sweeps across the trend as the process level changes.
+          if (animated) { var scanX = 372 + ((time * 24) % 203); ctx.save(); ctx.strokeStyle = "rgba(102,183,178,.48)"; ctx.lineWidth = 1; ctx.setLineDash([2,4]); ctx.beginPath(); ctx.moveTo(scanX,61); ctx.lineTo(scanX,130); ctx.stroke(); ctx.restore(); }
           // 3D process tank / vessel
           ctx.fillStyle = light ? "rgba(130,152,199,.20)" : "rgba(130,152,199,.22)";
           ctx.strokeStyle = blue; ctx.lineWidth = 2;
@@ -1237,8 +1594,41 @@
           ctx.beginPath(); ctx.ellipse(170,221,57,17,0,Math.PI,Math.PI*2); ctx.strokeStyle=muted; ctx.stroke();
           // Fluid level and subtle fill
           ctx.fillStyle = light ? "rgba(102,183,178,.27)" : "rgba(102,183,178,.25)";
-          ctx.beginPath(); ctx.moveTo(116,167); ctx.lineTo(116,220); ctx.bezierCurveTo(116,236,224,236,224,220); ctx.lineTo(224,167); ctx.closePath(); ctx.fill();
-          ctx.beginPath(); ctx.ellipse(170,167,54,14,0,0,Math.PI*2); ctx.fillStyle="rgba(102,183,178,.42)"; ctx.fill(); ctx.strokeStyle=teal; ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(116,levelY); ctx.lineTo(116,220); ctx.bezierCurveTo(116,236,224,236,224,220); ctx.lineTo(224,levelY); ctx.closePath(); ctx.fill();
+          ctx.beginPath(); ctx.ellipse(170,levelY,54,14,0,0,Math.PI*2); ctx.fillStyle="rgba(102,183,178,.42)"; ctx.fill(); ctx.strokeStyle=teal; ctx.stroke();
+          // Small moving surface ripples make the changing fluid level visible.
+          if (animated) {
+            var rippleShift = (time * 18) % 42;
+            ctx.save(); ctx.beginPath(); ctx.ellipse(170,levelY,12 + rippleShift * .35,3 + rippleShift * .04,0,0,Math.PI*2); ctx.strokeStyle="rgba(102,183,178,"+(0.34-rippleShift*.004)+")"; ctx.lineWidth=1.1; ctx.stroke(); ctx.restore();
+            for (var bubble=0; bubble<3; bubble++) { var bx=151+bubble*17+Math.sin(time*1.8+bubble)*4; var by=levelY+18-((time*13+bubble*19)%43); if(by>levelY+5 && by<215){ctx.beginPath();ctx.arc(bx,by,1.7+(bubble%2)*.5,0,Math.PI*2);ctx.strokeStyle="rgba(102,183,178,.75)";ctx.lineWidth=1;ctx.stroke();} }
+          }
+          // High- and low-level switches mounted on the tank wall.
+          // Their status follows the animated liquid surface and pulses when a limit is reached.
+          var highSwitchActive = levelY < 145;
+          var lowSwitchActive = levelY > 168;
+          var switchStates = [
+            {y:145, label:"LSH", active:highSwitchActive, color:gold},
+            {y:188, label:"LSL", active:lowSwitchActive, color:teal}
+          ];
+          switchStates.forEach(function(sw) {
+            var pulse = animated && sw.active ? (0.5 + 0.5 * Math.sin(time * 5)) : 0;
+            // Mount each switch on the tank's left side; keep labels outside the vessel silhouette.
+            ctx.strokeStyle = sw.active ? sw.color : muted; ctx.lineWidth = 1.6;
+            ctx.beginPath(); ctx.moveTo(113,sw.y); ctx.lineTo(106,sw.y); ctx.stroke();
+            ctx.fillStyle = light ? "#fff" : "#292d40";
+            ctx.beginPath(); ctx.roundRect(95,sw.y-5,11,10,2); ctx.fill(); ctx.stroke();
+            ctx.beginPath(); ctx.arc(89,sw.y,3.2,0,Math.PI*2);
+            ctx.fillStyle = sw.active ? sw.color : muted; ctx.globalAlpha = sw.active ? 0.65 + pulse*0.35 : 0.45;
+            ctx.fill(); ctx.globalAlpha = 1;
+            if (animated && sw.active) {
+              ctx.beginPath(); ctx.arc(89,sw.y,6+pulse*2,0,Math.PI*2);
+              ctx.strokeStyle = sw.color; ctx.globalAlpha = 0.2 + pulse*0.35; ctx.lineWidth = 1; ctx.stroke(); ctx.globalAlpha = 1;
+            }
+            ctx.fillStyle = sw.active ? sw.color : muted; ctx.font = "bold 7px ui-monospace, monospace";
+            ctx.textAlign = "right"; ctx.fillText(sw.label,79,sw.y+2.5); ctx.textAlign = "start";
+          });
+          // Compact level readout follows the actual drawn liquid surface.
+          ctx.fillStyle=ink; ctx.font="bold 9px ui-monospace, monospace"; ctx.fillText("LEVEL "+Math.max(8,Math.min(92,levelPct))+"%",132,246);
           // Single P&ID instrument bubble: TT = temperature transmitter.
           // The stem and process connection stop at the bubble boundary.
           ctx.strokeStyle = gold; ctx.lineWidth = 1.8;
@@ -1247,21 +1637,41 @@
           ctx.beginPath(); ctx.arc(170,49,13,0,Math.PI*2); ctx.fill(); ctx.stroke();
           ctx.fillStyle=ink; ctx.font="bold 8px system-ui, sans-serif"; ctx.textAlign="center";
           ctx.fillText("TT",170,52); ctx.textAlign="start";
+          if (animated) { ctx.beginPath(); ctx.arc(170,49,16+Math.sin(time*2.1)*1.5,0,Math.PI*2); ctx.strokeStyle="rgba(214,182,108,"+(0.25+Math.abs(Math.sin(time*2.1))*0.45)+")"; ctx.lineWidth=1; ctx.stroke(); }
+          ctx.fillStyle=gold; ctx.font="9px ui-monospace, monospace"; ctx.fillText((24.5+Math.sin(time*.72)*1.8).toFixed(1)+"°C",187,51);
           // Process pipe is split at the control-valve body so no pipe is drawn through its symbol.
           ctx.strokeStyle=teal; ctx.lineWidth=5; ctx.beginPath(); ctx.moveTo(227,216); ctx.lineTo(257,216); ctx.moveTo(283,216); ctx.lineTo(307,216); ctx.stroke();
           ctx.strokeStyle=blue; ctx.lineWidth=1.8; ctx.beginPath(); ctx.moveTo(227,216); ctx.lineTo(257,216); ctx.moveTo(283,216); ctx.lineTo(307,216); ctx.stroke();
           ctx.fillStyle=teal; ctx.beginPath(); ctx.moveTo(303,210); ctx.lineTo(312,216); ctx.lineTo(303,222); ctx.closePath(); ctx.fill();
-          // P&ID control valve: opposing triangles with actuator stem and diaphragm.
+          // P&ID control valve: the two plugs visibly separate as the valve opens and approach when it closes.
           ctx.fillStyle=light?"#fff":"#292d40"; ctx.strokeStyle=lavender; ctx.lineWidth=2;
-          ctx.beginPath(); ctx.moveTo(257,204); ctx.lineTo(270,216); ctx.lineTo(257,228); ctx.closePath(); ctx.fill(); ctx.stroke();
-          ctx.beginPath(); ctx.moveTo(283,204); ctx.lineTo(270,216); ctx.lineTo(283,228); ctx.closePath(); ctx.fill(); ctx.stroke();
-          ctx.beginPath(); ctx.moveTo(270,204); ctx.lineTo(270,196); ctx.stroke();
-          ctx.beginPath(); ctx.ellipse(270,188,12,5,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(257,204); ctx.lineTo(270-valveGap,216); ctx.lineTo(257,228); ctx.closePath(); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(283,204); ctx.lineTo(270+valveGap,216); ctx.lineTo(283,228); ctx.closePath(); ctx.fill(); ctx.stroke();
+          // Actuator stem follows the same opening command; the diaphragm subtly compresses during movement.
+          var actuatorY = animated ? (0.5-valveOpening)*7 : 0;
+          ctx.beginPath(); ctx.moveTo(270,204); ctx.lineTo(270,196+actuatorY); ctx.stroke();
+          ctx.beginPath(); ctx.ellipse(270,188+actuatorY,12,5+(animated?valveOpening*1.2:0),0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+          if (animated) {
+            ctx.save(); ctx.globalAlpha=.10+valveOpening*.22; ctx.fillStyle=lavender; ctx.beginPath(); ctx.arc(270,216,17+valveOpening*5,0,Math.PI*2); ctx.fill(); ctx.restore();
+            // Flow pulses travel through the valve only while it is sufficiently open.
+            if (valveOpening > 0.12) {
+              var pulseCount = 3;
+              for (var vp=0; vp<pulseCount; vp++) {
+                var flowX = 245 + ((time * (18 + valveOpening * 42) + vp * 13) % 63);
+                if (flowX > 251 && flowX < 289 && valveOpening < 0.28) continue;
+                ctx.beginPath(); ctx.arc(flowX,216,1.8+valveOpening*0.8,0,Math.PI*2);
+                ctx.fillStyle=teal; ctx.globalAlpha=.25+valveOpening*.7; ctx.fill(); ctx.globalAlpha=1;
+              }
+            }
+          }
+          // Compact live position indicator makes the opening/closing action legible.
+          ctx.fillStyle=ink; ctx.font="bold 8px ui-monospace, monospace";
+          ctx.fillText((valveOpening < 0.18 ? "CLOSING" : valveOpening > 0.82 ? "OPEN" : "MODULATING")+" "+Math.round(valveOpening*100)+"%",238,246);
           // PLC / PID controller module
           ctx.fillStyle = light ? "rgba(255,255,255,.92)" : "rgba(27,31,47,.92)"; ctx.strokeStyle=lavender; ctx.lineWidth=1.6;
           ctx.beginPath(); ctx.roundRect(322,177,105,78,8); ctx.fill(); ctx.stroke();
           ctx.fillStyle=ink; ctx.font="bold 11px system-ui, sans-serif"; ctx.fillText("PLC  /  PID",338,195);
-          for(var led=0;led<3;led++){ctx.beginPath();ctx.arc(340+led*15,211,3.2,0,Math.PI*2);ctx.fillStyle=[teal,gold,lavender][led];ctx.fill();}
+          for(var led=0;led<3;led++){ctx.beginPath();ctx.arc(340+led*15,211,3.2,0,Math.PI*2);ctx.fillStyle=[teal,gold,lavender][led];ctx.globalAlpha=led===0?(0.55+Math.abs(valveResponse)*.45):led===1?(0.45+Math.abs(Math.sin(time*2))*0.55):0.65+Math.abs(valveResponse)*.35;ctx.fill();if(animated&&led<2){ctx.globalAlpha=.18+Math.abs(Math.sin(time*2+led))*0.22;ctx.beginPath();ctx.arc(340+led*15,211,6,0,Math.PI*2);ctx.fill();}ctx.globalAlpha=1;}
           ctx.strokeStyle=muted; ctx.lineWidth=1.2;
           for(var row=0;row<3;row++){ctx.beginPath();ctx.moveTo(338,225+row*7);ctx.lineTo(410,225+row*7);ctx.stroke();}
           // Dashed instrument signal to the controller: begin outside the TT bubble and end at the controller edge.
@@ -1283,11 +1693,10 @@
           ctx.beginPath(); ctx.roundRect(451,178,136,105,9); ctx.fill(); ctx.stroke();
           ctx.fillStyle=ink; ctx.font="11px system-ui, sans-serif"; ctx.fillText("DATA  /  MODEL",465,196);
           var heights=[24,39,31,53,44,62];
-          heights.forEach(function(h,i){ctx.fillStyle=[blue,lavender,teal][i%3];ctx.globalAlpha=.9;ctx.fillRect(466+i*17,267-h,10,h);}); ctx.globalAlpha=1;
+          heights.forEach(function(h,i){var dynamicH=h+(animated?Math.sin(time*1.35+i*.7)*5+valveResponse*2:0);ctx.fillStyle=[blue,lavender,teal][i%3];ctx.globalAlpha=.72+(animated?Math.abs(Math.sin(time+i))*.23:0);ctx.fillRect(466+i*17,267-dynamicH,10,dynamicH);}); ctx.globalAlpha=1;
           ctx.strokeStyle=muted; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(463,268);ctx.lineTo(572,268);ctx.stroke();
           // Animated data pulses along the feedback path
           if (animated) {
-            var time = (ts || 0) / 1000;
             var instrumentLengths = [], instrumentTotal = 0;
             for (var ii=1; ii<instrumentPath.length; ii++) { var idx=instrumentPath[ii], prev=instrumentPath[ii-1]; var il=Math.hypot(idx[0]-prev[0],idx[1]-prev[1]); instrumentLengths.push(il); instrumentTotal+=il; }
             var instrumentDistance = (time * 32) % instrumentTotal, instrumentSeg = 0;
