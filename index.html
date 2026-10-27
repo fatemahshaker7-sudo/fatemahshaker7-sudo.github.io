@@ -1026,8 +1026,8 @@
         </div>
         <div class="panel kpi">
           <p class="kpi-label">Projects</p>
-          <p class="kpi-value">5</p>
-          <p class="kpi-note">Delivery estimation, industrial optimization, habit tracking, senior and junior projects</p>
+          <p class="kpi-value">6</p>
+          <p class="kpi-note">Delivery estimation, emotion classification, industrial optimization, habit tracking, senior and junior projects</p>
         </div>
         <div class="panel kpi">
           <p class="kpi-label">Degree</p>
@@ -1049,6 +1049,7 @@
         </div>
         <div class="project-tabs" role="tablist" aria-label="Projects">
           <button class="project-tab" id="tab-olist" role="tab" aria-selected="false" aria-controls="project-olist" tabindex="-1">Olist Delivery Estimation</button>
+          <button class="project-tab" id="tab-emotions" role="tab" aria-selected="false" aria-controls="project-emotions" tabindex="-1">Emotions Classifier</button>
           <button class="project-tab" id="tab-habit" role="tab" aria-selected="true" aria-controls="project-habit" tabindex="0">Habit Tracking App</button>
           <button class="project-tab" id="tab-industrial" role="tab" aria-selected="false" aria-controls="project-industrial" tabindex="-1">Industrial Optimization</button>
           <button class="project-tab" id="tab-senior" role="tab" aria-selected="false" aria-controls="project-senior" tabindex="-1">Senior Project</button>
@@ -1065,6 +1066,17 @@
             <dl class="kv">
               <div><dt>Tools used</dt><dd><ul class="items"><li>Python</li><li>Pandas</li><li>NumPy</li><li>Scikit-learn</li><li>Machine Learning</li><li>Streamlit</li></ul></dd></div>
               <div><dt>Key result</dt><dd>4.39-day mean absolute error (MAE) on unseen test data.</dd></div>
+            </dl>
+          </article>
+          <article class="case" id="project-emotions" role="tabpanel" aria-labelledby="tab-emotions" hidden>
+            <h3>Emotions Classifier</h3>
+            <p class="lead">Built an interactive emotion-classification application that applies machine learning to predict emotions through a Streamlit interface.</p>
+            <p style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px">
+              <a href="https://emotionsclassifier2.streamlit.app/" target="_blank" rel="noopener noreferrer">Open live Streamlit app ↗</a>
+              <a href="https://github.com/fatemahshaker7-sudo/Projects/tree/main/Emotions_Classifier" target="_blank" rel="noopener noreferrer">View GitHub project ↗</a>
+            </p>
+            <dl class="kv">
+              <div><dt>Related skills</dt><dd><ul class="items"><li>Python</li><li>Machine Learning</li><li>Emotion Classification</li><li>Streamlit</li></ul></dd></div>
             </dl>
           </article>
           <article class="case" id="project-habit" role="tabpanel" aria-labelledby="tab-habit">
@@ -1101,7 +1113,7 @@
       <section class="panel p-skills" id="skills" aria-labelledby="skills-title">
         <div class="panel-head">
           <h2 class="panel-title" id="skills-title">Skills</h2>
-          <p class="panel-meta">12 tools</p>
+          <p class="panel-meta">Tools &amp; applied ML</p>
         </div>
         <div class="panel-body">
           <ul class="bars" id="bars">
@@ -1126,6 +1138,11 @@
               <p class="bar-items">Streamlit</p>
             </li>
             <li class="bar-row">
+              <div class="bar-top"><span>Machine learning &amp; classification</span><span class="bar-count">3 skills</span></div>
+              <span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--n:3"></span></span>
+              <p class="bar-items">Machine Learning, Emotion Classification, Predictive Modeling</p>
+            </li>
+            <li class="bar-row">
               <div class="bar-top"><span>Engineering &amp; control</span><span class="bar-count">5 tools</span></div>
               <span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--n:5"></span></span>
               <p class="bar-items">MATLAB, Simulink, SCADA, PLC, Modeling</p>
@@ -1136,7 +1153,7 @@
               <p class="bar-items">Fusion 360</p>
             </li>
           </ul>
-          <p class="chart-note">Bars show how many tools sit in each category.</p>
+          <p class="chart-note">Bars summarize the tools and applied skills in each category.</p>
         </div>
       </section>
 
@@ -1284,7 +1301,7 @@
       /* Independent discipline filters: neither selected shows all projects. */
       var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
       var engineeringSelected = false, dataScienceSelected = false;
-      var allProjectIds = ['tab-olist','tab-habit','tab-industrial','tab-senior','tab-junior'];
+      var allProjectIds = ['tab-olist','tab-emotions','tab-habit','tab-industrial','tab-senior','tab-junior'];
       function applyProjectFilter() {
         filterButtons.forEach(function (button) {
           var selected = button.getAttribute('data-filter') === 'engineering' ? engineeringSelected : dataScienceSelected;
@@ -1293,7 +1310,7 @@
         var allowed;
         if (engineeringSelected && dataScienceSelected) allowed = ['tab-industrial','tab-senior'];
         else if (engineeringSelected) allowed = ['tab-junior'];
-        else if (dataScienceSelected) allowed = ['tab-olist','tab-habit'];
+        else if (dataScienceSelected) allowed = ['tab-olist','tab-emotions','tab-habit'];
         else allowed = allProjectIds.slice();
         projectTabs.forEach(function (tab) {
           var show = allowed.indexOf(tab.id) !== -1;
