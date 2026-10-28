@@ -1026,8 +1026,8 @@
         </div>
         <div class="panel kpi">
           <p class="kpi-label">Projects</p>
-          <p class="kpi-value">6</p>
-          <p class="kpi-note">Delivery estimation, emotion classification, industrial optimization, habit tracking, senior and junior projects</p>
+          <p class="kpi-value">7</p>
+          <p class="kpi-note">Delivery estimation, age and gender prediction, emotion classification, industrial optimization, habit tracking, and engineering projects</p>
         </div>
         <div class="panel kpi">
           <p class="kpi-label">Degree</p>
@@ -1049,6 +1049,7 @@
         </div>
         <div class="project-tabs" role="tablist" aria-label="Projects">
           <button class="project-tab" id="tab-olist" role="tab" aria-selected="false" aria-controls="project-olist" tabindex="-1">Olist Delivery Estimation</button>
+          <button class="project-tab" id="tab-age-gender" role="tab" aria-selected="false" aria-controls="project-age-gender" tabindex="-1">Age &amp; Gender Prediction</button>
           <button class="project-tab" id="tab-emotions" role="tab" aria-selected="false" aria-controls="project-emotions" tabindex="-1">Emotions Classifier</button>
           <button class="project-tab" id="tab-habit" role="tab" aria-selected="true" aria-controls="project-habit" tabindex="0">Habit Tracking App</button>
           <button class="project-tab" id="tab-industrial" role="tab" aria-selected="false" aria-controls="project-industrial" tabindex="-1">Industrial Optimization</button>
@@ -1068,15 +1069,26 @@
               <div><dt>Key result</dt><dd>4.39-day mean absolute error (MAE) on unseen test data.</dd></div>
             </dl>
           </article>
-          <article class="case" id="project-emotions" role="tabpanel" aria-labelledby="tab-emotions" hidden>
-            <h3>Emotions Classifier</h3>
-            <p class="lead">Built an interactive emotion-classification application that applies machine learning to predict emotions through a Streamlit interface.</p>
+          <article class="case" id="project-age-gender" role="tabpanel" aria-labelledby="tab-age-gender" hidden>
+            <h3>Age &amp; Gender Prediction</h3>
+            <p class="lead">An applied computer-vision project that uses facial-image input to estimate age and predict gender. The project brings image-based machine learning into an interactive application, turning model output into predictions that users can explore. It demonstrates a practical workflow for applying a trained model to visual data.</p>
             <p style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px">
-              <a href="https://emotionsclassifier2.streamlit.app/" target="_blank" rel="noopener noreferrer">Open live Streamlit app ↗</a>
-              <a href="https://github.com/fatemahshaker7-sudo/Projects/tree/main/Emotions_Classifier" target="_blank" rel="noopener noreferrer">View GitHub project ↗</a>
+              <a href="https://agegenderestimator.streamlit.app/" target="_blank" rel="noopener noreferrer">Open live Streamlit app ↗</a>
+              <a href="https://github.com/fatemahshaker7-sudo/Projects/tree/main/Age_Gender_Prediction" target="_blank" rel="noopener noreferrer">View GitHub repository ↗</a>
             </p>
             <dl class="kv">
-              <div><dt>Related skills</dt><dd><ul class="items"><li>Python</li><li>Machine Learning</li><li>Emotion Classification</li><li>Streamlit</li></ul></dd></div>
+              <div><dt>Related skills</dt><dd><ul class="items"><li>Python</li><li>Computer Vision</li><li>Image Processing</li><li>Age Estimation</li><li>Gender Classification</li><li>Machine Learning</li><li>Streamlit</li></ul></dd></div>
+            </dl>
+          </article>
+          <article class="case" id="project-emotions" role="tabpanel" aria-labelledby="tab-emotions" hidden>
+            <h3>Emotions Classifier</h3>
+            <p class="lead">Developed an interactive machine-learning application that classifies emotions and presents predictions through a simple Streamlit interface. The project demonstrates how a classification model can be integrated into a user-facing data application, making model output easy to explore. Visit the deployed app to try it, or browse the repository to review the project files.</p>
+            <p style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px">
+              <a href="https://emotionsclassifier2.streamlit.app/" target="_blank" rel="noopener noreferrer">Open live Streamlit app ↗</a>
+              <a href="https://github.com/fatemahshaker7-sudo/Projects/tree/main/Emotions_Classifier" target="_blank" rel="noopener noreferrer">View GitHub repository ↗</a>
+            </p>
+            <dl class="kv">
+              <div><dt>Related skills</dt><dd><ul class="items"><li>Python</li><li>Machine Learning</li><li>Emotion Classification</li><li>Data Processing</li><li>Streamlit</li></ul></dd></div>
             </dl>
           </article>
           <article class="case" id="project-habit" role="tabpanel" aria-labelledby="tab-habit">
@@ -1113,7 +1125,7 @@
       <section class="panel p-skills" id="skills" aria-labelledby="skills-title">
         <div class="panel-head">
           <h2 class="panel-title" id="skills-title">Skills</h2>
-          <p class="panel-meta">Tools &amp; applied ML</p>
+          <p class="panel-meta">Applied ML &amp; app development</p>
         </div>
         <div class="panel-body">
           <ul class="bars" id="bars">
@@ -1138,9 +1150,9 @@
               <p class="bar-items">Streamlit</p>
             </li>
             <li class="bar-row">
-              <div class="bar-top"><span>Machine learning &amp; classification</span><span class="bar-count">3 skills</span></div>
-              <span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--n:3"></span></span>
-              <p class="bar-items">Machine Learning, Emotion Classification, Predictive Modeling</p>
+              <div class="bar-top"><span>Machine learning</span><span class="bar-count">6 skills</span></div>
+              <span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--n:6"></span></span>
+              <p class="bar-items">Machine learning, computer vision, image processing, age estimation, gender classification, emotion classification</p>
             </li>
             <li class="bar-row">
               <div class="bar-top"><span>Engineering &amp; control</span><span class="bar-count">5 tools</span></div>
@@ -1301,7 +1313,7 @@
       /* Independent discipline filters: neither selected shows all projects. */
       var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
       var engineeringSelected = false, dataScienceSelected = false;
-      var allProjectIds = ['tab-olist','tab-emotions','tab-habit','tab-industrial','tab-senior','tab-junior'];
+      var allProjectIds = ['tab-olist','tab-age-gender','tab-emotions','tab-habit','tab-industrial','tab-senior','tab-junior'];
       function applyProjectFilter() {
         filterButtons.forEach(function (button) {
           var selected = button.getAttribute('data-filter') === 'engineering' ? engineeringSelected : dataScienceSelected;
@@ -1310,7 +1322,7 @@
         var allowed;
         if (engineeringSelected && dataScienceSelected) allowed = ['tab-industrial','tab-senior'];
         else if (engineeringSelected) allowed = ['tab-junior'];
-        else if (dataScienceSelected) allowed = ['tab-olist','tab-emotions','tab-habit'];
+        else if (dataScienceSelected) allowed = ['tab-olist','tab-age-gender','tab-emotions','tab-habit'];
         else allowed = allProjectIds.slice();
         projectTabs.forEach(function (tab) {
           var show = allowed.indexOf(tab.id) !== -1;
