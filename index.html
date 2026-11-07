@@ -1026,8 +1026,8 @@
         </div>
         <div class="panel kpi">
           <p class="kpi-label">Projects</p>
-          <p class="kpi-value">7</p>
-          <p class="kpi-note">Delivery estimation, age and gender prediction, emotion classification, industrial optimization, habit tracking, and engineering projects</p>
+          <p class="kpi-value">9</p>
+          <p class="kpi-note">Delivery estimation, age and gender prediction, emotion classification, object detection, industrial optimization, habit tracking, and engineering projects</p>
         </div>
         <div class="panel kpi">
           <p class="kpi-label">Degree</p>
@@ -1051,6 +1051,8 @@
           <button class="project-tab" id="tab-olist" role="tab" aria-selected="false" aria-controls="project-olist" tabindex="-1">Olist Delivery Estimation</button>
           <button class="project-tab" id="tab-age-gender" role="tab" aria-selected="false" aria-controls="project-age-gender" tabindex="-1">Age &amp; Gender Prediction</button>
           <button class="project-tab" id="tab-emotions" role="tab" aria-selected="false" aria-controls="project-emotions" tabindex="-1">Emotions Classifier</button>
+          <button class="project-tab" id="tab-currency" role="tab" aria-selected="false" aria-controls="project-currency" tabindex="-1">Bahraini Currency Detector</button>
+          <button class="project-tab" id="tab-food" role="tab" aria-selected="false" aria-controls="project-food" tabindex="-1">Bahraini Food Detection</button>
           <button class="project-tab" id="tab-habit" role="tab" aria-selected="true" aria-controls="project-habit" tabindex="0">Habit Tracking App</button>
           <button class="project-tab" id="tab-industrial" role="tab" aria-selected="false" aria-controls="project-industrial" tabindex="-1">Industrial Optimization</button>
           <button class="project-tab" id="tab-senior" role="tab" aria-selected="false" aria-controls="project-senior" tabindex="-1">Senior Project</button>
@@ -1089,6 +1091,28 @@
             </p>
             <dl class="kv">
               <div><dt>Related skills</dt><dd><ul class="items"><li>Python</li><li>Machine Learning</li><li>Emotion Classification</li><li>Data Processing</li><li>Streamlit</li></ul></dd></div>
+            </dl>
+          </article>
+          <article class="case" id="project-currency" role="tabpanel" aria-labelledby="tab-currency" hidden>
+            <h3>Bahraini Currency Detector</h3>
+            <p class="lead">An applied computer-vision project that recognizes Bahraini currency from images and presents the predictions through an interactive Streamlit app, turning a trained model into a tool anyone can try.</p>
+            <p style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px">
+              <a href="https://bhcurrencydetector.streamlit.app/" target="_blank" rel="noopener noreferrer">Open live Streamlit app ↗</a>
+              <a href="https://github.com/fatemahshaker7-sudo/Projects/tree/main/Bahraini_Currency_Detector" target="_blank" rel="noopener noreferrer">View GitHub repository ↗</a>
+            </p>
+            <dl class="kv">
+              <div><dt>Related skills</dt><dd><ul class="items"><li>Python</li><li>Computer Vision</li><li>Image Processing</li><li>Machine Learning</li><li>Streamlit</li></ul></dd></div>
+            </dl>
+          </article>
+          <article class="case" id="project-food" role="tabpanel" aria-labelledby="tab-food" hidden>
+            <h3>Bahraini Food Object Detection</h3>
+            <p class="lead">Built a YOLO-based object detection model that identifies Bahraini dishes, deployed in a Streamlit app that supports both live camera detection and photo upload.</p>
+            <p style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px">
+              <a href="https://bahrainifoodobjectdetector.streamlit.app/" target="_blank" rel="noopener noreferrer">Open live Streamlit app ↗</a>
+              <a href="https://github.com/fatemahshaker7-sudo/Bahraini_Food_Object_Detection/tree/main" target="_blank" rel="noopener noreferrer">View GitHub repository ↗</a>
+            </p>
+            <dl class="kv">
+              <div><dt>Related skills</dt><dd><ul class="items"><li>Python</li><li>YOLO</li><li>Object Detection</li><li>Computer Vision</li><li>Streamlit</li></ul></dd></div>
             </dl>
           </article>
           <article class="case" id="project-habit" role="tabpanel" aria-labelledby="tab-habit">
@@ -1251,7 +1275,7 @@
           <button id="app-preview-close" type="button">Close ✕</button>
         </div>
       </header>
-      <iframe class="app-preview-frame" id="app-preview-frame" title="Interactive live app preview" allow="clipboard-read; clipboard-write; fullscreen; autoplay" referrerpolicy="strict-origin-when-cross-origin" loading="eager"></iframe>
+      <iframe class="app-preview-frame" id="app-preview-frame" title="Interactive live app preview" allow="clipboard-read; clipboard-write; fullscreen; autoplay; camera" referrerpolicy="strict-origin-when-cross-origin" loading="eager"></iframe>
       <p class="app-preview-note">You can interact with the app here. If the site does not allow embedding, use “Open in new tab”.</p>
     </div>
   </section>
@@ -1313,7 +1337,7 @@
       /* Independent discipline filters: neither selected shows all projects. */
       var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
       var engineeringSelected = false, dataScienceSelected = false;
-      var allProjectIds = ['tab-olist','tab-age-gender','tab-emotions','tab-habit','tab-industrial','tab-senior','tab-junior'];
+      var allProjectIds = ['tab-olist','tab-age-gender','tab-emotions','tab-currency','tab-food','tab-habit','tab-industrial','tab-senior','tab-junior'];
       function applyProjectFilter() {
         filterButtons.forEach(function (button) {
           var selected = button.getAttribute('data-filter') === 'engineering' ? engineeringSelected : dataScienceSelected;
@@ -1322,7 +1346,7 @@
         var allowed;
         if (engineeringSelected && dataScienceSelected) allowed = ['tab-industrial','tab-senior'];
         else if (engineeringSelected) allowed = ['tab-junior'];
-        else if (dataScienceSelected) allowed = ['tab-olist','tab-age-gender','tab-emotions','tab-habit'];
+        else if (dataScienceSelected) allowed = ['tab-olist','tab-age-gender','tab-emotions','tab-currency','tab-food','tab-habit'];
         else allowed = allProjectIds.slice();
         projectTabs.forEach(function (tab) {
           var show = allowed.indexOf(tab.id) !== -1;
