@@ -62,7 +62,6 @@ An academic engineering project demonstrating the application of process instrum
 [![Arduino](https://img.shields.io/badge/Arduino-008184.svg?logo=arduino)](#)
 [![ESP32](https://img.shields.io/badge/ESP32-e7352c.svg?logo=espressif&logoColor=fff)](#)
 ![MQTT](https://img.shields.io/badge/MQTT-660066?logo=mqtt&logoColor=white)
-![Embedded](https://img.shields.io/badge/Embedded-Systems-blue?style=for-the-badge)
 ![Microcontrollers](https://img.shields.io/badge/Microcontrollers-Embedded%20Systems-00979D?style=for-the-badge&logo=microchip&logoColor=white)
 
 An earlier engineering project reflecting my foundation in instrumentation, control systems, and engineering analysis.
