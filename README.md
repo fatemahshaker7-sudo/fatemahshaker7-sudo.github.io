@@ -26,6 +26,7 @@ This portfolio brings together my engineering background and data science projec
 ## Featured Projects
 
 ### 1. Olist Delivery Time Estimation
+[![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-FF4B4B?logo=streamlit&logoColor=white)](https://olist-delivery-estimation-app.streamlit.app/))
 
 An end-to-end machine learning project using the Brazilian Olist e-commerce dataset to estimate delivery times in days. Multiple regression models were evaluated, and a stacking ensemble was developed using HistGradientBoosting, Random Forest, Extra Trees, and Ridge regression.
 
@@ -33,16 +34,15 @@ An end-to-end machine learning project using the Brazilian Olist e-commerce data
 
 **Technologies:** Python, Pandas, NumPy, Scikit-learn, Machine Learning, Streamlit.
 
-- [Live Streamlit Application](https://olist-delivery-estimation-app.streamlit.app/)
 - [Source Code](https://github.com/fatemahshaker7-sudo/OLIST_DATE_ESTIMATION)
 
 ### 2. Habit Tracking App
+[![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-FF4B4B?logo=streamlit&logoColor=white)](https://habbit-tracking-app.streamlit.app/)
 
 An interactive web application for tracking habits over daily, weekly, and monthly periods. It includes streak analysis, completion heatmaps, progress bars, and AI-generated coaching tips.
 
 **Technologies:** Python, Pandas, Streamlit, Altair, OpenRouter API, ZenQuotes API.
 
-- [Live Application](https://habbit-tracking-app.streamlit.app)
 
 ### 3. Industrial Process Optimization
 
@@ -53,14 +53,17 @@ An industrial improvement project focused on reducing time waste in the aluminum
 **Tools and methods:** Power BI, data analysis, root cause analysis, productivity improvement, workflow optimization.
 
 ### 4. Senior Engineering Project
+![Control & Instrumentation](https://img.shields.io/badge/Control%20%26%20Instrumentation-engineering-orange?style=for-the-badge)
 
 An academic engineering project demonstrating the application of process instrumentation, control engineering, modeling, and technical problem-solving.
 
 ### 5. Junior Engineering Project
+[![Arduino](https://img.shields.io/badge/Arduino-008184.svg?logo=arduino)](#)
+[![ESP32](https://img.shields.io/badge/ESP32-e7352c.svg?logo=espressif&logoColor=fff)](#)
+![MQTT](https://img.shields.io/badge/MQTT-660066?logo=mqtt&logoColor=white)
 
 An earlier engineering project reflecting my foundation in instrumentation, control systems, and engineering analysis.
 
-Further details about the engineering projects are available in the [live portfolio](https://fatemahshaker7-sudo.github.io/).
 
 ## Technical Skills
 
