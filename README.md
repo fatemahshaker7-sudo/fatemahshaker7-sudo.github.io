@@ -125,6 +125,7 @@ This portfolio is an evolving collection of my work and learning. I aim to conti
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-fatemahshaker7--sudo.github.io-0A66C2?style=for-the-badge&logo=githubpages&logoColor=white)](https://fatemahshaker7-sudo.github.io/)
 [![GitHub](https://img.shields.io/badge/GitHub-fatemahshaker7--sudo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fatemahshaker7-sudo)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Fatemah%20Shaker-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/fatemah-shaker7)
 
 ---
 
