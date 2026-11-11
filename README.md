@@ -26,7 +26,7 @@ This portfolio brings together my engineering background and data science projec
 ## Featured Projects
 
 ### 1. Olist Delivery Time Estimation
-[![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-FF4B4B?logo=streamlit&logoColor=white)](https://olist-delivery-estimation-app.streamlit.app/))
+[![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-FF4B4B?logo=streamlit&logoColor=white)](https://olist-delivery-estimation-app.streamlit.app/)
 
 An end-to-end machine learning project using the Brazilian Olist e-commerce dataset to estimate delivery times in days. Multiple regression models were evaluated, and a stacking ensemble was developed using HistGradientBoosting, Random Forest, Extra Trees, and Ridge regression.
 
