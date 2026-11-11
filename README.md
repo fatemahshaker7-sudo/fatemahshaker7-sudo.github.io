@@ -54,6 +54,7 @@ An industrial improvement project focused on reducing time waste in the aluminum
 **Tools and methods:** Power BI, data analysis, root cause analysis, productivity improvement, workflow optimization.
 
 ### 4. Senior Engineering Project
+![MATLAB](https://img.shields.io/badge/MATLAB-0076A8?style=flat&logo=mathworks&logoColor=white)
 ![Simulink](https://img.shields.io/badge/Simulink-F78F1E?style=flat&logo=mathworks&logoColor=white)
 ![Control & Instrumentation](https://img.shields.io/badge/Control_%26_Instrumentation-0A66C2?style=flat&logo=probot&logoColor=white)
 ![Control Engineering](https://img.shields.io/badge/Control_Engineering-F78F1E?style=flat)
