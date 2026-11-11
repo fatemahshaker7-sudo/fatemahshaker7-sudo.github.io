@@ -479,15 +479,18 @@
     .project-detail-actions { display:flex; gap:8px; flex-wrap:wrap; }
     .project-detail-actions button, .project-detail-nav { display:inline-flex; align-items:center; justify-content:center; min-width:42px; min-height:40px; padding:8px 12px; border:1px solid var(--rule); border-radius:10px; color:var(--text); background:transparent; font:inherit; cursor:pointer; }
     .project-detail-actions button:hover, .project-detail-nav:hover { background:var(--text); color:var(--bg); }
-    .project-detail-body { flex:1; min-height:0; display:grid; grid-template-columns:48px minmax(0,1fr) 48px; align-items:center; gap:12px; padding:18px; }
-    .project-detail-content { min-width:0; height:100%; overflow:auto; padding:clamp(8px,2vw,24px); border:1px solid var(--rule); border-radius:12px; }
-    .project-detail-content h3 { font-family:var(--font-display); font-size:clamp(1.4rem,3vw,2rem); margin-bottom:14px; }
+    .project-detail-body { flex:1; min-height:0; display:flex; padding:clamp(12px,2vw,24px); overflow:hidden; }
+    .project-detail-content { min-width:0; width:100%; height:100%; overflow-y:auto; overscroll-behavior:contain; padding:clamp(12px,2vw,28px); border:1px solid var(--rule); border-radius:12px; }
+    .project-detail-content h3 { font-family:var(--font-display); font-size:clamp(1.4rem,3vw,2rem); margin:0 0 14px; }
     .project-detail-content p { margin:0 0 12px; }
+    .project-detail-section { padding:0 0 24px; margin:0 0 24px; border-bottom:1px solid var(--rule); }
+    .project-detail-section:last-child { border-bottom:0; margin-bottom:0; padding-bottom:0; }
+    .project-detail-section h4 { margin:0 0 10px; color:var(--signal-cyan); font:600 1.05rem/1.4 var(--font-display); }
+    .project-detail-section .placeholder-note { margin-top:12px; }
     .project-detail-content .placeholder-note { color:var(--muted); font-size:.92rem; }
     .project-detail-content iframe { display:block; width:100%; height:min(52vh,520px); min-height:260px; border:1px solid var(--rule); border-radius:8px; background:#fff; margin-top:14px; }
     .presentation-actions a { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border:1px solid var(--rule); border-radius:10px; background:var(--text); color:var(--bg); text-decoration:none; font:inherit; font-weight:600; }
     .presentation-actions a:hover { background:transparent; color:var(--text); }
-    .project-detail-counter { text-align:center; color:var(--muted); padding:0 12px 12px; font-family:var(--font-mono); font-size:.85rem; }
     .explore-project { display:inline-flex; align-items:center; gap:6px; border:1px solid var(--rule); border-radius:999px; padding:8px 13px; background:transparent; color:var(--text); font:inherit; font-weight:600; cursor:pointer; }
     .explore-project:hover { background:var(--text); color:var(--bg); }
     /* Minimized interactive Streamlit app preview */
@@ -501,7 +504,7 @@
     .app-preview-actions button:hover, .app-preview-actions a:hover { background:var(--text); color:var(--bg); }
     .app-preview-frame { width:100%; flex:1; border:0; background:#fff; }
     .app-preview-note { padding:8px 14px; border-top:1px solid var(--rule); color:var(--muted); font-size:.85rem; }
-    @media(max-width:600px) { .project-detail-head { align-items:flex-start; flex-direction:column; } .project-detail-actions { width:100%; } .project-detail-actions button { flex:1; } .project-detail-body { grid-template-columns:34px minmax(0,1fr) 34px; gap:5px; padding:8px; } .project-detail-content { padding:10px; } .app-preview-head { align-items:flex-start; flex-wrap:wrap; } .app-preview-actions { margin-left:0; width:100%; } .app-preview-actions button,.app-preview-actions a { flex:1; } }
+    @media(max-width:600px) { .project-detail-head { align-items:flex-start; flex-direction:column; } .project-detail-actions { width:100%; } .project-detail-actions button { flex:1; } .project-detail-body { padding:8px; } .project-detail-content { padding:12px; } .app-preview-head { align-items:flex-start; flex-wrap:wrap; } .app-preview-actions { margin-left:0; width:100%; } .app-preview-actions button,.app-preview-actions a { flex:1; } }
 
     /* ---------- Skills chart ---------- */
     .bars { display: grid; gap: 22px; }
@@ -815,11 +818,6 @@
       border-bottom-color: color-mix(in srgb, var(--signal-cyan) 24%, var(--rule));
     }
     .project-detail-head strong, .app-preview-title { letter-spacing: -0.015em; }
-    .project-detail-counter {
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
     .project-detail-content { border-radius: 8px; }
     .presentation-actions a:first-child {
       background: var(--signal-cyan);
@@ -1133,8 +1131,8 @@
           <article class="case" id="project-senior" role="tabpanel" aria-labelledby="tab-senior" hidden>
             <h3>Senior Project</h3>
             <p style="margin-top:14px"><button type="button" class="explore-project" data-project="senior">🔎 Learn More</button></p>
-            <p class="lead">University of Bahrain · 2022. Designed and tuned PID and Fuzzy PID controllers for a nonlinear blood glucose–insulin system for Type 1 diabetes, aiming to maintain normal glucose levels with minimal insulin dose.</p>
-            <dl class="kv"><div><dt>Tools used</dt><dd><ul class="items"><li>MATLAB</li><li>Simulink</li><li>PID Control</li><li>Fuzzy PID</li></ul></dd></div></dl>
+            <p class="lead">University of Bahrain · 2022. A team project (3 students) comparing PID, fuzzy and Fuzzy PID controllers on a simulated Type 1 diabetes patient (Bergman minimal model) in MATLAB/Simulink. The Fuzzy PID lowered the glucose peak from 18.75 to 16.05 mmol/L, cut the integral absolute error by 58% and settled 40% faster than the conventional PID.</p>
+            <dl class="kv"><div><dt>Tools used</dt><dd><ul class="items"><li>MATLAB</li><li>Simulink</li><li>PID Control</li><li>Fuzzy Logic</li><li>Fuzzy PID</li></ul></dd></div></dl>
           </article>
           <article class="case" id="project-junior" role="tabpanel" aria-labelledby="tab-junior" hidden>
             <h3>Junior Project</h3>
@@ -1290,11 +1288,8 @@
         </div>
       </header>
       <div class="project-detail-body">
-        <button type="button" class="project-detail-nav" id="detail-prev" aria-label="Previous section">←</button>
         <section class="project-detail-content" id="detail-content" aria-live="polite"></section>
-        <button type="button" class="project-detail-nav" id="detail-next" aria-label="Next section">→</button>
       </div>
-      <p id="detail-counter" class="project-detail-counter"></p>
     </div>
   </section>
 
@@ -1392,8 +1387,7 @@
       var detailModal = document.getElementById('project-detail-modal');
       var detailContent = document.getElementById('detail-content');
       var detailTitle = document.getElementById('detail-title');
-      var detailCounter = document.getElementById('detail-counter');
-      var detailIndex = 0, detailProject = 'senior';
+      var detailProject = 'senior';
       var presentationUrls = {
         senior: 'https://fatemahshaker7-sudo.github.io/presentations/senior_project.pdf',
         junior: 'https://fatemahshaker7-sudo.github.io/presentations/junior_project.pdf'
@@ -1419,27 +1413,32 @@
         ]}
       };
       function renderDetail() {
-        var slides = detailData[detailProject].slides, slide = slides[detailIndex];
-        detailTitle.textContent = detailData[detailProject].title;
-        var html = '<h3>' + slide.title + '</h3><p>' + slide.body + '</p>';
-        if (slide.presentation) {
-          var pdfUrl = presentationUrls[detailProject];
-          var label = detailProject === 'senior' ? 'Senior' : 'Junior';
-          html += '<div class="presentation-actions" style="display:flex;flex-wrap:wrap;gap:10px;margin:14px 0">' +
-            '<a class="presentation-action" href="' + pdfUrl + '" target="_blank" rel="noopener noreferrer">Open PDF in Full Browser ↗</a>' +
-            '<a class="presentation-action" href="' + pdfUrl + '" download="' + detailProject + '_project.pdf">Download PDF ↓</a>' +
-            '</div>' +
-            '<iframe title="' + label + ' Project PDF presentation" src="' + pdfUrl + '#toolbar=1&navpanes=0&view=FitH" loading="lazy"></iframe>' +
-            '<p class="placeholder-note">If the embedded preview does not load in your browser, use “Open PDF in Full Browser”.</p>';
-        }
-        if (slide.note) html += '<p class="placeholder-note">' + slide.note + '</p>';
-        detailContent.innerHTML = html; detailCounter.textContent = 'Section ' + (detailIndex + 1) + ' of ' + slides.length;
-        document.title = detailData[detailProject].title + ' | Fatemah Shaker';
+        var project = detailData[detailProject];
+        detailTitle.textContent = project.title;
+        var html = '';
+        project.slides.forEach(function (slide) {
+          html += '<section class="project-detail-section"><h4>' + slide.title + '</h4><p>' + slide.body + '</p>';
+          if (slide.presentation) {
+            var pdfUrl = presentationUrls[detailProject];
+            var label = detailProject === 'senior' ? 'Senior' : 'Junior';
+            html += '<div class="presentation-actions" style="display:flex;flex-wrap:wrap;gap:10px;margin:14px 0">' +
+              '<a class="presentation-action" href="' + pdfUrl + '" target="_blank" rel="noopener noreferrer">Open PDF in Full Browser ↗</a>' +
+              '<a class="presentation-action" href="' + pdfUrl + '" download="' + detailProject + '_project.pdf">Download PDF ↓</a>' +
+              '</div>' +
+              '<iframe title="' + label + ' Project PDF presentation" src="' + pdfUrl + '#toolbar=1&navpanes=0&view=FitH" loading="lazy"></iframe>' +
+              '<p class="placeholder-note">If the embedded preview does not load in your browser, use “Open PDF in Full Browser”.</p>';
+          }
+          if (slide.note) html += '<p class="placeholder-note">' + slide.note + '</p>';
+          html += '</section>';
+        });
+        detailContent.innerHTML = html;
+        detailContent.scrollTop = 0;
+        document.title = project.title + ' | Fatemah Shaker';
       }
-      function openProjectDetail(project, index) {
+      function openProjectDetail(project) {
         detailProject = detailData[project] ? project : 'senior';
-        detailIndex = Math.max(0, Math.min(Number(index) || 0, detailData[detailProject].slides.length - 1));
         renderDetail(); detailModal.hidden = false; document.body.style.overflow = 'hidden';
+        document.getElementById('detail-close').focus();
       }
       function closeProjectDetail() {
         detailModal.hidden = true; document.body.style.overflow = '';
@@ -1447,8 +1446,6 @@
         if (url.searchParams.has('project-view')) { url.searchParams.delete('project-view'); url.searchParams.delete('section'); window.history.replaceState({}, '', url.pathname + url.search + url.hash); }
       }
       document.querySelectorAll('.explore-project').forEach(function (button) { button.addEventListener('click', function () { openProjectDetail(button.getAttribute('data-project'), 0); }); });
-      document.getElementById('detail-prev').addEventListener('click', function () { detailIndex = (detailIndex - 1 + detailData[detailProject].slides.length) % detailData[detailProject].slides.length; renderDetail(); });
-      document.getElementById('detail-next').addEventListener('click', function () { detailIndex = (detailIndex + 1) % detailData[detailProject].slides.length; renderDetail(); });
       document.getElementById('detail-close').addEventListener('click', function () {
         if (new URL(window.location.href).searchParams.has('project-view')) {
           window.close();
@@ -1457,20 +1454,18 @@
       });
       detailModal.addEventListener('click', function (event) { if (event.target === detailModal) closeProjectDetail(); });
       document.getElementById('detail-open-tab').addEventListener('click', function () {
-        var url = new URL(window.location.href); url.searchParams.set('project-view', detailProject); url.searchParams.set('section', String(detailIndex));
+        var url = new URL(window.location.href); url.searchParams.set('project-view', detailProject); url.searchParams.delete('section');
         window.open(url.href, '_blank', 'noopener,noreferrer');
       });
       document.addEventListener('keydown', function (event) {
         if (!detailModal.hidden) {
-          if (event.key === 'ArrowLeft') { event.preventDefault(); document.getElementById('detail-prev').click(); }
-          else if (event.key === 'ArrowRight') { event.preventDefault(); document.getElementById('detail-next').click(); }
-          else if (event.key === 'Escape') closeProjectDetail();
+          if (event.key === 'Escape') closeProjectDetail();
         }
       });
       var initialUrl = new URL(window.location.href);
       if (initialUrl.searchParams.has('project-view')) {
         document.body.classList.add('project-standalone');
-        openProjectDetail(initialUrl.searchParams.get('project-view'), initialUrl.searchParams.get('section'));
+        openProjectDetail(initialUrl.searchParams.get('project-view'));
         document.getElementById('detail-open-tab').textContent = 'Open Another Tab ↗';
       }
 
@@ -1894,6 +1889,20 @@
   .cs-next { display:block; padding:18px; border:1px solid var(--rule); border-radius:12px; text-decoration:none; font-family:var(--font-display); font-weight:600; font-size:1.15rem; background:var(--panel); }
   .cs-next:hover { border-color:var(--signal-cyan); }
   .cs-next small { display:block; font:500 .7rem var(--font-mono); letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+
+  .cs-table { width:100%; border-collapse:collapse; margin-top:12px; font-size:.95rem; }
+  .cs-table th, .cs-table td { padding:10px 12px; border-bottom:1px solid var(--rule); text-align:right; transition:opacity .2s, background .2s; }
+  .cs-table th:first-child { text-align:left; font-weight:600; }
+  .cs-table thead th { font:500 .7rem var(--font-mono); letter-spacing:.07em; text-transform:uppercase; color:var(--muted); }
+  .cs-table td { font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
+  .cs-table[data-mode="pid"] [data-col]:not([data-col="pid"]),
+  .cs-table[data-mode="fuzzy"] [data-col]:not([data-col="fuzzy"]),
+  .cs-table[data-mode="fpid"] [data-col]:not([data-col="fpid"]) { opacity:.28; }
+  .cs-table[data-mode="fpid"] td[data-col="fpid"], .cs-table[data-mode="both"] td[data-col="fpid"] { color:var(--signal-cyan); font-weight:600; }
+  .cs-figs.wide { grid-template-columns:1fr; }
+  .cs-figs img { background:#fff; }
+  .cs-eq { margin:10px 0; padding:14px 16px; border:1px solid var(--rule); border-radius:10px; background:var(--panel); font:500 .92rem/1.8 var(--font-mono); overflow-x:auto; white-space:pre; }
+
 </style>
 
 <dialog class="cs" id="cs" aria-labelledby="cs-title">
@@ -1912,16 +1921,41 @@
   var CFG = {
     senior: {
       title: 'Senior Project', next: 'junior', pdf: 'https://fatemahshaker7-sudo.github.io/presentations/senior_project.pdf',
-      kicker: 'University of Bahrain · 2022',
-      headline: 'PID vs Fuzzy PID for Type 1 diabetes glucose control',
-      stats: [['Year','2022'],['Context','University of Bahrain'],['Tools','MATLAB · Simulink'],['Headline result', null]],  /* TODO: e.g. "Peak glucose 150 mg/dL" */
-      problem: ['Blood glucose in Type 1 diabetes is hard to regulate: the glucose–insulin system is nonlinear and changes over time.','The goal was to hold glucose in the normal range using as little insulin as possible, and to compare a conventional PID controller with a Fuzzy PID controller.'],
-      approach: 'Both controllers were designed, tuned and tested in MATLAB and Simulink against a nonlinear glucose–insulin model. Select a block to see what it does.',
-      nodes: [[10,70,120,50,'Target|glucose','The normal glucose level the controller tries to hold.'],[200,70,120,50,'PID /|Fuzzy PID','Computes the insulin command from the glucose error. The Fuzzy PID variant adjusts its behaviour with fuzzy rules.'],[390,70,120,50,'Insulin|delivery','Turns the controller command into an insulin dose.'],[580,70,130,50,'Glucose–insulin|model','Nonlinear Type 1 diabetes model simulated in Simulink.']],
+      kicker: 'University of Bahrain · CHENG490 Senior Project · 2021–2022',
+      headline: 'Fuzzy PID control of the blood glucose–insulin system for Type 1 diabetes',
+      stats: [['Year','2022'],['Team','3 students · Supervisor Dr. Noureddine Mansour'],['Tools','MATLAB · Simulink · Fuzzy Logic'],['Headline result','Fuzzy PID cut IAE by 58% and settling time by 40% vs PID']],
+      problem: [
+        'People with Type 1 diabetes (T1DM) cannot regulate their own blood glucose because the pancreas does not supply insulin. An artificial pancreas closes that loop with a glucose monitor, a control algorithm and an insulin pump.',
+        'The aim was to keep glucose within an acceptable range using an external controller. Our team built a simulated patient in Simulink and compared three controllers: a conventional PID, a fuzzy controller, and a Fuzzy PID.'
+      ],
+      approach: 'The patient is simulated with Bergman’s minimal model. A meal pushes glucose up, and the controller doses insulin to bring it back to the 4.5 mmol/L basal level. Select a block to see what it does.',
+      nodes: [
+        [10,70,120,50,'Basal|glucose','Setpoint: basal glucose Gb = 4.5 mmol/L. The controller works on the error between this and the measured glucose.'],
+        [200,70,120,50,'Fuzzy PID|controller','Takes the error e and its rate of change Δe, applies 25-rule fuzzy tables, and adjusts Kp, Ki and Kd around the base PID gains (−2, −0.01, 1).'],
+        [390,70,120,50,'Insulin|U(t)','The controller output, delivered as exogenous insulin U(t). In the model it is divided by the insulin distribution volume (12 L).'],
+        [580,70,130,50,'Bergman|patient model','Three ODEs for plasma glucose G, remote insulin X and plasma insulin I. A meal D(t) acts as the disturbance.']
+      ],
       edges: ['M130 95H196','M320 95H386','M510 95H576','M645 120V170H260V124'], labels: [[452,164,'measured glucose']], vb: '0 0 720 190',
-      /* TODO: replace "null" with your values, e.g. '12%' */
-      metrics: [['Overshoot', null, null],['Settling time', null, null],['Total insulin', null, null]],
-      findings: [['What I built','Describe the part you personally designed, tuned or simulated.'],['What the results showed','State which controller won and by how much.'],['What I would do differently','One honest improvement, e.g. a more realistic patient model or meal disturbances.']],
+      extra:
+        '<h3 style="margin-top:26px">The patient model</h3>' +
+        '<p>Bergman’s “minimal” model, from the late 1970s and early 1980s, describes glucose–insulin dynamics with three ODEs. Because all insulin is injected, it models an insulin-dependent patient.</p>' +
+        '<div class="cs-eq">dG/dt = −p₁·G − X·(G + Gb) + D(t)\ndX/dt = −p₂·X + p₃·I\ndI/dt = −n·(I + Ib) + U(t)/V₁</div>' +
+        '<div class="cs-summary">' + [['p₁','0.028 normal · 0 patient'],['p₂','0.025 1/min'],['p₃','13×10⁻⁶'],['Gb · Ib','4.5 mmol/L · 15 mU/L'],['V₁','12 L'],['n','5/54 1/min']].map(function (s) { return '<div class="cs-stat"><span>' + s[0] + '</span><b>' + s[1] + '</b></div>'; }).join('') + '</div>' +
+        '<p style="margin-top:14px">The meal is a smooth pulse, D(t) = D·exp(−a·(ln(b·t) − c)²), with a peak of 0.5 mmol/min.</p>' +
+        gallery([['assets/senior-bergman-model.jpg','Simulink model of the normal subject and the T1DM patient'],['assets/senior-meal.jpg','Meal glucose infusion rate, peaking at 0.5 mmol/min'],['assets/senior-open-loop.jpg','Without control, the patient’s glucose climbs above 20 mmol/L while the normal subject recovers to 4.5']]) +
+        '<h3 style="margin-top:26px">The three controllers</h3>' +
+        '<p><b>PID:</b> u(t) = −2·e(t) − 0.01·∫e dt + 1·de/dt.</p>' +
+        '<p><b>Fuzzy:</b> two inputs, the error e (−14 to 0) and its change Δe (−0.5 to 0.5), each with five triangular membership functions. A 5×5 rule table (25 rules) sets the insulin output on a 0–70 scale.</p>' +
+        '<p><b>Fuzzy PID:</b> the same two inputs feed three fuzzy tables (75 rules in total) that output ΔKp, ΔKi and ΔKd, each in the range −0.5 to 0.5. These are added to the base gains, so the PID retunes itself as the glucose error changes.</p>' +
+        gallery([['assets/senior-pid-block.jpg','Conventional PID loop'],['assets/senior-fuzzy-block.jpg','Fuzzy controller loop'],['assets/senior-fuzzy-pid-block.jpg','Fuzzy PID loop'],['assets/senior-fuzzy-inputs.jpg','Membership functions for the inputs e and Δe'],['assets/senior-fuzzy-pid-outputs.jpg','Membership functions for the outputs ΔKp, ΔKi and ΔKd']]),
+      metrics: [['Peak (mmol/L)','18.75','17.13','16.05'],['Peak time (min)','62.74','51.88','41.72'],['Settling time (min)','276.86','270.12','166.67'],['IAE','1775.54','1260.54','746.63']],
+      results: [['assets/senior-results-patient1.jpg','Patient 1: glucose response under each controller'],['assets/senior-results-patients23.jpg','Patients 2 and 3: the same comparison with different insulin-action parameters']],
+      findings: [
+        ['What the team built','The Bergman patient model, the meal disturbance, and three controllers (PID, fuzzy and Fuzzy PID) in MATLAB/Simulink, evaluated on peak glucose, peak time, settling time and IAE.',false],
+        ['What the results showed','Fuzzy PID was best on every metric. Compared with PID it lowered the glucose peak from 18.75 to 16.05 mmol/L, reached the peak 21 minutes sooner, settled in 167 min instead of 277, and cut the integral absolute error from 1775.5 to 746.6.',false],
+        ['Robustness','Tested on three virtual patients with different insulin-action parameters (p₂ = 0.025, 0.02, 0.0072 and p₃ = 13, 5.3, 2.16 ×10⁻⁶). Fuzzy PID again gave the lowest peak and fastest recovery.',false],
+        ['Limits and next step','All results are from simulation with a single meal disturbance. A suggested improvement is a lookup table in place of live rule evaluation, which can speed up controller execution.',false]
+      ],
       figs: []
     },
     junior: {
@@ -1960,34 +1994,25 @@
     return o + '</svg><div class="cs-info" aria-live="polite" id="cs-info">Select a block to see what it does.</div>';
   }
 
-  function stepResp(z, w, t) { var wd = w * Math.sqrt(1 - z * z); return 1 - Math.exp(-z * w * t) * (Math.cos(wd * t) + z / Math.sqrt(1 - z * z) * Math.sin(wd * t)); }
-  function curve(z) {
-    var p = []; for (var i = 0; i <= 120; i++) { var t = i / 12, y = stepResp(z, 1.3, t); p.push((40 + t * 58).toFixed(1) + ',' + (200 - (y + .1) * 130).toFixed(1)); } return p.join(' ');
-  }
-  function chart() {
-    return '<svg viewBox="0 0 640 230" role="img" aria-label="Illustrative step response of the two controllers"><line class="cs-ax" x1="40" y1="200" x2="630" y2="200"/><line class="cs-ax" x1="40" y1="10" x2="40" y2="200"/>' +
-      '<line class="cs-ref" x1="40" y1="' + (200 - 1.1 * 130) + '" x2="630" y2="' + (200 - 1.1 * 130) + '"/><text class="cs-lbl" x="590" y="' + (200 - 1.1 * 130 - 6) + '">target</text>' +
-      '<polyline class="cs-curve pid" id="cv-pid" points="' + curve(.35) + '"/><polyline class="cs-curve fuzzy" id="cv-fuzzy" points="' + curve(.85) + '"/>' +
-      '<text class="cs-lbl" x="335" y="224">time</text></svg>';
+  function gallery(list, wide) {
+    if (!list || !list.length) return '';
+    return '<div class="cs-figs wide">' + list.map(function (x) {
+      return '<figure style="margin:0"><img loading="lazy" src="' + x[0] + '" alt="' + x[1] + '"><figcaption class="cs-cap">' + x[1] + '</figcaption></figure>'; }).join('') + '</div>';
   }
   function metrics(c) {
-    return '<div class="cs-metrics">' + c.metrics.map(function (m) {
-      return '<div class="cs-stat"><span>' + m[0] + '</span><b data-m="' + m[0] + '"></b></div>'; }).join('') + '</div>';
+    return '<table class="cs-table" id="cs-table" data-mode="both"><thead><tr><th>Metric</th><th data-col="pid">PID</th><th data-col="fuzzy">Fuzzy</th><th data-col="fpid">Fuzzy PID</th></tr></thead><tbody>' +
+      c.metrics.map(function (r) { return '<tr><th scope="row">' + r[0] + '</th><td data-col="pid">' + r[1] + '</td><td data-col="fuzzy">' + r[2] + '</td><td data-col="fpid">' + r[3] + '</td></tr>'; }).join('') + '</tbody></table>';
   }
-  function paintMetrics(c) {
-    c.metrics.forEach(function (m) {
-      var el = body.querySelector('[data-m="' + m[0] + '"]'); if (!el) return;
-      el.textContent = mode === 'pid' ? val(m[1]) : mode === 'fuzzy' ? val(m[2]) : 'PID ' + val(m[1]) + '  ·  Fuzzy ' + val(m[2]);
-    });
-    var pc = document.getElementById('cv-pid'), fc = document.getElementById('cv-fuzzy');
-    if (pc) { pc.style.opacity = mode === 'fuzzy' ? .12 : 1; fc.style.opacity = mode === 'pid' ? .12 : 1; }
+  function paintMetrics() {
+    var t = document.getElementById('cs-table'); if (t) t.dataset.mode = mode;
     body.querySelectorAll('.cs-toggle button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.mode === mode ? 'true' : 'false'); });
   }
 
   function interactive(c, id) {
     if (id === 'senior') {
-      return '<h3>Compare the controllers</h3><div class="cs-toggle" role="group" aria-label="Controller view"><button type="button" data-mode="pid">PID</button><button type="button" data-mode="fuzzy">Fuzzy PID</button><button type="button" data-mode="both">Compare</button></div>' +
-        '<div class="cs-fig">' + chart() + '</div><p class="cs-cap">Illustrative response shape (<span style="color:var(--signal-amber)">PID</span> overshoots more, <span style="color:var(--signal-cyan)">Fuzzy PID</span> settles smoothly). ' + TODO + ' Replace with your Simulink plot and fill in the metrics below.</p>' + metrics(c);
+      return '<h3>Results</h3><p>Simulated patient 1 after a meal. Pick a controller to focus on its column, or compare all three.</p>' +
+        '<div class="cs-toggle" role="group" aria-label="Controller view"><button type="button" data-mode="pid">PID</button><button type="button" data-mode="fuzzy">Fuzzy</button><button type="button" data-mode="fpid">Fuzzy PID</button><button type="button" data-mode="both">Compare all</button></div>' +
+        metrics(c) + '<p class="cs-cap">Lower is better for every row. IAE is the integral absolute error of glucose from the 4.5 mmol/L target.</p>' + gallery(c.results);
     }
     var f = c.figs.length ? '<div class="cs-figs">' + c.figs.map(function (x) { return '<figure style="margin:0"><img loading="lazy" src="' + x[0] + '" alt="' + x[1] + '"><figcaption class="cs-cap">' + x[1] + '</figcaption></figure>'; }).join('') + '</div>' :
       '<div class="cs-figs"><div class="cs-ph">' + TODO + '<br>Add a photo of the build<br>(assets/junior-build.jpg)</div><div class="cs-ph">' + TODO + '<br>Add a web dashboard screenshot<br>(assets/junior-dashboard.png)</div></div>';
@@ -2002,9 +2027,9 @@
     body.innerHTML =
       '<section id="cs-summary"><div class="cs-kicker">' + c.kicker + '</div><h2>' + c.headline + '</h2><div class="cs-summary">' + c.stats.map(stat).join('') + '</div></section>' +
       '<section id="cs-problem"><h3>Problem</h3>' + c.problem.map(function (t) { return '<p>' + t + '</p>'; }).join('') + '</section>' +
-      '<section id="cs-system"><h3>System</h3><p>' + c.approach + '</p><div class="cs-fig">' + diagram(c, id) + '</div></section>' +
+      '<section id="cs-system"><h3>System</h3><p>' + c.approach + '</p><div class="cs-fig">' + diagram(c, id) + '</div>' + (c.extra || '') + '</section>' +
       '<section id="cs-build">' + interactive(c, id) + '</section>' +
-      '<section id="cs-findings"><h3>Findings</h3><ul class="cs-list">' + c.findings.map(function (f) { return '<li><b>' + f[0] + '</b>' + f[1] + ' ' + TODO + '</li>'; }).join('') + '</ul></section>' +
+      '<section id="cs-findings"><h3>Findings</h3><ul class="cs-list">' + c.findings.map(function (f) { return '<li><b>' + f[0] + '</b>' + f[1] + (f[2] === false ? '' : ' ' + TODO) + '</li>'; }).join('') + '</ul></section>' +
       '<section id="cs-report"><h3>Full report</h3><div class="cs-report"><div class="doc">PDF</div><div class="txt"><b>' + c.title + ' presentation</b><br><span style="color:var(--muted)">Slides with the full details.</span></div><a class="pri" href="' + c.pdf + '" target="_blank" rel="noopener noreferrer">Open ↗</a><a href="' + c.pdf + '" download>Download ↓</a></div></section>' +
       '<a class="cs-next" href="#project/' + c.next + '"><small>Next project</small>' + n.title + ' →</a>';
     if (c.metrics) paintMetrics(c);
