@@ -121,8 +121,9 @@ This portfolio is an evolving collection of my work and learning. I aim to conti
 
 ## Connect
 
-- **Portfolio:** [![Portfolio](https://img.shields.io/badge/Portfolio-fatemahshaker7--sudo.github.io-0A66C2?style=for-the-badge&logo=githubpages&logoColor=white)](https://fatemahshaker7-sudo.github.io/)
-- **GitHub:** [![GitHub](https://img.shields.io/badge/GitHub-fatemahshaker7--sudo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fatemahshaker7-sudo)
+[![Portfolio](https://img.shields.io/badge/Portfolio-fatemahshaker7--sudo.github.io-0A66C2?style=for-the-badge&logo=githubpages&logoColor=white)](https://fatemahshaker7-sudo.github.io/)
+[![GitHub](https://img.shields.io/badge/GitHub-fatemahshaker7--sudo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fatemahshaker7-sudo)
+
 ---
 
 *Built to showcase the connection between engineering, data, and practical problem-solving.*
