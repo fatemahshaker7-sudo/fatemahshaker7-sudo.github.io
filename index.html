@@ -1137,7 +1137,7 @@
           <article class="case" id="project-junior" role="tabpanel" aria-labelledby="tab-junior" hidden>
             <h3>Junior Project</h3>
             <p style="margin-top:14px"><button type="button" class="explore-project" data-project="junior">🔎 Learn More</button></p>
-            <p class="lead">University of Bahrain · 2021. Designed, built and tested an Arduino weather station using a DHT11 sensor and LCD, sending sensor readings to a web server via Wi-Fi and MQTT.</p>
+            <p class="lead">University of Bahrain · PICENG321 · 2021. Designed a patient temperature monitoring prototype using a KY-013 sensor, NodeMCU ESP8266, LCD, buzzer and Wi-Fi-connected Cayenne dashboard.</p>
             <dl class="kv"><div><dt>Tools used</dt><dd><ul class="items"><li>Arduino Uno</li><li>DHT11</li><li>LCD</li><li>Wi-Fi</li><li>MQTT</li></ul></dd></div></dl>
           </article>
         </div>
@@ -1403,7 +1403,7 @@
           {title:'Tools & Engineering Skills',body:'MATLAB · Simulink · Feedback Control · PID Control · Fuzzy PID · Nonlinear System Modeling · Simulation-Based Evaluation',note:'The project brought together control-system design and simulation for a biomedical engineering application.'}
         ]},
         junior: { title: 'Junior Project', slides: [
-          {title:'Project Overview',body:'This project developed an Arduino-based weather station that reads environmental measurements from a DHT11 sensor, displays readings on an LCD, and sends the data to a web server through Wi-Fi and MQTT for remote access.',note:'Project context: University of Bahrain · 2021.'},
+          {title:'Project Overview',body:'This project developed an IoT-based patient temperature monitoring system using a KY-013 sensor, NodeMCU ESP8266, LCD, buzzer and Wi-Fi dashboard, and sends the data to a web server through Wi-Fi and MQTT for remote access.',note:'Project context: University of Bahrain · 2021.'},
           {title:'Problem & Objectives',body:'The aim was to create a compact system for collecting and presenting environmental sensor data in two ways: a local display for immediate viewing and a network connection for remote monitoring. The design combines embedded hardware with a lightweight messaging workflow.',note:'See the original presentation for the stated requirements and project scope.'},
           {title:'System Architecture & Data Flow',body:'The DHT11 provides the sensor readings to the Arduino-based system. The LCD presents the readings locally, while the Wi-Fi connection and MQTT messaging path send the data onward to a web server for remote viewing.',note:'This summarizes the system components described for the project; the presentation contains the original architecture details.'},
           {title:'Hardware & Implementation',body:'The main components include an Arduino board, a DHT11 temperature-and-humidity sensor, an LCD, Wi-Fi connectivity, and MQTT communication. The implementation connects sensor acquisition, local display, and network data transmission into one monitoring workflow.',note:'Refer to the PDF for the circuit, implementation details, and any code or configuration shown.'},
@@ -1959,17 +1959,67 @@
       figs: []
     },
     junior: {
-      title: 'Junior Project', next: 'senior', pdf: 'https://fatemahshaker7-sudo.github.io/presentations/junior_project.pdf',
-      kicker: 'University of Bahrain · 2021',
-      headline: 'Arduino weather station with Wi-Fi and MQTT',
-      stats: [['Year','2021'],['Context','University of Bahrain'],['Tools','Arduino · DHT11 · MQTT'],['Headline result', null]],  /* TODO: e.g. "Readings every 5 s" */
-      problem: ['The aim was a compact station that shows environmental readings locally and also reports them remotely.','That meant combining embedded hardware, a local display and a lightweight network messaging path in one working system.'],
-      approach: 'A DHT11 sensor feeds an Arduino, which drives the LCD and publishes readings over Wi-Fi using MQTT to a web server. Select a block to see what it does.',
-      nodes: [[10,20,120,50,'DHT11|sensor','Measures temperature and humidity.'],[200,20,120,50,'Arduino|Uno','Reads the sensor, drives the LCD and publishes the readings.'],[390,20,120,50,'Wi-Fi +|MQTT','Sends readings as MQTT messages over Wi-Fi.'],[580,20,130,50,'Web|server','Receives the data so it can be viewed remotely.'],[200,130,120,50,'LCD|display','Shows the current readings locally.']],
-      edges: ['M130 45H196','M320 45H386','M510 45H576','M260 70V126'], labels: [], vb: '0 0 720 200',
+      title: 'Junior Project', next: 'senior',
+      pdf: 'presentations/temperature_monitoring_system.pdf',
+      kicker: 'University of Bahrain · PICENG 321 Mini-Project · May 2021',
+      headline: 'IoT-based patient temperature monitoring with wireless alerts and online records',
+      stats: [['Year','2021'],['Controller','NodeMCU ESP8266'],['Sensor','KY-013 analog thermistor'],['Alert threshold','Above 38°C'],['Connectivity','Built-in Wi-Fi · Cayenne']],
+      problem: [
+        'The project explores a way for hospital staff to monitor a patient’s temperature continuously rather than relying only on occasional manual checks. A rising temperature can be an important observation that needs timely attention.',
+        'The proposed system measures temperature, displays the current reading locally, sounds an alert when the reading exceeds 38°C, and sends readings over Wi-Fi to an online dashboard where staff can review them.'
+      ],
+      approach: 'The KY-013 analog temperature sensor provides a voltage that changes with temperature. The NodeMCU ESP8266 reads the analog signal, converts it into a temperature value, updates the LCD, checks the 38°C alert condition, and publishes the reading to the MyDevices Cayenne IoT dashboard over its built-in Wi-Fi connection.',
+      nodes: [
+        [8,22,138,56,'KY-013|temperature sensor','An NTC thermistor module. Its resistance changes with ambient temperature; the microcontroller reads the analog signal and converts it to °C.'],
+        [220,72,150,64,'NodeMCU|ESP8266','The central controller reads the analog input, calculates temperature, checks the alert threshold, and manages Wi-Fi communication.'],
+        [455,8,140,56,'16×2 LCD|display','Shows the current temperature locally so a nearby user can read it without opening the online dashboard.'],
+        [455,82,140,56,'Buzzer|alert','Sounds when the measured temperature is greater than 38°C, according to the project logic.'],
+        [455,156,140,56,'Cayenne|IoT dashboard','Receives temperature readings over Wi-Fi for remote viewing and online history.']
+      ],
+      edges: ['M146 50H180V92H216','M370 91H410V36H451','M370 104H410V110H451','M370 118H410V184H451'],
+      labels: [], vb: '0 0 610 225',
+      extra:
+        '<h3 style="margin-top:26px">Hardware and technical details</h3>' +
+        '<div class="cs-summary">' +
+          [['Temperature sensor','KY-013 analog NTC thermistor'],['Controller','NodeMCU ESP8266 / ESP-12E'],['Local display','16×2 alphanumeric LCD'],['Audible notification','Piezo buzzer'],['Connectivity','ESP8266 built-in Wi-Fi'],['Prototyping','Breadboard and jumper wires']].map(function (x) { return '<div class="cs-stat"><span>' + x[0] + '</span><b>' + x[1] + '</b></div>'; }).join('') +
+        '</div>' +
+        '<h3 style="margin-top:24px">Key component specifications</h3>' +
+        '<ul class="cs-list">' +
+          '<li><b>KY-013 sensor</b>5 V operating voltage; stated measurement range −55°C to 125°C; stated accuracy ±0.5°C.</li>' +
+          '<li><b>NodeMCU ESP8266</b>3.3 V operating logic, built-in Wi-Fi, one analog input, 16 digital I/O pins, and 4 MB flash memory as listed in the report.</li>' +
+          '<li><b>LCD</b>16 characters across two rows; operating voltage listed as 4.7–5.3 V.</li>' +
+          '<li><b>Buzzer</b>Continuous-beep output; operating voltage listed as 4–8 V DC.</li>' +
+        '</ul>' +
+        '<h3 style="margin-top:24px">Monitoring logic</h3>' +
+        '<ol class="cs-list">' +
+          '<li><b>Measure</b>Read the analog value from the KY-013 sensor.</li>' +
+          '<li><b>Convert</b>Convert the analog reading into a temperature in Celsius using the thermistor calculation in the program.</li>' +
+          '<li><b>Display</b>Show the temperature on the 16×2 LCD and print the value to the Serial Monitor.</li>' +
+          '<li><b>Check threshold</b>If the temperature is above 38°C, activate the buzzer; otherwise keep it off.</li>' +
+          '<li><b>Send to the cloud</b>Publish the temperature to a Cayenne virtual channel through the ESP8266 Wi-Fi connection.</li>' +
+        '</ol>' +
+        '<h3 style="margin-top:24px">Software and IoT platform</h3>' +
+        '<p>The system was programmed in Arduino IDE using ESP8266 Wi-Fi and Cayenne MQTT libraries, with an LCD library for the display. MyDevices Cayenne was used to visualize incoming readings on an online dashboard.</p>' +
+        '<p class="cs-cap">Security note: the original source code includes Wi-Fi and platform credentials. These have intentionally not been reproduced in this portfolio case study. Never publish live passwords, tokens, or private device credentials in a public repository.</p>',
       metrics: null,
-      findings: [['What I built','Describe the wiring, firmware and the MQTT/web part you wrote.'],['What the results showed','Update interval, accuracy checks, reliability over time.'],['What I would do differently','e.g. a more accurate sensor, deep-sleep for battery use, or a secured MQTT connection.']],
-      figs: [] /* TODO: add e.g. ['assets/junior-build.jpg','The finished station'], ['assets/junior-dashboard.png','Web dashboard'] */
+      findings: [
+        ['Project outcome','The report concludes that the team successfully built a system that continuously measures and displays patient temperature, triggers a buzzer when the reading exceeds 38°C, and sends readings over the internet to an online platform.'],
+        ['Remote monitoring','The NodeMCU ESP8266’s built-in Wi-Fi was used to transmit temperature values to a MyDevices Cayenne dashboard for online viewing and record keeping.'],
+        ['Alert behavior','The program compares the calculated temperature with a 38°C threshold and activates the buzzer when the reading is higher. This is a prototype alert, not a clinical diagnosis or a substitute for medical monitoring equipment.'],
+        ['Challenge and solution','The NodeMCU repeatedly failed to connect to the Wi-Fi network. The team tested another board and then reduced network interference by disconnecting other devices from the Wi-Fi network; the report states that this resolved the connection problem.'],
+        ['Teamwork during COVID-19','The report notes that COVID-19 restrictions made in-person meetings and collaboration more difficult, so project coordination had to take place under those constraints.'],
+        ['Skills demonstrated','Analog sensor interfacing, thermistor-based temperature conversion, microcontroller programming, LCD interfacing, threshold-based alert logic, Wi-Fi communication, MQTT-based IoT data publishing, and troubleshooting.']
+      ],
+      figs: [
+        ['assets/junior-prototype-connections.png','Project prototype: NodeMCU, LCD, sensor and wiring connected on the breadboard'],
+        ['assets/junior-ky013-sensor.png','KY-013 analog temperature sensor module'],
+        ['assets/junior-nodemcu-esp8266.png','NodeMCU ESP8266 controller and specifications from the report'],
+        ['assets/junior-lcd.png','16×2 LCD module used for local temperature display'],
+        ['assets/junior-buzzer.png','Buzzer used for the high-temperature alert'],
+        ['assets/junior-cayenne-logo.png','MyDevices Cayenne logo shown in the report (the report does not include a dashboard screenshot)'],
+        ['assets/junior-jumper-wires.png','Jumper wires used to connect the prototype components'],
+        ['assets/junior-breadboard.png','Breadboard used for circuit prototyping']
+      ]
     }
   };
 
