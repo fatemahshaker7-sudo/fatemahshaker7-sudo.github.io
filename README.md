@@ -27,6 +27,7 @@ This portfolio brings together my engineering background and data science projec
 
 ### 1. Olist Delivery Time Estimation
 [![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-FF4B4B?logo=streamlit&logoColor=white)](https://olist-delivery-estimation-app.streamlit.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/fatemahshaker7-sudo/OLIST_DATE_ESTIMATION)
 
 An end-to-end machine learning project using the Brazilian Olist e-commerce dataset to estimate delivery times in days. Multiple regression models were evaluated, and a stacking ensemble was developed using HistGradientBoosting, Random Forest, Extra Trees, and Ridge regression.
 
@@ -34,7 +35,6 @@ An end-to-end machine learning project using the Brazilian Olist e-commerce data
 
 **Technologies:** Python, Pandas, NumPy, Scikit-learn, Machine Learning, Streamlit.
 
-- [Source Code](https://github.com/fatemahshaker7-sudo/OLIST_DATE_ESTIMATION)
 
 ### 2. Habit Tracking App
 [![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-FF4B4B?logo=streamlit&logoColor=white)](https://habbit-tracking-app.streamlit.app/)
@@ -121,9 +121,8 @@ This portfolio is an evolving collection of my work and learning. I aim to conti
 
 ## Connect
 
-- **Portfolio:** [fatemahshaker7-sudo.github.io](https://fatemahshaker7-sudo.github.io/)
-- **GitHub:** [@fatemahshaker7-sudo](https://github.com/fatemahshaker7-sudo)
-
+- **Portfolio:** [![Portfolio](https://img.shields.io/badge/Portfolio-fatemahshaker7--sudo.github.io-0A66C2?style=for-the-badge&logo=githubpages&logoColor=white)](https://fatemahshaker7-sudo.github.io/)
+- **GitHub:** [![GitHub](https://img.shields.io/badge/GitHub-fatemahshaker7--sudo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fatemahshaker7-sudo)
 ---
 
 *Built to showcase the connection between engineering, data, and practical problem-solving.*
