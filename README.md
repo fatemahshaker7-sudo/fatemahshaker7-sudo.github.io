@@ -54,7 +54,8 @@ An industrial improvement project focused on reducing time waste in the aluminum
 **Tools and methods:** Power BI, data analysis, root cause analysis, productivity improvement, workflow optimization.
 
 ### 4. Senior Engineering Project
-![Control & Instrumentation](https://img.shields.io/badge/Control%20%26%20Instrumentation-engineering-orange?style=for-the-badge)
+![Simulink](https://img.shields.io/badge/Simulink-F78F1E?style=flat&logo=mathworks&logoColor=white)
+![Control & Instrumentation](https://img.shields.io/badge/Control_%26_Instrumentation-0A66C2?style=flat&logo=probot&logoColor=white)
 
 An academic engineering project demonstrating the application of process instrumentation, control engineering, modeling, and technical problem-solving.
 
