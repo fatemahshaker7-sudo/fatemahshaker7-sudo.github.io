@@ -45,6 +45,7 @@ An interactive web application for tracking habits over daily, weekly, and month
 
 
 ### 3. Industrial Process Optimization
+[![Power BI](https://custom-icon-badges.demolab.com/badge/Power%20BI-F1C912?logo=power-bi&logoColor=fff)](#)
 
 An industrial improvement project focused on reducing time waste in the aluminum wire drawing process at Midal Cables. The work involved analyzing process data, investigating causes of lost time, optimizing workflows, and presenting performance indicators through Power BI dashboards.
 
