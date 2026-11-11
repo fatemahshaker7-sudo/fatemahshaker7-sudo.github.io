@@ -1138,7 +1138,7 @@
             <h3>Junior Project</h3>
             <p style="margin-top:14px"><button type="button" class="explore-project" data-project="junior">🔎 Learn More</button></p>
             <p class="lead">University of Bahrain · PICENG321 · 2021. Designed a patient temperature monitoring prototype using a KY-013 sensor, NodeMCU ESP8266, LCD, buzzer and Wi-Fi-connected Cayenne dashboard.</p>
-            <dl class="kv"><div><dt>Tools used</dt><dd><ul class="items"><li>Arduino Uno</li><li>DHT11</li><li>LCD</li><li>Wi-Fi</li><li>MQTT</li></ul></dd></div></dl>
+            <dl class="kv"><div><dt>Tools used</dt><dd><ul class="items"><li>NodeMCU ESP8266</li><li>KY-013 thermistor</li><li>16×2 LCD</li><li>Wi-Fi</li><li>MQTT</li></ul></dd></div></dl>
           </article>
         </div>
       </section>
@@ -1390,7 +1390,7 @@
       var detailProject = 'senior';
       var presentationUrls = {
         senior: 'https://fatemahshaker7-sudo.github.io/presentations/senior_project.pdf',
-        junior: 'https://fatemahshaker7-sudo.github.io/presentations/junior_project.pdf'
+        junior: 'https://fatemahshaker7-sudo.github.io/presentations/junior_project1.pdf'
       };
       var detailData = {
         senior: { title: 'Senior Project', slides: [
@@ -1403,13 +1403,13 @@
           {title:'Tools & Engineering Skills',body:'MATLAB · Simulink · Feedback Control · PID Control · Fuzzy PID · Nonlinear System Modeling · Simulation-Based Evaluation',note:'The project brought together control-system design and simulation for a biomedical engineering application.'}
         ]},
         junior: { title: 'Junior Project', slides: [
-          {title:'Project Overview',body:'This project developed an IoT-based patient temperature monitoring system using a KY-013 sensor, NodeMCU ESP8266, LCD, buzzer and Wi-Fi dashboard, and sends the data to a web server through Wi-Fi and MQTT for remote access.',note:'Project context: University of Bahrain · 2021.'},
-          {title:'Problem & Objectives',body:'The aim was to create a compact system for collecting and presenting environmental sensor data in two ways: a local display for immediate viewing and a network connection for remote monitoring. The design combines embedded hardware with a lightweight messaging workflow.',note:'See the original presentation for the stated requirements and project scope.'},
-          {title:'System Architecture & Data Flow',body:'The DHT11 provides the sensor readings to the Arduino-based system. The LCD presents the readings locally, while the Wi-Fi connection and MQTT messaging path send the data onward to a web server for remote viewing.',note:'This summarizes the system components described for the project; the presentation contains the original architecture details.'},
-          {title:'Hardware & Implementation',body:'The main components include an Arduino board, a DHT11 temperature-and-humidity sensor, an LCD, Wi-Fi connectivity, and MQTT communication. The implementation connects sensor acquisition, local display, and network data transmission into one monitoring workflow.',note:'Refer to the PDF for the circuit, implementation details, and any code or configuration shown.'},
-          {title:'Testing & Outcome',body:'The system was designed to read the DHT11 measurements, show them on the LCD, and transmit them for web-based monitoring. These functions form the main end-to-end behavior to verify when testing the station.',note:'The original presentation should be used for the specific test observations and reported results.'},
-          {title:'Project Presentation',body:'View the original Junior Project presentation below. You can read it here, open it in a full browser tab, or download the PDF.',presentation:true},
-          {title:'Tools & Engineering Skills',body:'Arduino · DHT11 Sensor · LCD · Wi-Fi · MQTT · Embedded Systems · Sensor Data Acquisition · IoT Monitoring',note:'The project combines basic electronics and embedded programming with networked data reporting.'}
+          {title:'Project Overview',body:'This mini-project developed a patient temperature monitoring prototype using a KY-013 analog thermistor sensor, NodeMCU ESP8266, 16×2 LCD, buzzer and Wi-Fi connection to MyDevices Cayenne.',note:'Project context: University of Bahrain · PICENG321 · May 2021.'},
+          {title:'Problem & Objectives',body:'The objectives were to program a microcontroller, read temperature-sensor measurements and continuously monitor a patient’s temperature. The prototype provides a local display, a buzzer alert above 38°C and online temperature readings.',note:'The report describes this as a monitoring prototype, not a clinically validated medical device.'},
+          {title:'System Architecture & Data Flow',body:'The KY-013 thermistor module supplies an analog signal to the NodeMCU ESP8266. The program converts the reading to Celsius, displays it on the LCD, checks whether it exceeds 38°C, and publishes the temperature to Cayenne using Wi-Fi and MQTT.',note:'This follows the components and data flow described in the project report.'},
+          {title:'Hardware & Implementation',body:'The prototype uses a KY-013 sensor, NodeMCU ESP8266, 16×2 LCD, buzzer, breadboard and jumper wires. It was programmed in Arduino IDE with ESP8266 Wi-Fi, Cayenne MQTT and LCD libraries.',note:'The original report contains the circuit, component specifications and implementation details.'},
+          {title:'Testing & Outcome',body:'The report states that the team achieved the project objectives: the system read and displayed temperature, activated the buzzer above 38°C and transmitted readings to the online Cayenne platform.',note:'The report also describes troubleshooting a NodeMCU Wi-Fi connection issue.'},
+          {title:'Project Report',body:'Read the original Junior Project report below, or open and download the PDF.',presentation:true},
+          {title:'Tools & Engineering Skills',body:'Arduino IDE · NodeMCU ESP8266 · KY-013 Thermistor · LCD Interfacing · Threshold-Based Alerts · Wi-Fi · MQTT · IoT Monitoring',note:'The project combines analog sensor interfacing, embedded programming and wireless data transmission.'}
         ]}
       };
       function renderDetail() {
@@ -1960,7 +1960,7 @@
     },
     junior: {
       title: 'Junior Project', next: 'senior',
-      pdf: 'presentations/temperature_monitoring_system.pdf',
+      pdf: 'presentations/junior_project1.pdf',
       kicker: 'University of Bahrain · PICENG 321 Mini-Project · May 2021',
       headline: 'IoT-based patient temperature monitoring with wireless alerts and online records',
       stats: [['Year','2021'],['Controller','NodeMCU ESP8266'],['Sensor','KY-013 analog thermistor'],['Alert threshold','Above 38°C'],['Connectivity','Built-in Wi-Fi · Cayenne']],
@@ -2011,14 +2011,9 @@
         ['Skills demonstrated','Analog sensor interfacing, thermistor-based temperature conversion, microcontroller programming, LCD interfacing, threshold-based alert logic, Wi-Fi communication, MQTT-based IoT data publishing, and troubleshooting.']
       ],
       figs: [
-        ['assets/junior-prototype-connections.png','Project prototype: NodeMCU, LCD, sensor and wiring connected on the breadboard'],
-        ['assets/junior-ky013-sensor.png','KY-013 analog temperature sensor module'],
-        ['assets/junior-nodemcu-esp8266.png','NodeMCU ESP8266 controller and specifications from the report'],
-        ['assets/junior-lcd.png','16×2 LCD module used for local temperature display'],
-        ['assets/junior-buzzer.png','Buzzer used for the high-temperature alert'],
-        ['assets/junior-cayenne-logo.png','MyDevices Cayenne logo shown in the report (the report does not include a dashboard screenshot)'],
-        ['assets/junior-jumper-wires.png','Jumper wires used to connect the prototype components'],
-        ['assets/junior-breadboard.png','Breadboard used for circuit prototyping']
+        ['assets/canyenne_dashborad.png','MyDevices Cayenne dashboard showing the temperature-monitoring data'],
+        ['assets/digital_prototype.png','Digital prototype of the temperature-monitoring system'],
+        ['assets/hardware_prototype.png','Hardware prototype of the temperature-monitoring system']
       ]
     }
   };
@@ -2065,7 +2060,7 @@
         metrics(c) + '<p class="cs-cap">Lower is better for every row. IAE is the integral absolute error of glucose from the 4.5 mmol/L target.</p>' + gallery(c.results);
     }
     var f = c.figs.length ? '<div class="cs-figs">' + c.figs.map(function (x) { return '<figure style="margin:0"><img loading="lazy" src="' + x[0] + '" alt="' + x[1] + '"><figcaption class="cs-cap">' + x[1] + '</figcaption></figure>'; }).join('') + '</div>' :
-      '<div class="cs-figs"><div class="cs-ph">' + TODO + '<br>Add a photo of the build<br>(assets/junior-build.jpg)</div><div class="cs-ph">' + TODO + '<br>Add a web dashboard screenshot<br>(assets/junior-dashboard.png)</div></div>';
+      '<div class="cs-figs"><div class="cs-ph">Project images will appear here when available.</div></div>';
     return '<h3>The build</h3>' + f;
   }
 
@@ -2080,7 +2075,7 @@
       '<section id="cs-system"><h3>System</h3><p>' + c.approach + '</p><div class="cs-fig">' + diagram(c, id) + '</div>' + (c.extra || '') + '</section>' +
       '<section id="cs-build">' + interactive(c, id) + '</section>' +
       '<section id="cs-findings"><h3>Findings</h3><ul class="cs-list">' + c.findings.map(function (f) { return '<li><b>' + f[0] + '</b>' + f[1] + (f[2] === false ? '' : ' ' + TODO) + '</li>'; }).join('') + '</ul></section>' +
-      '<section id="cs-report"><h3>Full report</h3><div class="cs-report"><div class="doc">PDF</div><div class="txt"><b>' + c.title + ' presentation</b><br><span style="color:var(--muted)">Slides with the full details.</span></div><a class="pri" href="' + c.pdf + '" target="_blank" rel="noopener noreferrer">Open ↗</a><a href="' + c.pdf + '" download>Download ↓</a></div></section>' +
+      '<section id="cs-report"><h3>Full report</h3><div class="cs-report"><div class="doc">PDF</div><div class="txt"><b>' + c.title + ' report</b><br><span style="color:var(--muted)">Full project report (PDF).</span></div><a class="pri" href="' + c.pdf + '" target="_blank" rel="noopener noreferrer">Open ↗</a><a href="' + c.pdf + '" download>Download ↓</a></div></section>' +
       '<a class="cs-next" href="#project/' + c.next + '"><small>Next project</small>' + n.title + ' →</a>';
     if (c.metrics) paintMetrics(c);
     scroller.scrollTop = 0; prog.style.width = '0'; document.title = c.title + ' | Fatemah Shaker';
