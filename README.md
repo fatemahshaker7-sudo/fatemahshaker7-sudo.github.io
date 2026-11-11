@@ -56,11 +56,13 @@ An industrial improvement project focused on reducing time waste in the aluminum
 ### 4. Senior Engineering Project
 ![Simulink](https://img.shields.io/badge/Simulink-F78F1E?style=flat&logo=mathworks&logoColor=white)
 ![Control & Instrumentation](https://img.shields.io/badge/Control_%26_Instrumentation-0A66C2?style=flat&logo=probot&logoColor=white)
+![Control Engineering](https://img.shields.io/badge/Control_Engineering-F78F1E?style=flat)
 
 An academic engineering project demonstrating the application of process instrumentation, control engineering, modeling, and technical problem-solving.
 
 ### 5. Junior Engineering Project
-![Microcontrollers](https://img.shields.io/badge/Microcontrollers-Embedded%20Systems-00979D?style=for-the-badge&logo=microchip&logoColor=white)
+![Embedded Systems](https://img.shields.io/badge/Embedded_Systems-5F5E5A?style=flat)
+![Microcontrollers](https://img.shields.io/badge/Microcontrollers-Arduino_%7C_ESP32_%7C_STM32-00979D?style=flat)
 [![Arduino](https://img.shields.io/badge/Arduino-008184.svg?logo=arduino)](#)
 [![ESP32](https://img.shields.io/badge/ESP32-e7352c.svg?logo=espressif&logoColor=fff)](#)
 ![MQTT](https://img.shields.io/badge/MQTT-660066?logo=mqtt&logoColor=white)
