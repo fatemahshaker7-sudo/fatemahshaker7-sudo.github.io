@@ -2094,7 +2094,7 @@ var f = c.figs.length ? '<ol class="tl">' + c.figs.map(function (x, i) {
       '<section id="cs-problem"><h3>Problem</h3>' + c.problem.map(function (t) { return '<p>' + t + '</p>'; }).join('') + '</section>' +
       '<section id="cs-system"><h3>System</h3><p>' + c.approach + '</p><div class="cs-fig">' + diagram(c, id) + '</div>' + (c.extra || '') + '</section>' +
       '<section id="cs-build">' + interactive(c, id) + '</section>' +
-      '<section id="cs-findings"><h3>Findings</h3><ul class="cs-list">' + c.findings.map(function (f) { return '<li><b>' + f[0] + '</b>' + f[1] + (f[2] === false ? '' : ' ' + TODO) + '</li>'; }).join('') + '</ul></section>' +
+      '<section id="cs-findings"><h3>Findings</h3><ul class="cs-list">' + c.findings.map(function (f) { return '<li><b>' + f[0] + '</b>' + f[1] + '</li>'; }).join('') + '</ul></section>' +
       '<section id="cs-report"><h3>Full report</h3><div class="cs-report"><div class="doc">PDF</div><div class="txt"><b>' + c.title + ' report</b><br><span style="color:var(--muted)">Full project report (PDF).</span></div><a class="pri" href="' + c.pdf + '" target="_blank" rel="noopener noreferrer">Open ↗</a><a href="' + c.pdf + '" download>Download ↓</a></div></section>' +
       '<a class="cs-next" href="#project/' + c.next + '"><small>Next project</small>' + n.title + ' →</a>';
     if (c.metrics) paintMetrics(c);
