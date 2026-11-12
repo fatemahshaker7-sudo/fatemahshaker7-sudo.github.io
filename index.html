@@ -1903,6 +1903,23 @@
   .cs-figs img { background:#fff; }
   .cs-eq { margin:10px 0; padding:14px 16px; border:1px solid var(--rule); border-radius:10px; background:var(--panel); font:500 .92rem/1.8 var(--font-mono); overflow-x:auto; white-space:pre; }
 
+/* Timeline */
+.tl{position:relative;margin:18px 0 0;padding:0 0 0 48px;list-style:none;counter-reset:tl}
+.tl::before,.tl::after{content:"";position:absolute;left:15px;top:6px;width:2px;border-radius:2px}
+.tl::before{bottom:6px;background:var(--track)}
+.tl::after{height:var(--tl,0px);max-height:calc(100% - 12px);background:linear-gradient(var(--slate),var(--signal-cyan));transition:height .25s ease}
+.tl>li{position:relative;counter-increment:tl;margin-bottom:26px}
+.tl>li::before{content:counter(tl);position:absolute;left:-48px;top:0;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--slate);background:var(--bg);color:var(--muted);font:600 .8rem var(--font-mono);transition:background .25s,border-color .25s,box-shadow .25s,color .25s}
+.tl>li.on::before{background:var(--signal-cyan);border-color:var(--signal-cyan);color:#172033;box-shadow:0 0 0 5px color-mix(in srgb,var(--signal-cyan) 18%,transparent)}
+.tl-card{border:1px solid var(--rule);border-radius:12px;background:var(--panel);overflow:hidden;transition:border-color .25s}
+.tl>li.on .tl-card{border-color:color-mix(in srgb,var(--signal-cyan) 45%,var(--rule))}
+.tl-card img{display:block;width:100%;max-height:75vh;object-fit:contain;background:#fff}
+.tl-txt{padding:12px 16px 14px}
+.tl-stage{font:500 .7rem var(--font-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--signal-cyan)}
+ol.tl.tl-steps>li{padding:12px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--panel);margin-bottom:14px}
+ol.tl.tl-steps>li b{display:block;font-family:var(--font-display);margin-bottom:2px}
+.tl-steps>li::before{top:10px}
+
 </style>
 
 <dialog class="cs" id="cs" aria-labelledby="cs-title">
@@ -1991,7 +2008,7 @@
           '<li><b>Buzzer</b>Continuous-beep output; operating voltage listed as 4–8 V DC.</li>' +
         '</ul>' +
         '<h3 style="margin-top:24px">Monitoring logic</h3>' +
-        '<ol class="cs-list">' +
+        '<ol class="tl tl-steps">' +
           '<li><b>Measure</b>Read the analog value from the KY-013 sensor.</li>' +
           '<li><b>Convert</b>Convert the analog reading into a temperature in Celsius using the thermistor calculation in the program.</li>' +
           '<li><b>Display</b>Show the temperature on the 16×2 LCD and print the value to the Serial Monitor.</li>' +
@@ -2011,9 +2028,9 @@
         ['Skills demonstrated','Analog sensor interfacing, thermistor-based temperature conversion, microcontroller programming, LCD interfacing, threshold-based alert logic, Wi-Fi communication, MQTT-based IoT data publishing, and troubleshooting.']
       ],
       figs: [
-        ['assets/canyenne_dashborad.png','MyDevices Cayenne dashboard showing the temperature-monitoring data'],
         ['assets/digital_prototype.png','Digital prototype of the temperature-monitoring system'],
-        ['assets/hardware_prototype.jpg','Hardware prototype of the temperature-monitoring system']
+        ['assets/hardware_prototype.jpg','Hardware prototype of the temperature-monitoring system'],
+        ['assets/canyenne_dashborad.png','MyDevices Cayenne dashboard showing the temperature-monitoring data']
       ]
     }
   };
@@ -2059,8 +2076,11 @@
         '<div class="cs-toggle" role="group" aria-label="Controller view"><button type="button" data-mode="pid">PID</button><button type="button" data-mode="fuzzy">Fuzzy</button><button type="button" data-mode="fpid">Fuzzy PID</button><button type="button" data-mode="both">Compare all</button></div>' +
         metrics(c) + '<p class="cs-cap">Lower is better for every row. IAE is the integral absolute error of glucose from the 4.5 mmol/L target.</p>' + gallery(c.results);
     }
-    var f = c.figs.length ? '<div class="cs-figs">' + c.figs.map(function (x) { return '<figure style="margin:0"><img loading="lazy" src="' + x[0] + '" alt="' + x[1] + '"><figcaption class="cs-cap">' + x[1] + '</figcaption></figure>'; }).join('') + '</div>' :
-      '<div class="cs-figs"><div class="cs-ph">Project images will appear here when available.</div></div>';
+    var stages = ['Digital prototype','Hardware prototype','Online dashboard'];
+var f = c.figs.length ? '<ol class="tl">' + c.figs.map(function (x, i) {
+  return '<li><div class="tl-card"><img loading="lazy" src="' + x[0] + '" alt="' + x[1] + '"><div class="tl-txt"><span class="tl-stage">' + stages[i] + '</span><p class="cs-cap" style="margin:4px 0 0">' + x[1] + '</p></div></div></li>';
+}).join('') + '</ol>' :
+  '<div class="cs-figs"><div class="cs-ph">Project images will appear here when available.</div></div>';
     return '<h3>The build</h3>' + f;
   }
 
@@ -2136,6 +2156,22 @@
     var b = e.target.closest('button'); if (!b) return;
     var t = document.getElementById('cs-' + b.dataset.s); if (t) scroller.scrollTo({ top: t.offsetTop - 12 });
   });
+
+
+  function updateTl() {
+  var sr = scroller.getBoundingClientRect();
+  body.querySelectorAll('.tl').forEach(function (t) {
+    var last = null;
+    t.querySelectorAll(':scope > li').forEach(function (li) {
+      var on = li.getBoundingClientRect().top < sr.top + sr.height * 0.65;
+      li.classList.toggle('on', on); if (on) last = li;
+    });
+    t.style.setProperty('--tl', last ? (last.getBoundingClientRect().top - t.getBoundingClientRect().top + 16) + 'px' : '0px');
+  });
+}
+scroller.addEventListener('scroll', updateTl, { passive: true });
+body.addEventListener('load', updateTl, true);
+
 
   /* progress bar + active chip */
   scroller.addEventListener('scroll', function () {
