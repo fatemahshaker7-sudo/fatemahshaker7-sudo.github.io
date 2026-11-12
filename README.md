@@ -108,7 +108,9 @@ fatemahshaker7-sudo.github.io/
 ├── index.html        # Portfolio website and interactive features
 ├── presentations/
 │   ├── junior.pdf    # Junior engineering project presentation
+│   ├── junior1.pdf   # mini engineering project presentation
 │   └── senior.pdf    # Senior engineering project presentation
+├── assets/           # images 
 └── README.md         # Project overview and documentation
 ```
 
