@@ -305,11 +305,23 @@
     }
 
     @media (min-width: 1100px) {
-      .p-project { grid-column: 1 / -1; }
-      .p-skills { grid-column: 1 / -1; }
-      .p-about { grid-column: span 8; }
-      .p-edu { grid-column: span 4; }
-    }
+  .hero .panel-body {
+    min-height: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    max-width: 52%;
+  }
+  .model {
+    position: absolute;
+    z-index: 1;
+    top: var(--head-h);
+    right: 0;
+    bottom: 0;
+    width: 48%;
+    height: auto;
+  }
+}
 
     /* ---------- Hero panel ---------- */
     .hero { position: relative; overflow: hidden; }
